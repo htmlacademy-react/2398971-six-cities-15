@@ -8,3 +8,9 @@ export enum AppRoute {
   Main = '/',
   Offer = '/Offer',
 }
+
+export enum AuthorizationStatus {
+  Auth = 'AUTH',
+  NoAuth = 'NO_AUTH',
+  Unknown = 'UNKNOWN',
+}

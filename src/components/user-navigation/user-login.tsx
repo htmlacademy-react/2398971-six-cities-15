@@ -1,6 +1,6 @@
 import {Link} from 'react-router-dom';
 
-function Logo(): JSX.Element {
+function UserLogin(): JSX.Element {
   return (
     <Link className="header__nav-link" to="#">
       <span className="header__signout">Sign out</span>
@@ -8,4 +8,4 @@ function Logo(): JSX.Element {
   );
 }
 
-export default Logo;
+export default UserLogin;

@@ -1,3 +1,4 @@
+import { Helmet } from 'react-helmet-async';
 import Logo from '../../components/logo/logo';
 import UserLogin from '../../components/user-navigation/user-login';
 import UserProfile from '../../components/user-navigation/user-profile';
@@ -5,6 +6,9 @@ import UserProfile from '../../components/user-navigation/user-profile';
 function ErrorScreen (): JSX.Element {
   return (
     <div className="page page--error-empty">
+      <Helmet>
+        <title>Шесть городов. Страница не найдена.</title>
+      </Helmet>
       <header className="header">
         <div className="container">
           <div className="header__wrapper">

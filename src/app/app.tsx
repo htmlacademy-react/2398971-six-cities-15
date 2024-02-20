@@ -1,10 +1,11 @@
 import { Route, BrowserRouter, Routes } from 'react-router-dom';
-import { AppRoute } from '../const';
+import { AppRoute, AuthorizationStatus } from '../const';
 import ErrorScreen from '../pages/error-screen/error-screen';
 import FavoritesScreen from '../pages/favorites-screen/favorites-screen';
 import LoginScreen from '../pages/login-screen/login-screen';
 import MainScreen from '../pages/main-screen/main-screen';
 import OfferScreen from '../pages/offer-screen/offer-screen';
+import PrivateRoute from '../components/private-route/private-route';
 
 type AppScreenProps = {
   placeCardCount: number;
@@ -17,7 +18,13 @@ function App ({placeCardCount}: AppScreenProps): JSX.Element {
       <Routes>
         <Route
           path={AppRoute.Favorites}
-          element={<FavoritesScreen />}
+          element={
+            <PrivateRoute
+              authorizationStatus={AuthorizationStatus.NoAuth}
+            >
+              <FavoritesScreen />
+            </PrivateRoute>
+          }
         />
         <Route
           path={AppRoute.Login}

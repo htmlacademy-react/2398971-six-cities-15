@@ -1,4 +1,4 @@
-function EmptyScreen (): JSX.Element {
+function ErrorScreen (): JSX.Element {
   return (
     <div className="page page--error-empty">
       <header className="header">
@@ -67,4 +67,4 @@ function EmptyScreen (): JSX.Element {
   );
 }
 
-export default EmptyScreen;
+export default ErrorScreen;

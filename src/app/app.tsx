@@ -7,12 +7,17 @@ import LoginScreen from '../pages/login-screen/login-screen';
 import MainScreen from '../pages/main-screen/main-screen';
 import OfferScreen from '../pages/offer-screen/offer-screen';
 import PrivateRoute from '../components/private-route/private-route';
+import { OffersList, CurrentOffer } from '../types/offer';
+import { Comments } from '../types/comment';
 
 type AppScreenProps = {
   placeCardCount: number;
+  offersList: OffersList[];
+  сurrentOffer: CurrentOffer[];
+  comments: Comments[];
 }
 
-function App ({placeCardCount}: AppScreenProps): JSX.Element {
+function App ({placeCardCount, offersList, сurrentOffer, comments}: AppScreenProps): JSX.Element {
 
   return (
     <HelmetProvider>

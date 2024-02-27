@@ -19,7 +19,7 @@ export const offersList: OffersList[] = [
       'longitude': 4.673877537499948,
       'zoom': 8
     },
-    'isFavorite': false,
+    'isFavorite': true,
     'isPremium': false,
     'rating': 4,
   },
@@ -42,7 +42,7 @@ export const offersList: OffersList[] = [
       'longitude': 2.330499,
       'zoom': 16
     },
-    'isFavorite': false,
+    'isFavorite': true,
     'isPremium': true,
     'rating': 2.7
   },
@@ -96,7 +96,7 @@ export const offersList: OffersList[] = [
 
 export const сurrentOffer: CurrentOffer[] = [
   {
-    'id': '6af6f711-c28d-4121-82cd-e0b462a27f00',
+    'id': '6af6f711-c28d-4121-82cd-27f00e0b462a',
     'title': 'Beautiful & luxurious studio at great location',
     'description': 'Relax, rejuvenate and unplug in this ultimate rustic getaway experience in the country. In our beautiful screened Pondhouse, you can gaze at the stars and listen to the sounds of nature from your cozy warm bed.',
     'type': 'apartment',

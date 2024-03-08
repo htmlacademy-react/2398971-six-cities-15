@@ -1,23 +1,25 @@
 import { OffersList } from '../../types/offer';
-import OfferCardPreview from './offer-card-preview';
+import CardPreview from '../card/card-preview';
 
-type OfferCardListProps = {
+type CardListProps = {
   offersList: OffersList[];
 }
 
-function OfferCardList(props: OfferCardListProps): JSX.Element {
+function CardList(props: CardListProps): JSX.Element {
   const { offersList } = props;
+  const isFavoriteCard = false;
 
   return (
     <div className="cities__places-list places__list tabs__content">
       {Array.from({length: offersList.length}, (_,index) => (
-        <OfferCardPreview
+        <CardPreview
           key={offersList[index].id}
           offer={offersList[index]}
+          isFavoriteCard={isFavoriteCard}
         />))}
     </div>
   );
 }
 
 
-export default OfferCardList;
+export default CardList;

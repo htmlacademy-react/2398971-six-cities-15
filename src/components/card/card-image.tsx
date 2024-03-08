@@ -1,23 +1,25 @@
 import {Link} from 'react-router-dom';
 import { AppRoute } from '../../const';
 
-type OfferCardImageProps = {
+type CardImageProps = {
   previewImage: string;
+  width: number;
+  height: number;
 }
 
-function OfferCardImage({previewImage}: OfferCardImageProps): JSX.Element {
+function CardImage({previewImage, width, height}: CardImageProps): JSX.Element {
 
   return (
     <Link to={AppRoute.Offer}>
       <img
         className="place-card__image"
         src={previewImage}
-        width={260}
-        height={200}
+        width={width}
+        height={height}
         alt="Place image"
       />
     </Link>
   );
 }
 
-export default OfferCardImage;
+export default CardImage;

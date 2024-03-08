@@ -1,32 +1,35 @@
 import { OffersList } from '../../types/offer';
-import OfferCardPremiumLogo from './offer-card-premium-logo';
-import OfferCardImage from './offer-card-image';
-import OfferCardName from './offer-card-name';
-import OfferCardBookmark from './offer-card-bookmark';
+import CardPremiumLogo from './card-premium-logo';
+import CardImage from './card-image';
+import CardName from './card-name';
+import CardBookmark from './card-bookmark';
 
-type OfferCardPreviewProps = {
+type CardPreviewProps = {
   offer: OffersList;
+  isFavoriteCard: boolean;
 }
 
-function OfferCardPreview (props: OfferCardPreviewProps): JSX.Element {
-  const { offer } = props;
+function CardPreview (props: CardPreviewProps): JSX.Element {
+  const { offer, isFavoriteCard } = props;
   const { title, type, price, previewImage, isFavorite, isPremium, rating} = offer;
 
   return (
-    <article className="cities__card place-card">
-      {isPremium ? <OfferCardPremiumLogo /> : ''}
-      <div className="cities__image-wrapper place-card__image-wrapper">
-        <OfferCardImage
+    <article className={isFavoriteCard ? 'favorites__card place-card' : 'cities__card place-card'}>
+      {isPremium ? <CardPremiumLogo /> : ''}
+      <div className={isFavoriteCard ? 'favorites__image-wrapper place-card__image-wrapper' : 'cities__image-wrapper place-card__image-wrapper'}>
+        <CardImage
           previewImage={previewImage}
+          width={isFavoriteCard ? 150 : 260}
+          height={isFavoriteCard ? 110 : 200}
         />
       </div>
-      <div className="place-card__info">
+      <div className={isFavoriteCard ? 'favorites__card-info place-card__info' : 'place-card__info'}>
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
             <b className="place-card__price-value">€{price}</b>
             <span className="place-card__price-text">/&nbsp;night</span>
           </div>
-          <OfferCardBookmark
+          <CardBookmark
             isFavorite={isFavorite}
           />
         </div>
@@ -37,7 +40,7 @@ function OfferCardPreview (props: OfferCardPreviewProps): JSX.Element {
           </div>
         </div>
         <h2 className="place-card__name">
-          <OfferCardName
+          <CardName
             title={title}
           />
         </h2>
@@ -47,4 +50,4 @@ function OfferCardPreview (props: OfferCardPreviewProps): JSX.Element {
   );
 }
 
-export default OfferCardPreview;
+export default CardPreview;

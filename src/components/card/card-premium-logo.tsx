@@ -1,4 +1,4 @@
-function OfferCardPremiumLogo(): JSX.Element {
+function CardPremiumLogo(): JSX.Element {
 
   return (
     <div className="place-card__mark">
@@ -7,4 +7,4 @@ function OfferCardPremiumLogo(): JSX.Element {
   );
 }
 
-export default OfferCardPremiumLogo;
+export default CardPremiumLogo;

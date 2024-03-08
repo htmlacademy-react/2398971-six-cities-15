@@ -1,11 +1,11 @@
 import {Link} from 'react-router-dom';
 import { AppRoute } from '../../const';
 
-type OfferCardNameProps = {
+type CardNameProps = {
   title: string;
 }
 
-function OfferCardName({title}: OfferCardNameProps): JSX.Element {
+function CardName({title}: CardNameProps): JSX.Element {
 
   return (
     <Link to={AppRoute.Offer}>
@@ -14,4 +14,4 @@ function OfferCardName({title}: OfferCardNameProps): JSX.Element {
   );
 }
 
-export default OfferCardName;
+export default CardName;

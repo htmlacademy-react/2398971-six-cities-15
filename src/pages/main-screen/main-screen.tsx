@@ -2,7 +2,7 @@ import { Helmet } from 'react-helmet-async';
 import Logo from '../../components/logo/logo';
 import UserLogin from '../../components/user-navigation/user-login';
 import UserProfile from '../../components/user-navigation/user-profile';
-import OfferCardList from '../../components/offer-card/offer-card-list';
+import CardList from '../../components/card-list/card-list';
 import { OffersList } from '../../types/offer';
 
 type MainScreenProps = {
@@ -105,7 +105,7 @@ function MainScreen ({offersList}: MainScreenProps): JSX.Element {
                 </ul>
               </form>
               <div className="cities__places-list places__list tabs__content">
-                <OfferCardList
+                <CardList
                   offersList={offersList}
                 />
               </div>

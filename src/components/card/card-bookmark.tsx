@@ -1,8 +1,8 @@
-type OfferCardBookmarkProps = {
+type CardBookmarkProps = {
   isFavorite: boolean;
 }
 
-function OfferCardBookmark({isFavorite}: OfferCardBookmarkProps): JSX.Element {
+function CardBookmark({isFavorite}: CardBookmarkProps): JSX.Element {
 
   return (
     <button
@@ -21,4 +21,4 @@ function OfferCardBookmark({isFavorite}: OfferCardBookmarkProps): JSX.Element {
   );
 }
 
-export default OfferCardBookmark;
+export default CardBookmark;

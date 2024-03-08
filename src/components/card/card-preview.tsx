@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { OffersList } from '../../types/offer';
 import CardPremiumLogo from './card-premium-logo';
 import CardImage from './card-image';
@@ -10,11 +11,22 @@ type CardPreviewProps = {
 }
 
 function CardPreview (props: CardPreviewProps): JSX.Element {
-  const { offer, isFavoriteCard } = props;
+  const { offer, isFavoriteCard} = props;
   const { title, type, price, previewImage, isFavorite, isPremium, rating} = offer;
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [point, setPoint] = useState(offer);
+
+  const handleMouseOver = () => {
+    // eslint-disable-next-line no-console
+    console.log('e.target');
+  };
+
   return (
-    <article className={isFavoriteCard ? 'favorites__card place-card' : 'cities__card place-card'}>
+    <article
+      onMouseOver={handleMouseOver}
+      className={isFavoriteCard ? 'favorites__card place-card' : 'cities__card place-card'}
+    >
       {isPremium ? <CardPremiumLogo /> : ''}
       <div className={isFavoriteCard ? 'favorites__image-wrapper place-card__image-wrapper' : 'cities__image-wrapper place-card__image-wrapper'}>
         <CardImage

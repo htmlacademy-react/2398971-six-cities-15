@@ -5,7 +5,12 @@ import UserProfile from '../../components/user-navigation/user-profile';
 import Offer from '../../components/offer/offer';
 import NearPlaces from '../../components/near-places/near-places';
 
-function OfferScreen (): JSX.Element {
+type OfferScreenProps = {
+  authorizationStatus: string;
+}
+
+function OfferScreen (props: OfferScreenProps): JSX.Element {
+  const {authorizationStatus} = props;
 
   return (
     <div className="page">
@@ -32,7 +37,7 @@ function OfferScreen (): JSX.Element {
         </div>
       </header>
       <main className="page__main page__main--offer">
-        <Offer/>
+        <Offer authorizationStatus={authorizationStatus}/>
         <NearPlaces/>
       </main>
     </div>

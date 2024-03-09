@@ -18,6 +18,13 @@ type AppScreenProps = {
 
 function App ({offersList, сurrentOffer, comments}: AppScreenProps): JSX.Element {
 
+  const authorizationStatus = AuthorizationStatus.Auth;
+
+  // eslint-disable-next-line no-console
+  console.log(сurrentOffer);
+  // eslint-disable-next-line no-console
+  console.log(comments);
+
   return (
     <HelmetProvider>
       <BrowserRouter>
@@ -26,7 +33,7 @@ function App ({offersList, сurrentOffer, comments}: AppScreenProps): JSX.Elemen
             path={AppRoute.Favorites}
             element={
               <PrivateRoute
-                authorizationStatus={AuthorizationStatus.Auth}
+                authorizationStatus={authorizationStatus}
               >
                 <FavoritesScreen offersList={offersList}/>
               </PrivateRoute>
@@ -42,7 +49,7 @@ function App ({offersList, сurrentOffer, comments}: AppScreenProps): JSX.Elemen
           />
           <Route
             path={AppRoute.Offer}
-            element={<OfferScreen />}
+            element={<OfferScreen authorizationStatus={authorizationStatus}/>}
           />
           <Route
             path='*'

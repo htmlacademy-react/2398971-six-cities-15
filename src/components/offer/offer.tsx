@@ -1,6 +1,11 @@
 import OfferReviewForm from './offer-review-form';
 
-function Offer(): JSX.Element {
+type OfferReviewFormProps = {
+  authorizationStatus: string;
+}
+
+function Offer(props: OfferReviewFormProps): JSX.Element {
+  const {authorizationStatus} = props;
 
   return (
     <section className="offer">
@@ -165,7 +170,7 @@ function Offer(): JSX.Element {
                 </div>
               </li>
             </ul>
-            <OfferReviewForm/>
+            {authorizationStatus && <OfferReviewForm/>}
           </section>
         </div>
       </div>

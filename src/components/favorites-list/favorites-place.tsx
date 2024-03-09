@@ -1,3 +1,5 @@
+import { useState } from 'react';
+import { Nullable } from 'vitest';
 import { OffersList } from '../../types/offer';
 import CardPreview from '../card/card-preview';
 
@@ -9,6 +11,14 @@ type FavoritePlaceProps = {
 
 function FavoritePlaceList(props: FavoritePlaceProps): JSX.Element {
   const { city, favoriteOffersList, isFavoriteCard } = props;
+  const [activeOffer, setActiveOffer] = useState<Nullable<OffersList>>(null);
+
+  // eslint-disable-next-line no-console
+  console.log(activeOffer);
+
+  const handleMouseHover = (offer?: OffersList) => {
+    setActiveOffer(offer || null);
+  };
 
   return (
     <li className="favorites__locations-items">
@@ -22,6 +32,7 @@ function FavoritePlaceList(props: FavoritePlaceProps): JSX.Element {
       <div className="favorites__places">
         {Array.from({length: favoriteOffersList.length}, (_,index) => (
           <CardPreview
+            handleMouseHover={handleMouseHover}
             key={favoriteOffersList[index].id}
             offer={favoriteOffersList[index]}
             isFavoriteCard={isFavoriteCard}

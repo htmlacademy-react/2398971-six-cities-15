@@ -1,7 +1,7 @@
 import { useState } from 'react';
+import { Nullable } from 'vitest';
 import { OffersList } from '../../types/offer';
 import CardPreview from '../card/card-preview';
-import { Nullable } from 'vitest';
 
 type CardListProps = {
   offersList: OffersList[];

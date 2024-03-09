@@ -1,7 +1,8 @@
+import {Link} from 'react-router-dom';
+import { AppRoute } from '../../const';
 import { OffersList } from '../../types/offer';
 import CardPremiumLogo from './card-premium-logo';
 import CardImage from './card-image';
-import CardName from './card-name';
 import CardBookmark from './card-bookmark';
 
 type CardPreviewProps = {
@@ -12,7 +13,7 @@ type CardPreviewProps = {
 
 function CardPreview (props: CardPreviewProps): JSX.Element {
   const { offer, isFavoriteCard, handleMouseHover} = props;
-  const { title, type, price, previewImage, isFavorite, isPremium, rating} = offer;
+  const { id, title, type, price, previewImage, isFavorite, isPremium, rating} = offer;
 
   const handleMouseOn = () => {
     handleMouseHover(offer);
@@ -23,7 +24,7 @@ function CardPreview (props: CardPreviewProps): JSX.Element {
   };
 
   return (
-    <article
+    <Link to={`${AppRoute.Offer}/${id}`}
       onMouseEnter={handleMouseOn}
       onMouseLeave={handleMouseOff}
       className={isFavoriteCard ? 'favorites__card place-card' : 'cities__card place-card'}
@@ -53,13 +54,11 @@ function CardPreview (props: CardPreviewProps): JSX.Element {
           </div>
         </div>
         <h2 className="place-card__name">
-          <CardName
-            title={title}
-          />
+          {title}
         </h2>
         <p className="place-card__type">{type[0].toUpperCase() + type.slice(1)}</p>
       </div>
-    </article>
+    </Link>
   );
 }
 

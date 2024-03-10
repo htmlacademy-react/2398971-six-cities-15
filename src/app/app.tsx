@@ -7,12 +7,23 @@ import LoginScreen from '../pages/login-screen/login-screen';
 import MainScreen from '../pages/main-screen/main-screen';
 import OfferScreen from '../pages/offer-screen/offer-screen';
 import PrivateRoute from '../components/private-route/private-route';
+import { OffersList, CurrentOffer } from '../types/offer';
+import { Comments } from '../types/comment';
 
 type AppScreenProps = {
-  placeCardCount: number;
+  offersList: OffersList[];
+  сurrentOffer: CurrentOffer[];
+  comments: Comments[];
 }
 
-function App ({placeCardCount}: AppScreenProps): JSX.Element {
+function App ({offersList, сurrentOffer, comments}: AppScreenProps): JSX.Element {
+
+  const authorizationStatus = AuthorizationStatus.Auth;
+
+  // eslint-disable-next-line no-console
+  console.log(сurrentOffer);
+  // eslint-disable-next-line no-console
+  console.log(comments);
 
   return (
     <HelmetProvider>
@@ -22,9 +33,9 @@ function App ({placeCardCount}: AppScreenProps): JSX.Element {
             path={AppRoute.Favorites}
             element={
               <PrivateRoute
-                authorizationStatus={AuthorizationStatus.NoAuth}
+                authorizationStatus={authorizationStatus}
               >
-                <FavoritesScreen />
+                <FavoritesScreen offersList={offersList}/>
               </PrivateRoute>
             }
           />
@@ -34,11 +45,11 @@ function App ({placeCardCount}: AppScreenProps): JSX.Element {
           />
           <Route
             path={AppRoute.Main}
-            element={<MainScreen placeCardCount={placeCardCount}/>}
+            element={<MainScreen offersList={offersList}/>}
           />
           <Route
             path={AppRoute.Offer}
-            element={<OfferScreen />}
+            element={<OfferScreen authorizationStatus={authorizationStatus}/>}
           />
           <Route
             path='*'

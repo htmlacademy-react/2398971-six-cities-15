@@ -2,13 +2,14 @@ import { Helmet } from 'react-helmet-async';
 import Logo from '../../components/logo/logo';
 import UserLogin from '../../components/user-navigation/user-login';
 import UserProfile from '../../components/user-navigation/user-profile';
-import PlaceCardScreen from './place-card-screen';
+import CardList from '../../components/card-list/card-list';
+import { OffersList } from '../../types/offer';
 
 type MainScreenProps = {
-  placeCardCount: number;
+  offersList: OffersList[];
 }
 
-function MainScreen ({placeCardCount}: MainScreenProps): JSX.Element {
+function MainScreen ({offersList}: MainScreenProps): JSX.Element {
 
   return (
     <div className="page page--gray page--main">
@@ -104,7 +105,9 @@ function MainScreen ({placeCardCount}: MainScreenProps): JSX.Element {
                 </ul>
               </form>
               <div className="cities__places-list places__list tabs__content">
-                {Array.from({length: placeCardCount}, (_,index) => <PlaceCardScreen key={index}/>)}
+                <CardList
+                  offersList={offersList}
+                />
               </div>
             </section>
             <div className="cities__right-section">

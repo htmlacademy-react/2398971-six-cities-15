@@ -1,15 +1,24 @@
+import { useState } from 'react';
+import { Nullable } from 'vitest';
 import { Helmet } from 'react-helmet-async';
 import Logo from '../../components/logo/logo';
 import UserLogin from '../../components/user-navigation/user-login';
 import UserProfile from '../../components/user-navigation/user-profile';
 import CardList from '../../components/card-list/card-list';
 import { OffersList } from '../../types/offer';
+import { city } from '../../mock/map';
+import Map from '../../components/map/map';
 
 type MainScreenProps = {
   offersList: OffersList[];
 }
 
 function MainScreen ({offersList}: MainScreenProps): JSX.Element {
+  const [activeOffer, setActiveOffer] = useState<Nullable<OffersList>>(null);
+
+  const handleOfferChange = (offer?: OffersList) => {
+    setActiveOffer(offer || null);
+  };
 
   return (
     <div className="page page--gray page--main">
@@ -106,12 +115,19 @@ function MainScreen ({offersList}: MainScreenProps): JSX.Element {
               </form>
               <div className="cities__places-list places__list tabs__content">
                 <CardList
+                  handleOfferChange={handleOfferChange}
                   offersList={offersList}
                 />
               </div>
             </section>
             <div className="cities__right-section">
-              <section className="cities__map map" />
+              <section className="cities__map map">
+                <Map
+                  city={city}
+                  offersList={offersList}
+                  activeOffer={activeOffer}
+                />
+              </section>
             </div>
           </div>
         </div>

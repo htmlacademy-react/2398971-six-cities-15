@@ -1,29 +1,20 @@
-import { useState } from 'react';
-import { Nullable } from 'vitest';
 import { OffersList } from '../../types/offer';
 import CardPreview from '../card/card-preview';
 
 type CardListProps = {
   offersList: OffersList[];
+  handleOfferChange: (offer?: OffersList) => void;
 }
 
 function CardList(props: CardListProps): JSX.Element {
-  const { offersList } = props;
+  const { offersList, handleOfferChange } = props;
   const isFavoriteCard = false;
-  const [activeOffer, setActiveOffer] = useState<Nullable<OffersList>>(null);
-
-  // eslint-disable-next-line no-console
-  console.log(activeOffer);
-
-  const handleMouseHover = (offer?: OffersList) => {
-    setActiveOffer(offer || null);
-  };
 
   return (
     <div className="cities__places-list places__list tabs__content">
       {Array.from({length: offersList.length}, (_,index) => (
         <CardPreview
-          handleMouseHover={handleMouseHover}
+          handleMouseHover={handleOfferChange}
           key={offersList[index].id}
           offer={offersList[index]}
           isFavoriteCard={isFavoriteCard}
@@ -31,6 +22,5 @@ function CardList(props: CardListProps): JSX.Element {
     </div>
   );
 }
-
 
 export default CardList;

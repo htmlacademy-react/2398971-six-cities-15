@@ -8,16 +8,13 @@ import MainScreen from '../pages/main-screen/main-screen';
 import OfferScreen from '../pages/offer-screen/offer-screen';
 import PrivateRoute from '../components/private-route/private-route';
 import { OffersList, CurrentOffer } from '../types/offer';
-import { Comments } from '../types/offer';
 
 type AppScreenProps = {
   offersList: OffersList[];
   сurrentOffers: CurrentOffer[];
-  comments: Comments[];
 }
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-function App ({offersList, сurrentOffers, comments}: AppScreenProps): JSX.Element {
+function App ({offersList, сurrentOffers}: AppScreenProps): JSX.Element {
 
   const authorizationStatus = AuthorizationStatus.Auth;
 

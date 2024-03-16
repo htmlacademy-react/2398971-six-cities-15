@@ -24,8 +24,10 @@ function OfferScreen (props: OfferScreenProps): JSX.Element {
     setActiveOffer(offer || null);
   };
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const currentNearOffer = сurrentOffers.find(({ id }) => id === activeOffer?.id);
+  // eslint-disable-next-line no-console
+  console.log(currentNearOffer);
+
 
   const сurrentOffer = сurrentOffers[0];
 

@@ -21,8 +21,11 @@ function MainScreen ({offersList, сurrentOffers}: MainScreenProps): JSX.Element
     setActiveOffer(offer || null);
   };
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const currentOffer = сurrentOffers.find(({ id }) => id === activeOffer?.id);
+
+  // eslint-disable-next-line no-console
+  console.log(currentOffer);
+
 
   return (
     <div className="page page--gray page--main">

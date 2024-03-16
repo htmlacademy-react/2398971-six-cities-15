@@ -10,8 +10,10 @@ type FavoritePlaceProps = {
 
 function FavoritePlaceList(props: FavoritePlaceProps): JSX.Element {
   const { city, favoriteOffersList } = props;
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [activeOffer, setActiveOffer] = useState<Nullable<OffersList>>(null);
+
+  // eslint-disable-next-line no-console
+  console.log(activeOffer);
 
   const handleMouseHover = (offer?: OffersList) => {
     setActiveOffer(offer || null);

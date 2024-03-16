@@ -4,6 +4,8 @@ import UserLogin from '../../components/user-navigation/user-login';
 import UserProfile from '../../components/user-navigation/user-profile';
 import Offer from '../../components/offer/offer';
 import NearPlaces from '../../components/near-places/near-places';
+import {сurrentOffers} from '../../mock/сurrentOffer';
+import { comments } from '../../mock/comments';
 
 type OfferScreenProps = {
   authorizationStatus: string;
@@ -11,6 +13,7 @@ type OfferScreenProps = {
 
 function OfferScreen (props: OfferScreenProps): JSX.Element {
   const {authorizationStatus} = props;
+  const сurrentOffer = сurrentOffers[0];
 
   return (
     <div className="page">
@@ -37,7 +40,11 @@ function OfferScreen (props: OfferScreenProps): JSX.Element {
         </div>
       </header>
       <main className="page__main page__main--offer">
-        <Offer authorizationStatus={authorizationStatus}/>
+        <Offer
+          authorizationStatus={authorizationStatus}
+          сurrentOffer={сurrentOffer}
+          comments={comments}
+        />
         <NearPlaces/>
       </main>
     </div>

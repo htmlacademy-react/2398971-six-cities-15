@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './app/app';
 import { offersList } from './mock/offers';
-import { сurrentOffer } from './mock/сurrentOffer';
+import { сurrentOffers } from './mock/сurrentOffer';
 import { comments } from './mock/comments';
 
 const root = ReactDOM.createRoot(
@@ -13,7 +13,7 @@ root.render(
   <React.StrictMode>
     <App
       offersList = {offersList}
-      сurrentOffer = {сurrentOffer}
+      сurrentOffers = {сurrentOffers}
       comments = {comments}
     />
   </React.StrictMode>

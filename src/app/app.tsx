@@ -12,16 +12,16 @@ import { Comments } from '../types/comment';
 
 type AppScreenProps = {
   offersList: OffersList[];
-  сurrentOffer: CurrentOffer[];
+  сurrentOffers: CurrentOffer[];
   comments: Comments[];
 }
 
-function App ({offersList, сurrentOffer, comments}: AppScreenProps): JSX.Element {
+function App ({offersList, сurrentOffers, comments}: AppScreenProps): JSX.Element {
 
   const authorizationStatus = AuthorizationStatus.Auth;
 
   // eslint-disable-next-line no-console
-  console.log(сurrentOffer);
+  console.log(сurrentOffers);
   // eslint-disable-next-line no-console
   console.log(comments);
 
@@ -45,7 +45,7 @@ function App ({offersList, сurrentOffer, comments}: AppScreenProps): JSX.Elemen
           />
           <Route
             path={AppRoute.Main}
-            element={<MainScreen offersList={offersList}/>}
+            element={<MainScreen offersList={offersList} сurrentOffers={сurrentOffers} />}
           />
           <Route
             path={AppRoute.Offer}

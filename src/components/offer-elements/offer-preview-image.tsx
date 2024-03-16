@@ -1,10 +1,10 @@
-type CardImageProps = {
+type OfferPreviewImageProps = {
   previewImage: string;
   width: number;
   height: number;
 }
 
-function CardImage({previewImage, width, height}: CardImageProps): JSX.Element {
+function OfferPreviewImage({previewImage, width, height}: OfferPreviewImageProps): JSX.Element {
 
   return (
     <img
@@ -17,4 +17,4 @@ function CardImage({previewImage, width, height}: CardImageProps): JSX.Element {
   );
 }
 
-export default CardImage;
+export default OfferPreviewImage;

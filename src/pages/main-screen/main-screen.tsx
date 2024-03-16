@@ -5,20 +5,26 @@ import Logo from '../../components/logo/logo';
 import UserLogin from '../../components/user-navigation/user-login';
 import UserProfile from '../../components/user-navigation/user-profile';
 import CardList from '../../components/card-list/card-list';
-import { OffersList } from '../../types/offer';
+import { CurrentOffer, OffersList } from '../../types/offer';
 import { city } from '../../mock/map';
 import Map from '../../components/map/map';
 
 type MainScreenProps = {
   offersList: OffersList[];
+  сurrentOffers: CurrentOffer[];
 }
 
-function MainScreen ({offersList}: MainScreenProps): JSX.Element {
+function MainScreen ({offersList, сurrentOffers}: MainScreenProps): JSX.Element {
   const [activeOffer, setActiveOffer] = useState<Nullable<OffersList>>(null);
 
   const handleOfferChange = (offer?: OffersList) => {
     setActiveOffer(offer || null);
   };
+
+  const currentOffer = сurrentOffers.find(({ id }) => id === activeOffer?.id);
+  // eslint-disable-next-line no-console
+  console.log(currentOffer);
+
 
   return (
     <div className="page page--gray page--main">

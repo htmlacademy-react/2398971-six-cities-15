@@ -8,7 +8,6 @@ type FavoriteCardListProps = {
 
 function FavoriteCardList(props: FavoriteCardListProps): JSX.Element {
   const { offersList } = props;
-  const isFavoriteCard = true;
   const favoriteOffersList = offersList.filter((place)=> place.isFavorite);
   const favoriteCities = Array.from(new Set(favoriteOffersList.map((place) => place.city.name)));
 
@@ -28,7 +27,6 @@ function FavoriteCardList(props: FavoriteCardListProps): JSX.Element {
               key={city}
               city={city}
               favoriteOffersList={favoriteOffersList.filter((place)=> place.city.name === city)}
-              isFavoriteCard={isFavoriteCard}
             />))}
         </ul>
       </section>

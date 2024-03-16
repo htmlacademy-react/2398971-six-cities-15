@@ -4,11 +4,11 @@ import CardPreview from '../card/card-preview';
 type CardListProps = {
   offersList: OffersList[];
   handleOfferChange: (offer?: OffersList) => void;
+  cardClassName: string;
 }
 
 function CardList(props: CardListProps): JSX.Element {
-  const { offersList, handleOfferChange } = props;
-  const isFavoriteCard = false;
+  const { offersList, handleOfferChange, cardClassName } = props;
 
   return (
     <div className="cities__places-list places__list tabs__content">
@@ -17,7 +17,7 @@ function CardList(props: CardListProps): JSX.Element {
           handleMouseHover={handleOfferChange}
           key={offersList[index].id}
           offer={offersList[index]}
-          isFavoriteCard={isFavoriteCard}
+          cardClassName={cardClassName}
         />))}
     </div>
   );

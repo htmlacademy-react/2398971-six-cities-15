@@ -13,11 +13,19 @@ export type PreviewImage = {
   previewImage: string;
 }
 
-export type Host = {
+export type User = {
   isPro: boolean;
   name: string;
   avatarUrl: string;
 }
+
+export type Comments = {
+id: string;
+comment: string;
+date: string;
+rating: number;
+user: User;
+};
 
 export type Offer = {
   id: string;
@@ -47,7 +55,7 @@ export type CurrentOffer = Offer & {
   description: string;
   images: string[];
   goods: string[];
-  host: Host;
+  host: User;
   bedrooms: number;
   maxAdults: number;
 };

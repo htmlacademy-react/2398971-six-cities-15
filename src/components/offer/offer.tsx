@@ -1,183 +1,92 @@
-import OfferReviewForm from './offer-review-form';
+import { Nullable } from 'vitest';
+import { CurrentOffer, OffersList } from '../../types/offer';
+import { Comments } from '../../types/offer';
+import OfferGallery from '../offer-elements/offer-gallery';
+import OfferPremiumLogo from '../offer-elements/offer-premium-logo';
+import OfferBookmark from '../offer-elements/offer-bookmark';
+import OfferRating from '../offer-elements/offer-rating';
+import OfferFeatures from '../offer-elements/offer-features';
+import OfferPrice from '../offer-elements/offer-price';
+import OfferInside from '../offer-elements/offer-inside';
+import OfferUser from '../offer-elements/offer-user';
+import OfferDescription from '../offer-elements/offer-description';
+import OfferReviewForm from '../offer-elements/offer-review-form';
+import OfferReviewsList from '../offer-elements/offer-reviews-list';
+import Map from '../map/map';
 
 type OfferReviewFormProps = {
   authorizationStatus: string;
+  сurrentOffer: CurrentOffer;
+  nearOffers: OffersList[];
+  comments: Comments[];
+  activeOffer: Nullable<OffersList>;
 }
 
 function Offer(props: OfferReviewFormProps): JSX.Element {
-  const {authorizationStatus} = props;
+  const {authorizationStatus, сurrentOffer, nearOffers, comments, activeOffer} = props;
+  const {title, description, type, price, images, city, goods, host, isFavorite, isPremium, rating, bedrooms, maxAdults} = сurrentOffer;
 
   return (
     <section className="offer">
-      <div className="offer__gallery-container container">
-        <div className="offer__gallery">
-          <div className="offer__image-wrapper">
-            <img
-              className="offer__image"
-              src="img/room.jpg"
-              alt="Photo studio"
-            />
-          </div>
-          <div className="offer__image-wrapper">
-            <img
-              className="offer__image"
-              src="img/apartment-01.jpg"
-              alt="Photo studio"
-            />
-          </div>
-          <div className="offer__image-wrapper">
-            <img
-              className="offer__image"
-              src="img/apartment-02.jpg"
-              alt="Photo studio"
-            />
-          </div>
-          <div className="offer__image-wrapper">
-            <img
-              className="offer__image"
-              src="img/apartment-03.jpg"
-              alt="Photo studio"
-            />
-          </div>
-          <div className="offer__image-wrapper">
-            <img
-              className="offer__image"
-              src="img/studio-01.jpg"
-              alt="Photo studio"
-            />
-          </div>
-          <div className="offer__image-wrapper">
-            <img
-              className="offer__image"
-              src="img/apartment-01.jpg"
-              alt="Photo studio"
-            />
-          </div>
-        </div>
-      </div>
+      <OfferGallery images={images}/>
       <div className="offer__container container">
         <div className="offer__wrapper">
-          <div className="offer__mark">
-            <span>Premium</span>
-          </div>
+          {isPremium ? <OfferPremiumLogo className="offer__mark" /> : ''}
           <div className="offer__name-wrapper">
             <h1 className="offer__name">
-          Beautiful &amp; luxurious studio at great location
+              {title}
             </h1>
-            <button className="offer__bookmark-button button" type="button">
-              <svg className="offer__bookmark-icon" width={31} height={33}>
-                <use xlinkHref="#icon-bookmark" />
-              </svg>
-              <span className="visually-hidden">To bookmarks</span>
-            </button>
+            <OfferBookmark
+              isFavorite={isFavorite}
+              className="offer"
+              width={31}
+              height={33}
+            />
           </div>
-          <div className="offer__rating rating">
-            <div className="offer__stars rating__stars">
-              <span style={{ width: '80%' }} />
-              <span className="visually-hidden">Rating</span>
-            </div>
-            <span className="offer__rating-value rating__value">4.8</span>
-          </div>
-          <ul className="offer__features">
-            <li className="offer__feature offer__feature--entire">Apartment</li>
-            <li className="offer__feature offer__feature--bedrooms">
-          3 Bedrooms
-            </li>
-            <li className="offer__feature offer__feature--adults">
-          Max 4 adults
-            </li>
-          </ul>
-          <div className="offer__price">
-            <b className="offer__price-value">€120</b>
-            <span className="offer__price-text">&nbsp;night</span>
-          </div>
-          <div className="offer__inside">
-            <h2 className="offer__inside-title">{'What\'s inside'}</h2>
-            <ul className="offer__inside-list">
-              <li className="offer__inside-item">Wi-Fi</li>
-              <li className="offer__inside-item">Washing machine</li>
-              <li className="offer__inside-item">Towels</li>
-              <li className="offer__inside-item">Heating</li>
-              <li className="offer__inside-item">Coffee machine</li>
-              <li className="offer__inside-item">Baby seat</li>
-              <li className="offer__inside-item">Kitchen</li>
-              <li className="offer__inside-item">Dishwasher</li>
-              <li className="offer__inside-item">Cabel TV</li>
-              <li className="offer__inside-item">Fridge</li>
-            </ul>
-          </div>
+          <OfferRating
+            className="offer"
+            rating={rating}
+          />
+          <OfferFeatures
+            type={type}
+            bedrooms={bedrooms}
+            maxAdults={maxAdults}
+          />
+          <OfferPrice
+            className="offer"
+            price={price}
+          />
+          <OfferInside goods={goods}/>
           <div className="offer__host">
             <h2 className="offer__host-title">Meet the host</h2>
-            <div className="offer__host-user user">
-              <div className="offer__avatar-wrapper offer__avatar-wrapper--pro user__avatar-wrapper">
-                <img
-                  className="offer__avatar user__avatar"
-                  src="img/avatar-angelina.jpg"
-                  width={74}
-                  height={74}
-                  alt="Host avatar"
-                />
-              </div>
-              <span className="offer__user-name">Angelina</span>
-              <span className="offer__user-status">Pro</span>
-            </div>
-            <div className="offer__description">
-              <p className="offer__text">
-            A quiet cozy and picturesque that hides behind a a river by the
-            unique lightness of Amsterdam. The building is green and from
-            18th century.
-              </p>
-              <p className="offer__text">
-            An independent House, strategically located between Rembrand
-            Square and National Opera, but where the bustle of the city
-            comes to rest in this alley flowery and colorful.
-              </p>
-            </div>
+            <OfferUser
+              className={'offer'}
+              user={host}
+              width={74}
+              height={74}
+            />
+            <OfferDescription description={description}/>
           </div>
           <section className="offer__reviews reviews">
             <h2 className="reviews__title">
-          Reviews · <span className="reviews__amount">1</span>
+              Reviews · <span className="reviews__amount">{comments.length}</span>
             </h2>
-            <ul className="reviews__list">
-              <li className="reviews__item">
-                <div className="reviews__user user">
-                  <div className="reviews__avatar-wrapper user__avatar-wrapper">
-                    <img
-                      className="reviews__avatar user__avatar"
-                      src="img/avatar-max.jpg"
-                      width={54}
-                      height={54}
-                      alt="Reviews avatar"
-                    />
-                  </div>
-                  <span className="reviews__user-name">Max</span>
-                </div>
-                <div className="reviews__info">
-                  <div className="reviews__rating rating">
-                    <div className="reviews__stars rating__stars">
-                      <span style={{ width: '80%' }} />
-                      <span className="visually-hidden">Rating</span>
-                    </div>
-                  </div>
-                  <p className="reviews__text">
-                A quiet cozy and picturesque that hides behind a a river by
-                the unique lightness of Amsterdam. The building is green and
-                from 18th century.
-                  </p>
-                  <time className="reviews__time" dateTime="2019-04-24">
-                April 2019
-                  </time>
-                </div>
-              </li>
-            </ul>
+            <OfferReviewsList
+              comments={comments}
+            />
             {authorizationStatus && <OfferReviewForm/>}
           </section>
         </div>
       </div>
-      <section className="offer__map map" />
+      <section className="offer__map map">
+        <Map
+          city={city}
+          offersList={nearOffers}
+          activeOffer={activeOffer}
+        />
+      </section>
     </section>
   );
 }
-
 
 export default Offer;

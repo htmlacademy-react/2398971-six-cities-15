@@ -1,11 +1,11 @@
 
-import { Comments } from '../types/comment';
+import { Comments } from '../types/offer';
 
 export const comments: Comments[] = [
   {
     'id': 'b3d5b1e9-75a2-4900-a930-5287fe38e7b7',
     'comment': 'Home is amazing. It\'s like staying in a museum. The rooms, furnishings and artworks are incredible. The views of My Vesuvius',
-    'date': '2024-02-04T21:00:00.275Z',
+    'date': '2024-05-04T21:00:00.275Z',
     'rating': 5,
     'user': {
       'name': 'Zak',
@@ -27,11 +27,11 @@ export const comments: Comments[] = [
   {
     'id': 'bb98fc84-f55b-4402-8d36-aa1525d5efea',
     'comment': 'The house is very good, very happy, hygienic and simple living conditions around it are also very good. I hope to have the opportunity to come back. Thank you.',
-    'date': '2024-02-03T21:00:00.275Z',
-    'rating': 2,
+    'date': '2023-12-03T21:00:00.275Z',
+    'rating': 3,
     'user': {
       'name': 'Jack',
-      'avatarUrl': 'https://15.design.htmlacademy.pro/static/avatar/7.jpg',
+      'avatarUrl': 'https://15.design.htmlacademy.pro/static/avatar/1.jpg',
       'isPro': true
     }
   }

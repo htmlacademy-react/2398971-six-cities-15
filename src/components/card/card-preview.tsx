@@ -1,18 +1,20 @@
 import {Link} from 'react-router-dom';
 import { AppRoute } from '../../const';
 import { OffersList } from '../../types/offer';
-import CardPremiumLogo from './card-premium-logo';
-import CardImage from './card-image';
-import CardBookmark from './card-bookmark';
+import OfferPremiumLogo from '../offer-elements/offer-premium-logo';
+import OfferPreviewImage from '../offer-elements/offer-preview-image';
+import OfferBookmark from '../offer-elements/offer-bookmark';
+import OfferRating from '../offer-elements/offer-rating';
+import OfferPrice from '../offer-elements/offer-price';
 
 type CardPreviewProps = {
   offer: OffersList;
-  isFavoriteCard: boolean;
   handleMouseHover: (offer?: OffersList) => void;
+  cardClassName: string;
 }
 
 function CardPreview (props: CardPreviewProps): JSX.Element {
-  const { offer, isFavoriteCard, handleMouseHover} = props;
+  const { offer, handleMouseHover, cardClassName} = props;
   const { id, title, type, price, previewImage, isFavorite, isPremium, rating} = offer;
 
   const handleMouseOn = () => {
@@ -27,32 +29,33 @@ function CardPreview (props: CardPreviewProps): JSX.Element {
     <Link to={`${AppRoute.Offer}/${id}`}
       onMouseEnter={handleMouseOn}
       onMouseLeave={handleMouseOff}
-      className={isFavoriteCard ? 'favorites__card place-card' : 'cities__card place-card'}
+      className={`${cardClassName}__card place-card`}
     >
-      {isPremium ? <CardPremiumLogo /> : ''}
-      <div className={isFavoriteCard ? 'favorites__image-wrapper place-card__image-wrapper' : 'cities__image-wrapper place-card__image-wrapper'}>
-        <CardImage
+      {isPremium ? <OfferPremiumLogo className="place-card__mark"/> : ''}
+      <div className={`${cardClassName}__image-wrapper place-card__image-wrapper`}>
+        <OfferPreviewImage
           previewImage={previewImage}
-          width={isFavoriteCard ? 150 : 260}
-          height={isFavoriteCard ? 110 : 200}
+          width={cardClassName === 'favorites' ? 150 : 260}
+          height={cardClassName === 'favorites' ? 110 : 200}
         />
       </div>
-      <div className={isFavoriteCard ? 'favorites__card-info place-card__info' : 'place-card__info'}>
+      <div className={cardClassName === 'favorites' ? 'favorites__card-info place-card__info' : 'place-card__info'}>
         <div className="place-card__price-wrapper">
-          <div className="place-card__price">
-            <b className="place-card__price-value">€{price}</b>
-            <span className="place-card__price-text">/&nbsp;night</span>
-          </div>
-          <CardBookmark
+          <OfferPrice
+            className="place-card"
+            price={price}
+          />
+          <OfferBookmark
             isFavorite={isFavorite}
+            className="place-card"
+            width={18}
+            height={19}
           />
         </div>
-        <div className="place-card__rating rating">
-          <div className="place-card__stars rating__stars">
-            <span style={{ width: rating / 5 * 100}} />
-            <span className="visually-hidden">Rating</span>
-          </div>
-        </div>
+        <OfferRating
+          className="place-card"
+          rating={rating}
+        />
         <h2 className="place-card__name">
           {title}
         </h2>
@@ -63,3 +66,4 @@ function CardPreview (props: CardPreviewProps): JSX.Element {
 }
 
 export default CardPreview;
+//isFavoriteCard ? 'favorites__card-info place-card__info' : 'place-card__info'

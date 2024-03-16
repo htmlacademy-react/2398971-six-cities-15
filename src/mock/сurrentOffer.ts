@@ -1,6 +1,6 @@
 import { CurrentOffer } from '../types/offer';
 
-export const сurrentOffer: CurrentOffer[] = [
+export const сurrentOffers: CurrentOffer[] = [
   {
     'id': '6af6f711-c28d-4121-82cd-e0b462a27f00',
     'title': 'Beautiful & luxurious studio at great location',
@@ -18,13 +18,13 @@ export const сurrentOffer: CurrentOffer[] = [
     'city': {
       'name': 'Amsterdam',
       'location': {
-        'latitude': 52.35514938496378,
-        'longitude': 4.673877537499948,
+        'latitude': 52.370216,
+        'longitude': 4.895168,
         'zoom': 8
       }},
     'location': {
-      'latitude': 52.35514938496378,
-      'longitude': 4.673877537499948,
+      'latitude': 52.3909553943508,
+      'longitude': 4.85309666406198,
       'zoom': 8
     },
     'goods': [
@@ -39,7 +39,7 @@ export const сurrentOffer: CurrentOffer[] = [
       'avatarUrl': 'https://loremflickr.com/248/152?random=16'
     },
     'isFavorite': true,
-    'isPremium': false,
+    'isPremium': true,
     'rating': 4,
     'bedrooms': 3,
     'maxAdults': 3
@@ -59,17 +59,16 @@ export const сurrentOffer: CurrentOffer[] = [
       'https://loremflickr.com/248/152?random=25',
     ],
     'city': {
-      'name': 'Brussels',
+      'name': 'Amsterdam',
       'location': {
-        'latitude': 48.85661,
-        'longitude': 2.351499,
-        'zoom': 13
-      }
-    },
+        'latitude': 52.370216,
+        'longitude': 4.895168,
+        'zoom': 8
+      }},
     'location': {
-      'latitude': 48.858610000000006,
-      'longitude': 2.330499,
-      'zoom': 16
+      'latitude': 52.3609553943508,
+      'longitude': 4.85309666406198,
+      'zoom': 8
     },
     'goods': [
       'Wi-Fi',
@@ -156,14 +155,13 @@ export const сurrentOffer: CurrentOffer[] = [
     'city': {
       'name': 'Amsterdam',
       'location': {
-        'latitude': 48.85661,
-        'longitude': 2.351499,
-        'zoom': 13
-      }
-    },
+        'latitude': 52.370216,
+        'longitude': 4.895168,
+        'zoom': 8
+      }},
     'location': {
-      'latitude': 48.85761,
-      'longitude': 2.358499,
+      'latitude': 52.3909553943508,
+      'longitude': 4.929309666406198,
       'zoom': 16
     },
     'goods': [

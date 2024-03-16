@@ -8,22 +8,15 @@ import MainScreen from '../pages/main-screen/main-screen';
 import OfferScreen from '../pages/offer-screen/offer-screen';
 import PrivateRoute from '../components/private-route/private-route';
 import { OffersList, CurrentOffer } from '../types/offer';
-import { Comments } from '../types/comment';
 
 type AppScreenProps = {
   offersList: OffersList[];
-  сurrentOffer: CurrentOffer[];
-  comments: Comments[];
+  сurrentOffers: CurrentOffer[];
 }
 
-function App ({offersList, сurrentOffer, comments}: AppScreenProps): JSX.Element {
+function App ({offersList, сurrentOffers}: AppScreenProps): JSX.Element {
 
   const authorizationStatus = AuthorizationStatus.Auth;
-
-  // eslint-disable-next-line no-console
-  console.log(сurrentOffer);
-  // eslint-disable-next-line no-console
-  console.log(comments);
 
   return (
     <HelmetProvider>
@@ -45,7 +38,7 @@ function App ({offersList, сurrentOffer, comments}: AppScreenProps): JSX.Elemen
           />
           <Route
             path={AppRoute.Main}
-            element={<MainScreen offersList={offersList}/>}
+            element={<MainScreen offersList={offersList} сurrentOffers={сurrentOffers} />}
           />
           <Route
             path={AppRoute.Offer}

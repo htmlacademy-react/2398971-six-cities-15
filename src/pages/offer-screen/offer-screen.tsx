@@ -1,10 +1,14 @@
+import { useState } from 'react';
+import { Nullable } from 'vitest';
 import { Helmet } from 'react-helmet-async';
+import { OffersList } from '../../types/offer';
 import Logo from '../../components/logo/logo';
 import UserLogin from '../../components/user-navigation/user-login';
 import UserProfile from '../../components/user-navigation/user-profile';
 import Offer from '../../components/offer/offer';
 import NearPlaces from '../../components/near-places/near-places';
-import {сurrentOffers} from '../../mock/сurrentOffer';
+import { offersList } from '../../mock/offers';
+import { сurrentOffers } from '../../mock/сurrentOffer';
 import { comments } from '../../mock/comments';
 
 type OfferScreenProps = {
@@ -13,7 +17,21 @@ type OfferScreenProps = {
 
 function OfferScreen (props: OfferScreenProps): JSX.Element {
   const {authorizationStatus} = props;
+
+  const [activeOffer, setActiveOffer] = useState<Nullable<OffersList>>(null);
+
+  const handleOfferChange = (offer?: OffersList) => {
+    setActiveOffer(offer || null);
+  };
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const currentNearOffer = сurrentOffers.find(({ id }) => id === activeOffer?.id);
+
   const сurrentOffer = сurrentOffers[0];
+
+  //const nearOffers: OffersList[] = сurrentOffers.slice(1).map((nearOffer) => offersList.find((offer)=> offer.id === nearOffer.id));
+  const nearOffers = offersList.slice(1);
+
 
   return (
     <div className="page">
@@ -43,9 +61,15 @@ function OfferScreen (props: OfferScreenProps): JSX.Element {
         <Offer
           authorizationStatus={authorizationStatus}
           сurrentOffer={сurrentOffer}
+          nearOffers={nearOffers}
           comments={comments}
+          activeOffer={activeOffer}
         />
-        <NearPlaces/>
+        <NearPlaces
+          handleOfferChange={handleOfferChange}
+          nearOffers={nearOffers}
+          cardClassName="near-places"
+        />
       </main>
     </div>
   );

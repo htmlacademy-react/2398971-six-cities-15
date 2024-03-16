@@ -6,15 +6,12 @@ import CardPreview from '../card/card-preview';
 type FavoritePlaceProps = {
   favoriteOffersList: OffersList[];
   city: string;
-  isFavoriteCard: boolean;
 }
 
 function FavoritePlaceList(props: FavoritePlaceProps): JSX.Element {
-  const { city, favoriteOffersList, isFavoriteCard } = props;
+  const { city, favoriteOffersList } = props;
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [activeOffer, setActiveOffer] = useState<Nullable<OffersList>>(null);
-
-  // eslint-disable-next-line no-console
-  console.log(activeOffer);
 
   const handleMouseHover = (offer?: OffersList) => {
     setActiveOffer(offer || null);
@@ -35,7 +32,7 @@ function FavoritePlaceList(props: FavoritePlaceProps): JSX.Element {
             handleMouseHover={handleMouseHover}
             key={favoriteOffersList[index].id}
             offer={favoriteOffersList[index]}
-            isFavoriteCard={isFavoriteCard}
+            cardClassName = {'favorites'}
           />))}
       </div>
     </li>);

@@ -8,7 +8,7 @@ import MainScreen from '../pages/main-screen/main-screen';
 import OfferScreen from '../pages/offer-screen/offer-screen';
 import PrivateRoute from '../components/private-route/private-route';
 import { OffersList, CurrentOffer } from '../types/offer';
-import { Comments } from '../types/comment';
+import { Comments } from '../types/offer';
 
 type AppScreenProps = {
   offersList: OffersList[];
@@ -16,14 +16,10 @@ type AppScreenProps = {
   comments: Comments[];
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function App ({offersList, сurrentOffers, comments}: AppScreenProps): JSX.Element {
 
   const authorizationStatus = AuthorizationStatus.Auth;
-
-  // eslint-disable-next-line no-console
-  console.log(сurrentOffers);
-  // eslint-disable-next-line no-console
-  console.log(comments);
 
   return (
     <HelmetProvider>

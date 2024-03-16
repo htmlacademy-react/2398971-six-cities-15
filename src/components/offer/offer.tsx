@@ -1,4 +1,5 @@
-import { CurrentOffer } from '../../types/offer';
+import { Nullable } from 'vitest';
+import { CurrentOffer, OffersList } from '../../types/offer';
 import { Comments } from '../../types/offer';
 import OfferGallery from '../offer-elements/offer-gallery';
 import OfferPremiumLogo from '../offer-elements/offer-premium-logo';
@@ -11,17 +12,19 @@ import OfferUser from '../offer-elements/offer-user';
 import OfferDescription from '../offer-elements/offer-description';
 import OfferReviewForm from '../offer-elements/offer-review-form';
 import OfferReviewsList from '../offer-elements/offer-reviews-list';
+import Map from '../map/map';
 
 type OfferReviewFormProps = {
   authorizationStatus: string;
   сurrentOffer: CurrentOffer;
+  nearOffers: OffersList[];
   comments: Comments[];
+  activeOffer: Nullable<OffersList>;
 }
 
 function Offer(props: OfferReviewFormProps): JSX.Element {
-  const {authorizationStatus, сurrentOffer, comments} = props;
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const {id, title, description, type, price, images, city, location, goods, host, isFavorite, isPremium, rating, bedrooms, maxAdults} = сurrentOffer;
+  const {authorizationStatus, сurrentOffer, nearOffers, comments, activeOffer} = props;
+  const {title, description, type, price, images, city, goods, host, isFavorite, isPremium, rating, bedrooms, maxAdults} = сurrentOffer;
 
   return (
     <section className="offer">
@@ -75,7 +78,13 @@ function Offer(props: OfferReviewFormProps): JSX.Element {
           </section>
         </div>
       </div>
-      <section className="offer__map map" />
+      <section className="offer__map map">
+        <Map
+          city={city}
+          offersList={nearOffers}
+          activeOffer={activeOffer}
+        />
+      </section>
     </section>
   );
 }

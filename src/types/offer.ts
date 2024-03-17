@@ -3,6 +3,12 @@ export type OfferCity = {
   location: OfferLocation;
 };
 
+export type Cities = {
+  id: string;
+  name: string;
+  location: OfferLocation;
+};
+
 export type OfferLocation = {
   latitude: number;
   longitude: number;

@@ -66,3 +66,8 @@ export type CurrentOffer = Offer & {
   maxAdults: number;
 };
 
+export type Sorting = {
+  id: string;
+  name: string;
+};
+

@@ -51,3 +51,22 @@ export const CITIES = [
     'location': {'latitude': 51.225402, 'longitude': 6.776314, 'zoom': 13}
   },
 ];
+
+export const SORTING = [
+  {
+    'id': 'popular',
+    'name': 'Popular',
+  },
+  {
+    'id': 'price_low_to_high',
+    'name': 'Price: low to high',
+  },
+  {
+    'id': 'price_high_to_low',
+    'name': 'Price: high to low',
+  },
+  {
+    'id': 'top_rated_first',
+    'name':  'Top rated first',
+  },
+];

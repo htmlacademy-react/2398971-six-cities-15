@@ -9,11 +9,14 @@ import { OffersList } from '../../types/offer';
 import Map from '../../components/map/map';
 import Locations from '../../components/locations/locations';
 import { useAppSelector } from '../../hooks';
+import PlacesSorting from '../../components/places-sorting/places-sorting';
+import SortingSelector from '../../utils/sorting';
 
 function MainScreen (): JSX.Element {
-  const offers = useAppSelector((state) => state.offers);
   const currentCity = useAppSelector((state) => state.city);
-  const currentOffers = offers.filter((offer) => offer.city.name === currentCity.name);
+  const currentOffers = useAppSelector((state) => state.currentOffers);
+  const currentSorting = useAppSelector((state) => state.sorting);
+  const sorteredOffers = SortingSelector(currentSorting.name);
 
   const [activeOffer, setActiveOffer] = useState<Nullable<OffersList>>(null);
 
@@ -57,36 +60,11 @@ function MainScreen (): JSX.Element {
               <b className="places__found">
                 {`${currentOffers.length} places to stay in ${currentCity.name}`}
               </b>
-              <form className="places__sorting" action="#" method="get">
-                <span className="places__sorting-caption">Sort by</span>
-                <span className="places__sorting-type" tabIndex={0}>
-                  Popular
-                  <svg className="places__sorting-arrow" width={7} height={4}>
-                    <use xlinkHref="#icon-arrow-select" />
-                  </svg>
-                </span>
-                <ul className="places__options places__options--custom places__options--opened">
-                  <li
-                    className="places__option places__option--active"
-                    tabIndex={0}
-                  >
-                    Popular
-                  </li>
-                  <li className="places__option" tabIndex={0}>
-                    Price: low to high
-                  </li>
-                  <li className="places__option" tabIndex={0}>
-                    Price: high to low
-                  </li>
-                  <li className="places__option" tabIndex={0}>
-                    Top rated first
-                  </li>
-                </ul>
-              </form>
+              <PlacesSorting/>
               <div className="cities__places-list places__list tabs__content">
                 <CardList
                   handleOfferChange={handleOfferChange}
-                  offersList={currentOffers}
+                  offersList={sorteredOffers}
                   cardClassName = {'cities'}
                 />
               </div>

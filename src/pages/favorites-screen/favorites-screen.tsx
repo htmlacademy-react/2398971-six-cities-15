@@ -3,13 +3,10 @@ import Logo from '../../components/logo/logo';
 import UserLogin from '../../components/user-navigation/user-login';
 import UserProfile from '../../components/user-navigation/user-profile';
 import FavoriteCardList from '../../components/favorites-list/favorites-list';
-import { OffersList } from '../../types/offer';
+import { useAppSelector } from '../../hooks';
 
-type FavoritesScreenProps = {
-  offersList: OffersList[];
-}
-
-function FavoritesScreen ({offersList}: FavoritesScreenProps): JSX.Element {
+function FavoritesScreen (): JSX.Element {
+  const offers = useAppSelector((state) => state.offers);
 
   return (
     <div className="page">
@@ -38,7 +35,7 @@ function FavoritesScreen ({offersList}: FavoritesScreenProps): JSX.Element {
       <main className="page__main page__main--favorites">
         <div className="page__favorites-container container">
           <FavoriteCardList
-            offersList={offersList}
+            offersList={offers}
           />
         </div>
       </main>

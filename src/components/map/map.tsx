@@ -1,6 +1,6 @@
 import { Nullable } from 'vitest';
 import {useRef, useEffect} from 'react';
-import leaflet from 'leaflet';
+import leaflet, { LayerGroup } from 'leaflet';
 import useMap from '../../hooks/use-map';
 import { OfferCity, OffersList } from '../../types/offer';
 import { URL_MARKER_DEFAULT, URL_MARKER_CURRENT } from '../../const';
@@ -29,6 +29,15 @@ function Map(props: MapProps): JSX.Element {
 
   const mapRef = useRef<HTMLDivElement>(null);
   const map = useMap({location: city.location, mapRef: mapRef});
+  const markerLayer = useRef<LayerGroup>(leaflet.layerGroup());
+
+  useEffect(() => {
+    if(map) {
+      map.setView([city.location.latitude, city.location.longitude], city.location.zoom);
+      markerLayer.current.addTo(map);
+      markerLayer.current.clearLayers();
+    }
+  }, [city, map]);
 
   useEffect(() => {
     if (map) {
@@ -40,7 +49,7 @@ function Map(props: MapProps): JSX.Element {
           }, {
             icon:  activeOffer !== undefined && activeOffer !== null && offer.id === activeOffer.id ? currentCustomIcon : defaultCustomIcon,
           })
-          .addTo(map);
+          .addTo(markerLayer.current);
 
       });
     }

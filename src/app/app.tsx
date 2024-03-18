@@ -7,14 +7,8 @@ import LoginScreen from '../pages/login-screen/login-screen';
 import MainScreen from '../pages/main-screen/main-screen';
 import OfferScreen from '../pages/offer-screen/offer-screen';
 import PrivateRoute from '../components/private-route/private-route';
-import { OffersList, CurrentOffer } from '../types/offer';
 
-type AppScreenProps = {
-  offersList: OffersList[];
-  сurrentOffers: CurrentOffer[];
-}
-
-function App ({offersList, сurrentOffers}: AppScreenProps): JSX.Element {
+function App (): JSX.Element {
 
   const authorizationStatus = AuthorizationStatus.Auth;
 
@@ -28,7 +22,7 @@ function App ({offersList, сurrentOffers}: AppScreenProps): JSX.Element {
               <PrivateRoute
                 authorizationStatus={authorizationStatus}
               >
-                <FavoritesScreen offersList={offersList}/>
+                <FavoritesScreen />
               </PrivateRoute>
             }
           />
@@ -38,7 +32,7 @@ function App ({offersList, сurrentOffers}: AppScreenProps): JSX.Element {
           />
           <Route
             path={AppRoute.Main}
-            element={<MainScreen offersList={offersList} сurrentOffers={сurrentOffers} />}
+            element={<MainScreen/>}
           />
           <Route
             path={AppRoute.Offer}

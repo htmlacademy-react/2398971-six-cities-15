@@ -28,10 +28,7 @@ function OfferScreen (props: OfferScreenProps): JSX.Element {
   // eslint-disable-next-line no-console
   console.log(currentNearOffer);
 
-
   const сurrentOffer = сurrentOffers[0];
-
-  //const nearOffers: OffersList[] = сurrentOffers.slice(1).map((nearOffer) => offersList.find((offer)=> offer.id === nearOffer.id));
   const nearOffers = offersList.slice(1);
 
 
@@ -62,10 +59,10 @@ function OfferScreen (props: OfferScreenProps): JSX.Element {
       <main className="page__main page__main--offer">
         <Offer
           authorizationStatus={authorizationStatus}
+          activeOffer={activeOffer}
           сurrentOffer={сurrentOffer}
           nearOffers={nearOffers}
           comments={comments}
-          activeOffer={activeOffer}
         />
         <NearPlaces
           handleOfferChange={handleOfferChange}

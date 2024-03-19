@@ -2,17 +2,17 @@ import { OffersList } from '../../types/offer';
 import CardPreview from '../card/card-preview';
 
 type CardListProps = {
-  offersList: OffersList[];
+  offers: OffersList[];
   handleOfferChange: (offer?: OffersList) => void;
   cardClassName: string;
 }
 
 function CardList(props: CardListProps): JSX.Element {
-  const { offersList, handleOfferChange, cardClassName } = props;
+  const { offers, handleOfferChange, cardClassName } = props;
 
   return (
     <div className="cities__places-list places__list tabs__content">
-      {offersList.map((offer) => (
+      {offers.map((offer) => (
         <CardPreview
           handleMouseHover={handleOfferChange}
           key={offer.id}

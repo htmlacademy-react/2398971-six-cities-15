@@ -64,7 +64,7 @@ function MainScreen (): JSX.Element {
               <div className="cities__places-list places__list tabs__content">
                 <CardList
                   handleOfferChange={handleOfferChange}
-                  offersList={sorteredOffers}
+                  offers={sorteredOffers}
                   cardClassName = {'cities'}
                 />
               </div>
@@ -73,7 +73,7 @@ function MainScreen (): JSX.Element {
               <section className="cities__map map">
                 <Map
                   city={currentCity}
-                  offersList={currentOffers}
+                  offers={currentOffers}
                   activeOffer={activeOffer}
                 />
               </section>

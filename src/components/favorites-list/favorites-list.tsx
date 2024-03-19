@@ -3,13 +3,13 @@ import FavoritePlaceList from './favorites-place';
 import FavoriteEmpty from './favorites-empty';
 
 type FavoriteCardListProps = {
-  offersList: OffersList[];
+  offers: OffersList[];
 }
 
 function FavoriteCardList(props: FavoriteCardListProps): JSX.Element {
-  const { offersList } = props;
-  const favoriteOffersList = offersList.filter((place)=> place.isFavorite);
-  const favoriteCities = Array.from(new Set(favoriteOffersList.map((place) => place.city.name)));
+  const { offers } = props;
+  const favoriteOffers = offers.filter((place)=> place.isFavorite);
+  const favoriteCities = Array.from(new Set(favoriteOffers.map((place) => place.city.name)));
 
   if (favoriteCities.length === 0) {
 
@@ -26,7 +26,7 @@ function FavoriteCardList(props: FavoriteCardListProps): JSX.Element {
             <FavoritePlaceList
               key={city}
               city={city}
-              favoriteOffersList={favoriteOffersList.filter((place)=> place.city.name === city)}
+              favoriteOffers={favoriteOffers.filter((place)=> place.city.name === city)}
             />))}
         </ul>
       </section>

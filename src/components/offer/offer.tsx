@@ -81,7 +81,7 @@ function Offer(props: OfferReviewFormProps): JSX.Element {
       <section className="offer__map map">
         <Map
           city={city}
-          offersList={nearOffers}
+          offers={nearOffers}
           activeOffer={activeOffer}
         />
       </section>

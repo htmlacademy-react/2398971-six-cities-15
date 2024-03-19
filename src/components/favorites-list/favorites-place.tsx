@@ -4,12 +4,12 @@ import { OffersList } from '../../types/offer';
 import CardPreview from '../card/card-preview';
 
 type FavoritePlaceProps = {
-  favoriteOffersList: OffersList[];
+  favoriteOffers: OffersList[];
   city: string;
 }
 
 function FavoritePlaceList(props: FavoritePlaceProps): JSX.Element {
-  const { city, favoriteOffersList } = props;
+  const { city, favoriteOffers } = props;
   const [activeOffer, setActiveOffer] = useState<Nullable<OffersList>>(null);
 
   // eslint-disable-next-line no-console
@@ -29,7 +29,7 @@ function FavoritePlaceList(props: FavoritePlaceProps): JSX.Element {
         </div>
       </div>
       <div className="favorites__places">
-        {favoriteOffersList.map((offer) => (
+        {favoriteOffers.map((offer) => (
           <CardPreview
             handleMouseHover={handleMouseHover}
             key={offer.id}

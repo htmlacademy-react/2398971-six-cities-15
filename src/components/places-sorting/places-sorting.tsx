@@ -27,18 +27,18 @@ function PlacesSorting(): JSX.Element {
         </svg>
       </span>
       <ul className={`places__options places__options--custom ${isOptionsOpened ? 'places__options--opened' : ''}`}>
-        {Array.from({length: SORTING.length}, (_,index) => (
+        {SORTING.map((sort) => (
           <li
-            key={SORTING[index].id}
-            className={`places__option ${currentSorting.name === SORTING[index].name ? 'places__option--active' : ''}`}
+            key={sort.id}
+            className={`places__option ${currentSorting.name === sort.name ? 'places__option--active' : ''}`}
             tabIndex={0}
             onClick={(evt) => {
               evt.preventDefault();
-              dispatch((sortingChange({sorting: SORTING[index]})));
+              dispatch((sortingChange({sorting: sort})));
               setIsOptionsOpened(false);
             }}
           >
-            {SORTING[index].name}
+            {sort.name}
           </li>
         ))}
 

@@ -29,13 +29,14 @@ function FavoritePlaceList(props: FavoritePlaceProps): JSX.Element {
         </div>
       </div>
       <div className="favorites__places">
-        {Array.from({length: favoriteOffersList.length}, (_,index) => (
+        {favoriteOffersList.map((offer) => (
           <CardPreview
             handleMouseHover={handleMouseHover}
-            key={favoriteOffersList[index].id}
-            offer={favoriteOffersList[index]}
+            key={offer.id}
+            offer={offer}
             cardClassName = {'favorites'}
-          />))}
+          />
+        ))}
       </div>
     </li>);
 }

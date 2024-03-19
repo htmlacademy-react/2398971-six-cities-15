@@ -12,13 +12,14 @@ function CardList(props: CardListProps): JSX.Element {
 
   return (
     <div className="cities__places-list places__list tabs__content">
-      {Array.from({length: offersList.length}, (_,index) => (
+      {offersList.map((offer) => (
         <CardPreview
           handleMouseHover={handleOfferChange}
-          key={offersList[index].id}
-          offer={offersList[index]}
+          key={offer.id}
+          offer={offer}
           cardClassName={cardClassName}
-        />))}
+        />
+      ))}
     </div>
   );
 }

@@ -10,17 +10,17 @@ function Locations(): JSX.Element {
   return (
     <section className="locations container">
       <ul className="locations__list tabs__list">
-        {Array.from({ length: CITIES.length}, (_,index) =>(
-          <li key={CITIES[index].id} className="locations__item">
+        {CITIES.map((city) => (
+          <li key={city.id} className="locations__item">
             <Link
-              className={`locations__item-link tabs__item ${currentCity.name === CITIES[index].name ? 'tabs__item--active' : ''}`}
+              className={`locations__item-link tabs__item ${currentCity.name === city.id ? 'tabs__item--active' : ''}`}
               onClick={(evt) => {
                 evt.preventDefault();
-                dispatch((cityChange({city: CITIES[index]})));
+                dispatch((cityChange({city: city})));
               }}
               to={AppRoute.Main}
             >
-              <span>{CITIES[index].name}</span>
+              <span>{city.name}</span>
             </Link>
           </li>
         ))}

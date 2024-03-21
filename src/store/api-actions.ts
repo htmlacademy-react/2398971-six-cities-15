@@ -22,7 +22,7 @@ export const fetchOfferAction = createAsyncThunk<void, undefined, {
   extra: AxiosInstance;
 }
 >(
-  'data/fetchQuestions',
+  'data/fetchOffers',
   async (_arg, {dispatch, extra: api}) => {
     dispatch(setOffersDataLoadingStatus(true));
     const {data} = await api.get<OffersList>(APIRoute.Offers);

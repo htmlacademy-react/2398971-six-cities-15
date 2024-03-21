@@ -13,10 +13,10 @@ function Locations(): JSX.Element {
         {CITIES.map((city) => (
           <li key={city.id} className="locations__item">
             <Link
-              className={`locations__item-link tabs__item ${currentCity.name === city.id ? 'tabs__item--active' : ''}`}
+              className={`locations__item-link tabs__item ${currentCity.name === city.name ? 'tabs__item--active' : ''}`}
               onClick={(evt) => {
                 evt.preventDefault();
-                dispatch((cityChange({city: city})));
+                dispatch((cityChange(city)));
               }}
               to={AppRoute.Main}
             >

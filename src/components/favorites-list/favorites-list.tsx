@@ -3,7 +3,7 @@ import FavoritePlaceList from './favorites-place';
 import FavoriteEmpty from './favorites-empty';
 
 type FavoriteCardListProps = {
-  offers: OffersList[];
+  offers: OffersList;
 }
 
 function FavoriteCardList(props: FavoriteCardListProps): JSX.Element {

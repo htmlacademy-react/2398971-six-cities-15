@@ -1,15 +1,15 @@
 import { useState } from 'react';
 import { Nullable } from 'vitest';
 import { Helmet } from 'react-helmet-async';
-import { OffersList } from '../../types/offer';
+import { OfferList } from '../../types/offer';
 import Logo from '../../components/logo/logo';
 import UserLogin from '../../components/user-navigation/user-login';
 import UserProfile from '../../components/user-navigation/user-profile';
 import Offer from '../../components/offer/offer';
 import NearPlaces from '../../components/near-places/near-places';
-import { offersList } from '../../mock/offers';
 import { сurrentOffers } from '../../mock/сurrentOffer';
 import { comments } from '../../mock/comments';
+import { useAppSelector } from '../../hooks';
 
 type OfferScreenProps = {
   authorizationStatus: string;
@@ -17,10 +17,11 @@ type OfferScreenProps = {
 
 function OfferScreen (props: OfferScreenProps): JSX.Element {
   const {authorizationStatus} = props;
+  const offers = useAppSelector((state) => state.offers);
 
-  const [activeOffer, setActiveOffer] = useState<Nullable<OffersList>>(null);
+  const [activeOffer, setActiveOffer] = useState<Nullable<OfferList>>(null);
 
-  const handleOfferChange = (offer?: OffersList) => {
+  const handleOfferChange = (offer?: OfferList) => {
     setActiveOffer(offer || null);
   };
 
@@ -29,7 +30,7 @@ function OfferScreen (props: OfferScreenProps): JSX.Element {
   console.log(currentNearOffer);
 
   const сurrentOffer = сurrentOffers[0];
-  const nearOffers = offersList.slice(1);
+  const nearOffers = offers.slice(1);
 
 
   return (

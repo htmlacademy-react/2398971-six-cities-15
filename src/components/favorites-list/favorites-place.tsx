@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { Nullable } from 'vitest';
-import { OffersList } from '../../types/offer';
+import { OfferList, OffersList } from '../../types/offer';
 import CardPreview from '../card/card-preview';
 
 type FavoritePlaceProps = {
-  favoriteOffers: OffersList[];
+  favoriteOffers: OffersList;
   city: string;
 }
 
@@ -15,7 +15,7 @@ function FavoritePlaceList(props: FavoritePlaceProps): JSX.Element {
   // eslint-disable-next-line no-console
   console.log(activeOffer);
 
-  const handleMouseHover = (offer?: OffersList) => {
+  const handleMouseHover = (offer?: OfferList) => {
     setActiveOffer(offer || null);
   };
 

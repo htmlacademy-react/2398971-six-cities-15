@@ -34,7 +34,7 @@ function PlacesSorting(): JSX.Element {
             tabIndex={0}
             onClick={(evt) => {
               evt.preventDefault();
-              dispatch((sortingChange({sorting: sort})));
+              dispatch((sortingChange(sort)));
               setIsOptionsOpened(false);
             }}
           >

@@ -2,14 +2,14 @@ import { Nullable } from 'vitest';
 import {useRef, useEffect} from 'react';
 import leaflet, { LayerGroup } from 'leaflet';
 import useMap from '../../hooks/use-map';
-import { OfferCity, OffersList } from '../../types/offer';
+import { OfferCity, OfferList, OffersList } from '../../types/offer';
 import { URL_MARKER_DEFAULT, URL_MARKER_CURRENT } from '../../const';
 import 'leaflet/dist/leaflet.css';
 
 type MapProps = {
   city: OfferCity;
-  offers: OffersList[];
-  activeOffer: Nullable<OffersList>;
+  offers: OffersList;
+  activeOffer: Nullable<OfferList>;
 };
 
 const defaultCustomIcon = leaflet.icon({

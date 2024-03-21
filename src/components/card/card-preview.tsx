@@ -1,6 +1,6 @@
 import {Link} from 'react-router-dom';
 import { AppRoute } from '../../const';
-import { OffersList } from '../../types/offer';
+import { OfferList } from '../../types/offer';
 import OfferPremiumLogo from '../offer-elements/offer-premium-logo';
 import OfferPreviewImage from '../offer-elements/offer-preview-image';
 import OfferBookmark from '../offer-elements/offer-bookmark';
@@ -8,8 +8,8 @@ import OfferRating from '../offer-elements/offer-rating';
 import OfferPrice from '../offer-elements/offer-price';
 
 type CardPreviewProps = {
-  offer: OffersList;
-  handleMouseHover: (offer?: OffersList) => void;
+  offer: OfferList;
+  handleMouseHover: (offer?: OfferList) => void;
   cardClassName: string;
 }
 

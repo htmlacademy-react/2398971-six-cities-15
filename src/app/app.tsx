@@ -7,10 +7,18 @@ import LoginScreen from '../pages/login-screen/login-screen';
 import MainScreen from '../pages/main-screen/main-screen';
 import OfferScreen from '../pages/offer-screen/offer-screen';
 import PrivateRoute from '../components/private-route/private-route';
+import { useAppSelector } from '../hooks';
+import LoadingScreen from '../pages/loading-screen/loading-screen';
 
 function App (): JSX.Element {
 
   const authorizationStatus = AuthorizationStatus.Auth;
+  const isOffersDataLoading = useAppSelector((state) => state.isOffersDataLoading);
+  if (isOffersDataLoading) {
+    return (
+      <LoadingScreen />
+    );
+  }
 
   return (
     <HelmetProvider>

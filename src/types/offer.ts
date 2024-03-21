@@ -45,7 +45,7 @@ export type Offer = {
   rating: number;
 };
 
-export type OffersList = PreviewImage & Offer & {
+export type OfferList = PreviewImage & Offer & {
   id: string;
   title: string;
   type: string;
@@ -56,6 +56,8 @@ export type OffersList = PreviewImage & Offer & {
   isPremium: boolean;
   rating: number;
 };
+
+export type OffersList = OfferList[];
 
 export type CurrentOffer = Offer & {
   description: string;

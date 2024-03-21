@@ -1,9 +1,9 @@
-import { OffersList } from '../../types/offer';
+import { OfferList, OffersList } from '../../types/offer';
 import CardPreview from '../card/card-preview';
 
 type NearPlacesProps = {
-  nearOffers: OffersList[];
-  handleOfferChange: (offer?: OffersList) => void;
+  nearOffers: OffersList;
+  handleOfferChange: (offer?: OfferList) => void;
   cardClassName: string;
 }
 

@@ -1,9 +1,9 @@
-import { OffersList } from '../../types/offer';
+import { OfferList, OffersList } from '../../types/offer';
 import CardPreview from '../card/card-preview';
 
 type CardListProps = {
-  offers: OffersList[];
-  handleOfferChange: (offer?: OffersList) => void;
+  offers: OffersList;
+  handleOfferChange: (offer?: OfferList) => void;
   cardClassName: string;
 }
 

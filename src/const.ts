@@ -1,6 +1,4 @@
-export const Setting = {
-  PlaceCardCount: 5
-};
+export const TIMEOUT_SHOW_ERROR = 2000;
 
 export enum AppRoute {
   Favorites = '/favorites',
@@ -13,6 +11,14 @@ export enum AuthorizationStatus {
   Auth = 'AUTH',
   NoAuth = 'NO_AUTH',
   Unknown = 'UNKNOWN',
+}
+
+export enum APIRoute {
+  Offers = '/six-cities/offers',
+  Favorite = '/six-cities/favorite',
+  Comments = '/six-cities/comments',
+  Login = '/six-cities/login',
+  Logout = '/six-cities/logout',
 }
 
 export const URL_MARKER_DEFAULT = 'markup/img/pin.svg';

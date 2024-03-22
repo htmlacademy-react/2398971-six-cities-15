@@ -1,27 +1,49 @@
 import {createReducer} from '@reduxjs/toolkit';
-import { cityChange, offersContent, sortingChange } from './action';
-
+import { cityChange, loadOffers, offersContent, sortingChange, setError, setOffersDataLoadingStatus, setCurrentOffers } from './action';
 import { CITIES, SORTING } from '../const';
-import { offersList } from '../mock/offers';
+import { Cities, OffersList, Sorting } from '../types/offer';
 
-const initialState = {
+type InitalState = {
+  city: Cities;
+  sorting: Sorting;
+  offers: OffersList;
+  currentOffers: OffersList;
+  isOffersDataLoading: boolean;
+  error: string | null;
+}
+
+const initialState: InitalState = {
   city: CITIES[0],
   sorting: SORTING[0],
-  offers: offersList,
-  currentOffers: offersList.filter((offer) => offer.city.name === CITIES[0].name),
+  offers: [],
+  currentOffers: [],
+  isOffersDataLoading: false,
+  error: null,
 };
 
 const reducer = createReducer(initialState, (builder) => {
   builder
     .addCase(cityChange, (state, action) => {
-      state.city = action.payload.city;
-      state.currentOffers = state.offers.filter((offer) => offer.city.name === action.payload.city.name);
+      state.city = action.payload;
+      state.currentOffers = state.offers.filter((offer) => offer.city.name === action.payload.name);
     })
     .addCase(offersContent, (state) => {
       state.offers.push();
     })
     .addCase(sortingChange, (state, action) => {
-      state.sorting = action.payload.sorting;
+      state.sorting = action.payload;
+    })
+    .addCase(loadOffers, (state, action) => {
+      state.offers = action.payload;
+    })
+    .addCase(setCurrentOffers, (state) => {
+      state.currentOffers = state.offers.filter((offer) => offer.city.name === state.city.name);
+    })
+    .addCase(setOffersDataLoadingStatus, (state, action) => {
+      state.isOffersDataLoading = action.payload;
+    })
+    .addCase(setError, (state, action) => {
+      state.error = action.payload;
     });
 });
 

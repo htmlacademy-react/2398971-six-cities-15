@@ -12,24 +12,24 @@ function OfferReviewsList(props: OfferReviewsListProps): JSX.Element {
 
   return (
     <ul className="reviews__list">
-      {Array.from({length: comments.length}, (_,index) => (
-        <li key={index} className="reviews__item">
+      {comments.map((comment) => (
+        <li key={comment.id} className="reviews__item">
           <OfferUser
             className={'reviews'}
-            user={comments[index].user}
+            user={comment.user}
             width={54}
             height={54}
           />
           <div className="reviews__info">
             <OfferRating
               className="reviews"
-              rating={comments[index].rating}
+              rating={comment.rating}
             />
             <p className="reviews__text">
-              {comments[index].comment}
+              {comment.comment}
             </p>
             <time className="reviews__time" dateTime="2019-04-24">
-              {dayjs(comments[index].date).format('MMMM DD')}
+              {dayjs(comment.date).format('MMMM DD')}
             </time>
           </div>
         </li>

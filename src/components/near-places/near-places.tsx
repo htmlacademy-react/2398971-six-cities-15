@@ -1,9 +1,9 @@
-import { OffersList } from '../../types/offer';
+import { OfferList, OffersList } from '../../types/offer';
 import CardPreview from '../card/card-preview';
 
 type NearPlacesProps = {
-  nearOffers: OffersList[];
-  handleOfferChange: (offer?: OffersList) => void;
+  nearOffers: OffersList;
+  handleOfferChange: (offer?: OfferList) => void;
   cardClassName: string;
 }
 
@@ -17,13 +17,14 @@ function NearPlaces(props:NearPlacesProps): JSX.Element {
           Other places in the neighbourhood
         </h2>
         <div className="near-places__list places__list">
-          {Array.from({length: nearOffers.length}, (_,index) => (
+          {nearOffers.map((offer) => (
             <CardPreview
               handleMouseHover={handleOfferChange}
-              key={nearOffers[index].id}
-              offer={nearOffers[index]}
+              key={offer.id}
+              offer={offer}
               cardClassName={cardClassName}
-            />))}
+            />
+          ))}
         </div>
       </section>
     </div>

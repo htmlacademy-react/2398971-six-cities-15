@@ -5,7 +5,7 @@ import Logo from '../../components/logo/logo';
 import UserLogin from '../../components/user-navigation/user-login';
 import UserProfile from '../../components/user-navigation/user-profile';
 import CardList from '../../components/card-list/card-list';
-import { OffersList } from '../../types/offer';
+import { OfferList } from '../../types/offer';
 import Map from '../../components/map/map';
 import Locations from '../../components/locations/locations';
 import { useAppSelector } from '../../hooks';
@@ -18,9 +18,9 @@ function MainScreen (): JSX.Element {
   const currentSorting = useAppSelector((state) => state.sorting);
   const sorteredOffers = SortingSelector(currentSorting.name);
 
-  const [activeOffer, setActiveOffer] = useState<Nullable<OffersList>>(null);
+  const [activeOffer, setActiveOffer] = useState<Nullable<OfferList>>(null);
 
-  const handleOfferChange = (offer?: OffersList) => {
+  const handleOfferChange = (offer?: OfferList) => {
     setActiveOffer(offer || null);
   };
 
@@ -64,7 +64,7 @@ function MainScreen (): JSX.Element {
               <div className="cities__places-list places__list tabs__content">
                 <CardList
                   handleOfferChange={handleOfferChange}
-                  offersList={sorteredOffers}
+                  offers={sorteredOffers}
                   cardClassName = {'cities'}
                 />
               </div>
@@ -73,7 +73,7 @@ function MainScreen (): JSX.Element {
               <section className="cities__map map">
                 <Map
                   city={currentCity}
-                  offersList={currentOffers}
+                  offers={currentOffers}
                   activeOffer={activeOffer}
                 />
               </section>

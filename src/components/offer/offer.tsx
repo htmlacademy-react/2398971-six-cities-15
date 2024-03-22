@@ -1,5 +1,5 @@
 import { Nullable } from 'vitest';
-import { CurrentOffer, OffersList } from '../../types/offer';
+import { CurrentOffer, OfferList, OffersList } from '../../types/offer';
 import { Comments } from '../../types/offer';
 import OfferGallery from '../offer-elements/offer-gallery';
 import OfferPremiumLogo from '../offer-elements/offer-premium-logo';
@@ -17,9 +17,9 @@ import Map from '../map/map';
 type OfferReviewFormProps = {
   authorizationStatus: string;
   сurrentOffer: CurrentOffer;
-  nearOffers: OffersList[];
+  nearOffers: OffersList;
   comments: Comments[];
-  activeOffer: Nullable<OffersList>;
+  activeOffer: Nullable<OfferList>;
 }
 
 function Offer(props: OfferReviewFormProps): JSX.Element {
@@ -81,7 +81,7 @@ function Offer(props: OfferReviewFormProps): JSX.Element {
       <section className="offer__map map">
         <Map
           city={city}
-          offersList={nearOffers}
+          offers={nearOffers}
           activeOffer={activeOffer}
         />
       </section>

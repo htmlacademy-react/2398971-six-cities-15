@@ -4,7 +4,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks';
 import { sortingChange } from '../../store/action';
 
 function PlacesSorting(): JSX.Element {
-  const [selectedSorting, setSelectedSorting] = useState(false);
+  const [isOptionsOpened, setIsOptionsOpened] = useState(false);
   const currentSorting = useAppSelector((state) => state.sorting);
   const dispatch = useAppDispatch();
 
@@ -18,7 +18,7 @@ function PlacesSorting(): JSX.Element {
         tabIndex={0}
         onClick={(evt) => {
           evt.preventDefault();
-          setSelectedSorting(!selectedSorting);
+          setIsOptionsOpened(!isOptionsOpened);
         }}
       >
         {currentSorting.name}
@@ -26,19 +26,19 @@ function PlacesSorting(): JSX.Element {
           <use xlinkHref="#icon-arrow-select" />
         </svg>
       </span>
-      <ul className={`places__options places__options--custom ${selectedSorting ? 'places__options--opened' : ''}`}>
-        {Array.from({length: SORTING.length}, (_,index) => (
+      <ul className={`places__options places__options--custom ${isOptionsOpened ? 'places__options--opened' : ''}`}>
+        {SORTING.map((sort) => (
           <li
-            key={SORTING[index].id}
-            className={`places__option ${currentSorting.name === SORTING[index].name ? 'places__option--active' : ''}`}
+            key={sort.id}
+            className={`places__option ${currentSorting.name === sort.name ? 'places__option--active' : ''}`}
             tabIndex={0}
             onClick={(evt) => {
               evt.preventDefault();
-              dispatch((sortingChange({sorting: SORTING[index]})));
-              setSelectedSorting(false);
+              dispatch((sortingChange(sort)));
+              setIsOptionsOpened(false);
             }}
           >
-            {SORTING[index].name}
+            {sort.name}
           </li>
         ))}
 

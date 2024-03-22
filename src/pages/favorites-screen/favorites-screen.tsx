@@ -35,7 +35,7 @@ function FavoritesScreen (): JSX.Element {
       <main className="page__main page__main--favorites">
         <div className="page__favorites-container container">
           <FavoriteCardList
-            offersList={offers}
+            offers={offers}
           />
         </div>
       </main>

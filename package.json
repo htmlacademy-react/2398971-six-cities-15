@@ -46,6 +46,7 @@
     "faker": "5.5.3",
     "jsdom": "22.1.0",
     "react-loader-spinner": "6.1.6",
+    "react-toastify": "10.0.5",
     "typescript": "5.2.2",
     "vite": "^4.5.2",
     "vitest": "0.34.6"

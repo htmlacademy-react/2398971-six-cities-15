@@ -3,7 +3,7 @@ import { AppRoute } from '../../const';
 import { useAppDispatch } from '../../hooks';
 import { logoutAction } from '../../store/api-actions';
 
-function UserLogin(): JSX.Element {
+function UserLogout(): JSX.Element {
   const dispatch = useAppDispatch();
 
   const handleLogoutClick = (evt: React.MouseEvent<HTMLAnchorElement>) => {
@@ -24,4 +24,4 @@ function UserLogin(): JSX.Element {
   );
 }
 
-export default UserLogin;
+export default UserLogout;

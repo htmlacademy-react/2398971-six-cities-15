@@ -43,7 +43,7 @@ function App (): JSX.Element {
             element={<MainScreen/>}
           />
           <Route
-            path={AppRoute.Offer}
+            path={`${AppRoute.Offer}/:offerId`}
             element={<OfferScreen authorizationStatus={authorizationStatus}/>}
           />
           <Route

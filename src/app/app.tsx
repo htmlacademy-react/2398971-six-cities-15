@@ -11,10 +11,10 @@ import { useAppSelector } from '../hooks';
 import LoadingScreen from '../pages/loading-screen/loading-screen';
 
 function App (): JSX.Element {
-
-  const authorizationStatus = AuthorizationStatus.Auth;
+  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
   const isOffersDataLoading = useAppSelector((state) => state.isOffersDataLoading);
-  if (isOffersDataLoading) {
+
+  if (authorizationStatus === AuthorizationStatus.Unknown || isOffersDataLoading) {
     return (
       <LoadingScreen />
     );

@@ -1,4 +1,4 @@
-import { Route, BrowserRouter, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import { AppRoute, AuthorizationStatus } from '../const';
 import ErrorScreen from '../pages/error-screen/error-screen';
@@ -9,12 +9,14 @@ import OfferScreen from '../pages/offer-screen/offer-screen';
 import PrivateRoute from '../components/private-route/private-route';
 import { useAppSelector } from '../hooks';
 import LoadingScreen from '../pages/loading-screen/loading-screen';
+import HistoryRouter from '../components/history-route/history-route';
+import browserHistory from '../browser-history';
 
 function App (): JSX.Element {
-
-  const authorizationStatus = AuthorizationStatus.Auth;
+  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
   const isOffersDataLoading = useAppSelector((state) => state.isOffersDataLoading);
-  if (isOffersDataLoading) {
+
+  if (authorizationStatus === AuthorizationStatus.Unknown || isOffersDataLoading) {
     return (
       <LoadingScreen />
     );
@@ -22,7 +24,7 @@ function App (): JSX.Element {
 
   return (
     <HelmetProvider>
-      <BrowserRouter>
+      <HistoryRouter history={browserHistory}>
         <Routes>
           <Route
             path={AppRoute.Favorites}
@@ -43,7 +45,7 @@ function App (): JSX.Element {
             element={<MainScreen/>}
           />
           <Route
-            path={AppRoute.Offer}
+            path={`${AppRoute.Offer}/:offerId`}
             element={<OfferScreen authorizationStatus={authorizationStatus}/>}
           />
           <Route
@@ -51,7 +53,7 @@ function App (): JSX.Element {
             element={<ErrorScreen />}
           />
         </Routes>
-      </BrowserRouter>
+      </HistoryRouter>
     </HelmetProvider>
   );
 }

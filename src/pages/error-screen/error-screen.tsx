@@ -1,7 +1,6 @@
 import { Helmet } from 'react-helmet-async';
 import Logo from '../../components/logo/logo';
-import UserLogin from '../../components/user-navigation/user-login';
-import UserProfile from '../../components/user-navigation/user-profile';
+import HeaderNavList from '../../components/user-navigation/user-navigation-list';
 
 function ErrorScreen (): JSX.Element {
   return (
@@ -16,14 +15,7 @@ function ErrorScreen (): JSX.Element {
               <Logo />
             </div>
             <nav className="header__nav">
-              <ul className="header__nav-list">
-                <li className="header__nav-item user">
-                  <UserProfile />
-                </li>
-                <li className="header__nav-item">
-                  <UserLogin />
-                </li>
-              </ul>
+              <HeaderNavList/>
             </nav>
           </div>
         </div>

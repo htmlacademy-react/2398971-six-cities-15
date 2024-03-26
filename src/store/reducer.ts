@@ -1,7 +1,7 @@
 import {createReducer} from '@reduxjs/toolkit';
-import { cityChange, loadOffers, offersContent, sortingChange, setOffersDataLoadingStatus, setCurrentOffers, requireAuthorization, getUserName } from './action';
+import { cityChange, loadOffers, offersContent, sortingChange, setOffersDataLoadingStatus, setCurrentOffers, requireAuthorization, getUserName, loadOffer, loadNearOffer, loadFavoriteOffers, loadComments, clearOffer, clearNearOffer, clearComments, setErrorStatus } from './action';
 import { AuthorizationStatus, CITIES, SORTING } from '../const';
-import { Cities, OffersList, Sorting } from '../types/offer';
+import { Cities, Comments, CurrentOffer, OffersList, Sorting } from '../types/offer';
 
 type InitalState = {
   city: Cities;
@@ -11,6 +11,11 @@ type InitalState = {
   isOffersDataLoading: boolean;
   authorizationStatus: AuthorizationStatus;
   email: string | null;
+  offer: CurrentOffer | null;
+  nearOffers: OffersList | null;
+  favoriteOffers: OffersList | null;
+  comments: Comments | null;
+  errorStatus: boolean;
 }
 
 const initialState: InitalState = {
@@ -21,6 +26,11 @@ const initialState: InitalState = {
   isOffersDataLoading: false,
   authorizationStatus: AuthorizationStatus.Unknown,
   email: null,
+  offer: null,
+  nearOffers: [],
+  favoriteOffers: [],
+  comments: [],
+  errorStatus: false
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -38,8 +48,29 @@ const reducer = createReducer(initialState, (builder) => {
     .addCase(loadOffers, (state, action) => {
       state.offers = action.payload;
     })
+    .addCase(loadOffer, (state, action) => {
+      state.offer = action.payload;
+    })
+    .addCase(clearOffer, (state, action) => {
+      state.offer = action.payload;
+    })
+    .addCase(loadNearOffer, (state, action) => {
+      state.nearOffers = action.payload;
+    })
+    .addCase(clearNearOffer, (state, action) => {
+      state.nearOffers = action.payload;
+    })
     .addCase(setCurrentOffers, (state) => {
       state.currentOffers = state.offers.filter((offer) => offer.city.name === state.city.name);
+    })
+    .addCase(loadFavoriteOffers, (state, action) => {
+      state.favoriteOffers = action.payload;
+    })
+    .addCase(loadComments, (state, action) => {
+      state.comments = action.payload;
+    })
+    .addCase(clearComments, (state, action) => {
+      state.comments = action.payload;
     })
     .addCase(setOffersDataLoadingStatus, (state, action) => {
       state.isOffersDataLoading = action.payload;
@@ -49,6 +80,9 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(getUserName, (state, action) => {
       state.email = action.payload;
+    })
+    .addCase(setErrorStatus, (state, action) => {
+      state.errorStatus = action.payload;
     });
 });
 

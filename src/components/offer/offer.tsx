@@ -18,7 +18,7 @@ type OfferReviewFormProps = {
   authorizationStatus: string;
   сurrentOffer: CurrentOffer;
   nearOffers: OffersList;
-  comments: Comments[];
+  comments: Comments;
   activeOffer: Nullable<OfferList>;
 }
 
@@ -74,7 +74,7 @@ function Offer(props: OfferReviewFormProps): JSX.Element {
             <OfferReviewsList
               comments={comments}
             />
-            {authorizationStatus && <OfferReviewForm/>}
+            { authorizationStatus === 'AUTH' ? <OfferReviewForm/> : ''}
           </section>
         </div>
       </div>

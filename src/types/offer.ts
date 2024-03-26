@@ -25,13 +25,20 @@ export type User = {
   avatarUrl: string;
 }
 
-export type Comments = {
+export type NewComment = {
+  comment: string;
+  rating: number;
+  };
+
+export type Comment = {
 id: string;
 comment: string;
 date: string;
 rating: number;
 user: User;
 };
+
+export type Comments = Comment[];
 
 export type Offer = {
   id: string;

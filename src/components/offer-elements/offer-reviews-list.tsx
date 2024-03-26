@@ -4,7 +4,7 @@ import OfferRating from './offer-rating';
 import OfferUser from './offer-user';
 
 type OfferReviewsListProps = {
-  comments: Comments[];
+  comments: Comments;
 }
 
 function OfferReviewsList(props: OfferReviewsListProps): JSX.Element {

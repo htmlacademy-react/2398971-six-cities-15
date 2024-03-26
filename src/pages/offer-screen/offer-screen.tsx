@@ -1,14 +1,17 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Nullable } from 'vitest';
 import { Helmet } from 'react-helmet-async';
 import { OfferList } from '../../types/offer';
 import Logo from '../../components/logo/logo';
 import Offer from '../../components/offer/offer';
 import NearPlaces from '../../components/near-places/near-places';
-import { сurrentOffers } from '../../mock/сurrentOffer';
-import { comments } from '../../mock/comments';
-import { useAppSelector } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import HeaderNavList from '../../components/user-navigation/user-navigation-list';
+import { useParams } from 'react-router-dom';
+import { fetchCurrentOfferAction, fetchNearOffersAction, fetchOfferCommentAction } from '../../store/api-actions';
+import LoadingScreen from '../loading-screen/loading-screen';
+import { clearComments, clearNearOffer, clearOffer } from '../../store/action';
+import ErrorScreen from '../error-screen/error-screen';
 
 type OfferScreenProps = {
   authorizationStatus: string;
@@ -16,21 +19,46 @@ type OfferScreenProps = {
 
 function OfferScreen (props: OfferScreenProps): JSX.Element {
   const {authorizationStatus} = props;
-  const offers = useAppSelector((state) => state.offers);
+  const dispatch = useAppDispatch();
+  const {offerId} = useParams();
 
   const [activeOffer, setActiveOffer] = useState<Nullable<OfferList>>(null);
 
   const handleOfferChange = (offer?: OfferList) => {
     setActiveOffer(offer || null);
-  };
+  };//const currentNearOffer = сurrentOffers.find(({ id }) => id === activeOffer?.id);
 
-  const currentNearOffer = сurrentOffers.find(({ id }) => id === activeOffer?.id);
-  // eslint-disable-next-line no-console
-  console.log(currentNearOffer);
 
-  const сurrentOffer = сurrentOffers[0];
-  const nearOffers = offers.slice(1);
+  useEffect (() => {
+    if (offerId) {
+      dispatch(fetchCurrentOfferAction(offerId));
+      dispatch(fetchNearOffersAction(offerId));
+      dispatch(fetchOfferCommentAction(offerId));
+    }
 
+    return () => {
+      dispatch(clearOffer(null));
+      dispatch(clearNearOffer(null));
+      dispatch(clearComments(null));
+    };
+  }, [dispatch, offerId]);
+
+  const сurrentOffer = useAppSelector((state) => state.offer);
+  const nearOffers = useAppSelector((state) => state.nearOffers);
+  const comments = useAppSelector((state) => state.comments);
+  const isError = useAppSelector((state) => state.errorStatus);
+
+  if (isError) {
+    return (
+      <ErrorScreen />
+    );
+  }
+
+  if (сurrentOffer === null || nearOffers === null || comments === null) {
+    return (
+      <LoadingScreen />
+    );
+  }
 
   return (
     <div className="page">

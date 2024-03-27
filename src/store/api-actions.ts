@@ -74,7 +74,7 @@ export const fetchSwitchFavoriteOffer = createAsyncThunk<void, SetFavoritData, {
 >(
   'data/fetchSwitchFavoriteOffer',
   async ({offerId, status}, {dispatch, extra: api}) => {
-    const {data} = await api.get<CurrentOffer>(`${APIRoute.Favorite}/${offerId}/${status}`);
+    const {data} = await api.post<CurrentOffer>(`${APIRoute.Favorite}/${offerId}/${status}`);
     dispatch(switchFavoriteOffer(data));
     dispatch(fetchFavoriteOffersAction());
     dispatch(fetchAllOfferAction());

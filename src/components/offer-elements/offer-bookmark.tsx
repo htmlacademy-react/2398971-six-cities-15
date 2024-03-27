@@ -1,6 +1,8 @@
 import { ReactEventHandler, useState } from 'react';
-import { useAppDispatch } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { fetchSwitchFavoriteOffer } from '../../store/api-actions';
+import { AppRoute, AuthorizationStatus } from '../../const';
+import { useNavigate } from 'react-router-dom';
 
 type OfferBookmarkProps = {
   offerId:string;
@@ -15,16 +17,22 @@ type TChangeHandleReview = ReactEventHandler<HTMLButtonElement>
 function OfferBookmark(props: OfferBookmarkProps): JSX.Element {
   const {offerId, className, width, height} = props;
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
 
   const [isFavorite, setIsFavorite] = useState(props.isFavorite);
 
   const handleFavoriteChange: TChangeHandleReview = (evt) => {
     evt.preventDefault();
-    setIsFavorite(!isFavorite);
-    dispatch(fetchSwitchFavoriteOffer({
-      offerId: offerId,
-      status: isFavorite ? 0 : 1,
-    }));
+    if (authorizationStatus === AuthorizationStatus.Auth) {
+      setIsFavorite(!isFavorite);
+      dispatch(fetchSwitchFavoriteOffer({
+        offerId: offerId,
+        status: isFavorite ? 0 : 1,
+      }));
+    } else {
+      navigate(AppRoute.Login);
+    }
   };
 
   return (

@@ -1,11 +1,40 @@
 import { Helmet } from 'react-helmet-async';
 import Logo from '../../components/logo/logo';
 import FavoriteCardList from '../../components/favorites-list/favorites-list';
-import { useAppSelector } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import HeaderNavList from '../../components/user-navigation/user-navigation-list';
+import { useEffect } from 'react';
+import { fetchFavoriteOffersAction } from '../../store/api-actions';
+import { clearFavoriteOffers } from '../../store/action';
+import ErrorScreen from '../error-screen/error-screen';
+import LoadingScreen from '../loading-screen/loading-screen';
 
 function FavoritesScreen (): JSX.Element {
-  const offers = useAppSelector((state) => state.offers);
+  const dispatch = useAppDispatch();
+
+
+  useEffect (() => {
+    dispatch(fetchFavoriteOffersAction());
+
+    return () => {
+      dispatch(clearFavoriteOffers(null));
+    };
+  }, [dispatch]);
+
+  const favoriteOffers = useAppSelector((state) => state.favoriteOffers);
+  const isError = useAppSelector((state) => state.errorStatus);
+
+  if (isError) {
+    return (
+      <ErrorScreen />
+    );
+  }
+
+  if (favoriteOffers === null) {
+    return (
+      <LoadingScreen />
+    );
+  }
 
   return (
     <div className="page">
@@ -27,7 +56,7 @@ function FavoritesScreen (): JSX.Element {
       <main className="page__main page__main--favorites">
         <div className="page__favorites-container container">
           <FavoriteCardList
-            offers={offers}
+            offers={favoriteOffers}
           />
         </div>
       </main>

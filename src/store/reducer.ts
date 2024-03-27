@@ -1,5 +1,5 @@
 import {createReducer} from '@reduxjs/toolkit';
-import { cityChange, loadOffers, offersContent, sortingChange, setOffersDataLoadingStatus, setCurrentOffers, requireAuthorization, getUserName, loadOffer, loadNearOffer, loadFavoriteOffers, loadComments, clearOffer, clearNearOffer, clearComments, setErrorStatus } from './action';
+import { cityChange, loadOffers, offersContent, sortingChange, setOffersDataLoadingStatus, setCurrentOffers, requireAuthorization, getUserName, loadOffer, loadNearOffer, loadFavoriteOffers, loadComments, clearOffer, clearNearOffer, clearComments, setErrorStatus, clearFavoriteOffers } from './action';
 import { AuthorizationStatus, CITIES, SORTING } from '../const';
 import { Cities, Comments, CurrentOffer, OffersList, Sorting } from '../types/offer';
 
@@ -28,7 +28,7 @@ const initialState: InitalState = {
   email: null,
   offer: null,
   nearOffers: [],
-  favoriteOffers: [],
+  favoriteOffers: null,
   comments: [],
   errorStatus: false
 };
@@ -64,6 +64,9 @@ const reducer = createReducer(initialState, (builder) => {
       state.currentOffers = state.offers.filter((offer) => offer.city.name === state.city.name);
     })
     .addCase(loadFavoriteOffers, (state, action) => {
+      state.favoriteOffers = action.payload;
+    })
+    .addCase(clearFavoriteOffers, (state, action) => {
       state.favoriteOffers = action.payload;
     })
     .addCase(loadComments, (state, action) => {

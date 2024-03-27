@@ -53,6 +53,34 @@ export const fetchNearOffersAction = createAsyncThunk<void, string, {
   },
 );
 
+export const fetchFavoriteOffersAction = createAsyncThunk<void, undefined, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}
+>(
+  'data/fetchFavoriteOffers',
+  async (_arg, {dispatch, extra: api}) => {
+    const {data} = await api.get<OffersList>(APIRoute.Favorite);
+    dispatch(loadFavoriteOffers(data));
+  },
+);
+
+export const fetchSwitchFavoriteOffer = createAsyncThunk<void, SetFavoritData, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}
+>(
+  'data/fetchSwitchFavoriteOffer',
+  async ({offerId, status}, {dispatch, extra: api}) => {
+    const {data} = await api.get<CurrentOffer>(`${APIRoute.Favorite}/${offerId}/${status}`);
+    dispatch(switchFavoriteOffer(data));
+    dispatch(fetchFavoriteOffersAction());
+    dispatch(fetchAllOfferAction());
+  },
+);
+
 export const fetchOfferCommentAction = createAsyncThunk<void, string, {
   dispatch: AppDispatch;
   state: State;

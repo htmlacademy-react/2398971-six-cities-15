@@ -14,6 +14,7 @@ export const clearNearOffer = createAction<null>('data/clearNearOffer');
 export const setCurrentOffers = createAction<OffersList>('data/setCurrentOffers');
 
 export const loadFavoriteOffers = createAction<OffersList>('data/loadFavoriteOffers');
+export const clearFavoriteOffers = createAction<null>('data/clearFavoriteOffers');
 export const switchFavoriteOffer = createAction<CurrentOffer>('data/switchFavoriteOffer');
 
 export const loadComments = createAction<Comments>('data/loadComments');

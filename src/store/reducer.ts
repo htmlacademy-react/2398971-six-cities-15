@@ -2,6 +2,7 @@ import {createReducer} from '@reduxjs/toolkit';
 import { cityChange, loadOffers, offersContent, sortingChange, setOffersDataLoadingStatus, setCurrentOffers, requireAuthorization, getUserName, loadOffer, loadNearOffer, loadFavoriteOffers, loadComments, clearOffer, clearNearOffer, clearComments, setErrorStatus, clearFavoriteOffers } from './action';
 import { AuthorizationStatus, CITIES, SORTING } from '../const';
 import { Cities, Comments, CurrentOffer, OffersList, Sorting } from '../types/offer';
+import { checkAuthAction, fetchAllOfferAction, fetchCurrentOfferAction, fetchFavoriteOffersAction, fetchNearOffersAction, fetchNewCommentAction, fetchOfferCommentAction, fetchSwitchFavoriteOffer, loginAction, logoutAction } from './api-actions';
 
 type InitalState = {
   city: Cities;
@@ -86,6 +87,66 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(setErrorStatus, (state, action) => {
       state.errorStatus = action.payload;
+    })
+    .addCase(fetchAllOfferAction.rejected, (state) => {
+      state.errorStatus = true;
+    })
+    .addCase(fetchCurrentOfferAction.rejected, (state) => {
+      state.errorStatus = true;
+    })
+    .addCase(fetchNearOffersAction.rejected, (state) => {
+      state.errorStatus = true;
+    })
+    .addCase(fetchFavoriteOffersAction.rejected, (state) => {
+      state.errorStatus = true;
+    })
+    .addCase(fetchSwitchFavoriteOffer.rejected, (state) => {
+      state.errorStatus = true;
+    })
+    .addCase(fetchOfferCommentAction.rejected, (state) => {
+      state.errorStatus = true;
+    })
+    .addCase(fetchNewCommentAction.rejected, (state) => {
+      state.errorStatus = true;
+    })
+    .addCase(checkAuthAction.rejected, (state) => {
+      state.errorStatus = true;
+    })
+    .addCase(loginAction.rejected, (state) => {
+      state.errorStatus = true;
+    })
+    .addCase(logoutAction.rejected, (state) => {
+      state.errorStatus = true;
+    })
+    .addCase(fetchAllOfferAction.fulfilled, (state) => {
+      state.errorStatus = false;
+    })
+    .addCase(fetchCurrentOfferAction.fulfilled, (state) => {
+      state.errorStatus = false;
+    })
+    .addCase(fetchNearOffersAction.fulfilled, (state) => {
+      state.errorStatus = false;
+    })
+    .addCase(fetchFavoriteOffersAction.fulfilled, (state) => {
+      state.errorStatus = false;
+    })
+    .addCase(fetchSwitchFavoriteOffer.fulfilled, (state) => {
+      state.errorStatus = false;
+    })
+    .addCase(fetchOfferCommentAction.fulfilled, (state) => {
+      state.errorStatus = false;
+    })
+    .addCase(fetchNewCommentAction.fulfilled, (state) => {
+      state.errorStatus = false;
+    })
+    .addCase(checkAuthAction.fulfilled, (state) => {
+      state.errorStatus = false;
+    })
+    .addCase(loginAction.fulfilled, (state) => {
+      state.errorStatus = false;
+    })
+    .addCase(logoutAction.fulfilled, (state) => {
+      state.errorStatus = false;
     });
 });
 

@@ -1,13 +1,32 @@
-import { Fragment, ReactEventHandler, useState } from 'react';
+import { FormEvent, Fragment, ReactEventHandler, useState } from 'react';
+import { useAppDispatch } from '../../hooks';
+import { fetchNewCommentAction } from '../../store/api-actions';
+import { useParams } from 'react-router-dom';
 
 type TChangeHandleReview = ReactEventHandler<HTMLInputElement | HTMLTextAreaElement>
 
 function OfferReviewForm(): JSX.Element {
+  const dispatch = useAppDispatch();
+  const {offerId} = useParams();
+
   const [review, setReview] = useState({rating: 0, review: ''});
 
   const handleReviewChange: TChangeHandleReview = (event) => {
     const {name, value} = event.currentTarget;
     setReview({...review,[name]:value});
+  };
+
+  const handleCommentSubmit = (evt: FormEvent<HTMLFormElement>) => {
+    evt.preventDefault();
+
+    if (offerId || review.review.length < 50 || review.rating === 0) {
+      dispatch(fetchNewCommentAction({
+        offerId: offerId,
+        comment: review.review,
+        rating: Number(review.rating),
+      }));
+      setReview({rating: 0, review: ''});
+    }
   };
 
   const rating = [
@@ -19,7 +38,11 @@ function OfferReviewForm(): JSX.Element {
   ];
 
   return (
-    <form className="reviews__form form" action="#" method="post">
+    <form
+      className="reviews__form form"
+      action=""
+      onSubmit={handleCommentSubmit}
+    >
       <label className="reviews__label form__label" htmlFor="review">
             Your review
       </label>
@@ -63,14 +86,11 @@ function OfferReviewForm(): JSX.Element {
           <b className="reviews__text-amount">50 characters</b>.
         </p>
         <button
-          onClick={() =>{
-            setReview(review);
-          }}
           className="reviews__submit form__submit button"
           type="submit"
           disabled={review.review.length < 50 || review.rating === 0}
         >
-              Submit
+          Submit
         </button>
       </div>
     </form>

@@ -46,6 +46,7 @@ function CardPreview (props: CardPreviewProps): JSX.Element {
             price={price}
           />
           <OfferBookmark
+            offerId={id}
             isFavorite={isFavorite}
             className="place-card"
             width={18}

@@ -18,13 +18,13 @@ type OfferReviewFormProps = {
   authorizationStatus: string;
   сurrentOffer: CurrentOffer;
   nearOffers: OffersList;
-  comments: Comments[];
+  comments: Comments;
   activeOffer: Nullable<OfferList>;
 }
 
 function Offer(props: OfferReviewFormProps): JSX.Element {
   const {authorizationStatus, сurrentOffer, nearOffers, comments, activeOffer} = props;
-  const {title, description, type, price, images, city, goods, host, isFavorite, isPremium, rating, bedrooms, maxAdults} = сurrentOffer;
+  const {id, title, description, type, price, images, city, goods, host, isFavorite, isPremium, rating, bedrooms, maxAdults} = сurrentOffer;
 
   return (
     <section className="offer">
@@ -37,6 +37,7 @@ function Offer(props: OfferReviewFormProps): JSX.Element {
               {title}
             </h1>
             <OfferBookmark
+              offerId={id}
               isFavorite={isFavorite}
               className="offer"
               width={31}
@@ -74,7 +75,7 @@ function Offer(props: OfferReviewFormProps): JSX.Element {
             <OfferReviewsList
               comments={comments}
             />
-            {authorizationStatus && <OfferReviewForm/>}
+            { authorizationStatus === 'AUTH' ? <OfferReviewForm/> : ''}
           </section>
         </div>
       </div>

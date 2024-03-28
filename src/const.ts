@@ -22,6 +22,8 @@ export enum APIRoute {
 
 export enum NameSpace {
   User = 'USER',
+  Offers = 'OFFERS',
+  TEMP = 'TEMP',
 }
 
 export const URL_MARKER_DEFAULT = 'markup/img/pin.svg';

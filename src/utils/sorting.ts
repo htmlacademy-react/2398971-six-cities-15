@@ -1,7 +1,8 @@
 import { useAppSelector } from '../hooks';
+import { getCurrentOffers } from '../store/temp-process/temp-selectors';
 
 function SortingSelector (sortingType: string) {
-  const currentOffers = useAppSelector((state) => state.currentOffers);
+  const currentOffers = useAppSelector(getCurrentOffers);
 
   switch (sortingType) {
     case 'Price: low to high':

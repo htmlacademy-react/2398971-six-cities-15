@@ -10,11 +10,12 @@ import { useAppSelector } from '../../hooks';
 import PlacesSorting from '../../components/places-sorting/places-sorting';
 import SortingSelector from '../../utils/sorting';
 import HeaderNavList from '../../components/user-navigation/user-navigation-list';
+import { getCurrentCity, getCurrentOffers, getCurrentSorting } from '../../store/temp-process/temp-selectors';
 
 function MainScreen (): JSX.Element {
-  const currentCity = useAppSelector((state) => state.city);
-  const currentOffers = useAppSelector((state) => state.currentOffers);
-  const currentSorting = useAppSelector((state) => state.sorting);
+  const currentCity = useAppSelector(getCurrentCity);
+  const currentOffers = useAppSelector(getCurrentOffers);
+  const currentSorting = useAppSelector(getCurrentSorting);
   const sorteredOffers = SortingSelector(currentSorting.name);
 
   const [activeOffer, setActiveOffer] = useState<Nullable<OfferList>>(null);

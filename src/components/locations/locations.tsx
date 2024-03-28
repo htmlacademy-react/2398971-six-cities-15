@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { AppRoute, CITIES } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { getCurrentCity } from '../../store/offers-process/selectors';
-import { cityChange } from '../../store/offers-process/offer-process.ts';
+import { cityChange } from '../../store/offers-process/offers-process.ts';
 
 function Locations(): JSX.Element {
   const currentCity = useAppSelector(getCurrentCity);

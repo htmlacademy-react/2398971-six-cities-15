@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { SORTING } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { getCurrentSorting } from '../../store/offers-process/selectors';
-import { sortingChange } from '../../store/offers-process/offer-process';
+import { sortingChange } from '../../store/offers-process/offers-process';
 
 function PlacesSorting(): JSX.Element {
   const [isOptionsOpened, setIsOptionsOpened] = useState(false);

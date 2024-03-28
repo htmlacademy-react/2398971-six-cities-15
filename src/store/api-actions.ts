@@ -1,7 +1,7 @@
 import { AxiosInstance } from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AppDispatch, State } from '../types/state.js';
-import { addComment, getUserName, loadComments, loadFavoriteOffers, loadNearOffer, loadOffer, redirectToRoute, switchFavoriteOffer} from './action.js';
+import { addComment, getUserName, loadFavoriteOffers, redirectToRoute, switchFavoriteOffer} from './action.js';
 import { APIRoute, AppRoute} from '../const.js';
 import { Comments, CurrentOffer, OffersList } from '../types/offer.js';
 import { AuthData } from '../types/auth-data.js';
@@ -24,29 +24,29 @@ export const fetchAllOfferAction = createAsyncThunk<OffersList, undefined, {
   },
 );
 
-export const fetchCurrentOfferAction = createAsyncThunk<void, string, {
+export const fetchCurrentOfferAction = createAsyncThunk<CurrentOffer, string, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
 }
 >(
   'data/fetchCurrentOffer',
-  async (offerId, {dispatch, extra: api}) => {
+  async (offerId, {extra: api}) => {
     const {data} = await api.get<CurrentOffer>(`${APIRoute.Offers}/${offerId}`);
-    dispatch(loadOffer(data));
+    return data;
   },
 );
 
-export const fetchNearOffersAction = createAsyncThunk<void, string, {
+export const fetchNearOffersAction = createAsyncThunk<OffersList, string, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
 }
 >(
   'data/fetchNearOffers',
-  async (offerId, {dispatch, extra: api}) => {
+  async (offerId, {extra: api}) => {
     const {data} = await api.get<OffersList>(`${APIRoute.Offers}/${offerId}/nearby`);
-    dispatch(loadNearOffer(data));
+    return data;
   },
 );
 
@@ -78,16 +78,16 @@ export const fetchSwitchFavoriteOffer = createAsyncThunk<void, SetFavoritData, {
   },
 );
 
-export const fetchOfferCommentAction = createAsyncThunk<void, string, {
+export const fetchOfferCommentAction = createAsyncThunk<Comments, string, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
 }
 >(
   'data/fetchOfferComment',
-  async (offerId, {dispatch, extra: api}) => {
+  async (offerId, {extra: api}) => {
     const {data} = await api.get<Comments>(`${APIRoute.Comments}/${offerId}`);
-    dispatch(loadComments(data));
+    return data;
   },
 );
 

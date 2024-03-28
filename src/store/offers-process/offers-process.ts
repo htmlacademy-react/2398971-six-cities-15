@@ -1,10 +1,10 @@
 import { CITIES, NameSpace, SORTING } from '../../const';
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { fetchAllOfferAction } from '../api-actions';
-import { OfferProcess } from '../../types/state';
+import { OffersProcess } from '../../types/state';
 import { Cities, Sorting } from '../../types/offer';
 
-const initialState: OfferProcess = {
+const initialState: OffersProcess = {
   city: CITIES[0],
   sorting: SORTING[0],
   offers: [],
@@ -12,7 +12,7 @@ const initialState: OfferProcess = {
   isOffersDataLoading: false,
 };
 
-export const offerProcess = createSlice({
+export const offersProcess = createSlice({
   name: NameSpace.Offers,
   initialState,
   reducers: {
@@ -34,9 +34,10 @@ export const offerProcess = createSlice({
       })
       .addCase(fetchAllOfferAction.fulfilled, (state, action) => {
         state.offers = action.payload;
+        state.isOffersDataLoading = false;
         state.currentOffers = state.offers.filter((offer) => offer.city.name === state.city.name);
       });
   }
 });
 
-export const { cityChange, sortingChange, setCurrentOffers } = offerProcess.actions;
+export const { cityChange, sortingChange, setCurrentOffers } = offersProcess.actions;

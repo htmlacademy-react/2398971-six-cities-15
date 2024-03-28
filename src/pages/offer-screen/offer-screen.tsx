@@ -10,8 +10,9 @@ import HeaderNavList from '../../components/user-navigation/user-navigation-list
 import { useParams } from 'react-router-dom';
 import { fetchCurrentOfferAction, fetchNearOffersAction, fetchOfferCommentAction } from '../../store/api-actions';
 import LoadingScreen from '../loading-screen/loading-screen';
-import { clearComments, clearNearOffer, clearOffer } from '../../store/action';
-import ErrorScreen from '../error-screen/error-screen';
+//import ErrorScreen from '../error-screen/error-screen';
+import { getComments, getCurrentOffer, getNearOffers, getOfferDataLoadingStatus } from '../../store/offer-process/selectors';
+import { clearOffer } from '../../store/offer-process/offer-process';
 
 type OfferScreenProps = {
   authorizationStatus: string;
@@ -37,24 +38,24 @@ function OfferScreen (props: OfferScreenProps): JSX.Element {
     }
 
     return () => {
-      dispatch(clearOffer(null));
-      dispatch(clearNearOffer(null));
-      dispatch(clearComments(null));
+      dispatch(clearOffer());
     };
   }, [dispatch, offerId]);
 
-  const сurrentOffer = useAppSelector((state) => state.offer);
-  const nearOffers = useAppSelector((state) => state.nearOffers);
-  const comments = useAppSelector((state) => state.comments);
-  const isError = useAppSelector((state) => state.errorStatus);
+  const сurrentOffer = useAppSelector(getCurrentOffer);
+  const nearOffers = useAppSelector(getNearOffers);
+  const comments = useAppSelector(getComments);
+  const isOfferDataLoading = useAppSelector(getOfferDataLoadingStatus);
 
-  if (isError) {
-    return (
-      <ErrorScreen />
-    );
-  }
+  //const isError = useAppSelector((state) => state.errorStatus);
 
-  if (сurrentOffer === null || nearOffers === null || comments === null) {
+  // if (isError) {
+  //   return (
+  //     <ErrorScreen />
+  //   );
+  // }
+
+  if (сurrentOffer === null || nearOffers === null || comments === null || isOfferDataLoading.includes(true)) {
     return (
       <LoadingScreen />
     );

@@ -1,4 +1,4 @@
-import { setOffersDataLoadingStatus, getUserName, loadOffer, loadNearOffer, loadFavoriteOffers, loadComments, clearOffer, clearNearOffer, clearComments, setErrorStatus, clearFavoriteOffers } from '../action';
+import { setOffersDataLoadingStatus, getUserName, loadFavoriteOffers, setErrorStatus, clearFavoriteOffers } from '../action';
 import { NameSpace } from '../../const';
 import { Comments, CurrentOffer, OffersList } from '../../types/offer';
 import { fetchAllOfferAction, fetchCurrentOfferAction, fetchFavoriteOffersAction, fetchNearOffersAction, fetchNewCommentAction, fetchOfferCommentAction, fetchSwitchFavoriteOffer } from '../api-actions';
@@ -30,29 +30,11 @@ export const TempProcess = createSlice({
   reducers: {},
   extraReducers(builder) {
     builder
-      .addCase(loadOffer, (state, action) => {
-        state.offer = action.payload;
-      })
-      .addCase(clearOffer, (state, action) => {
-        state.offer = action.payload;
-      })
-      .addCase(loadNearOffer, (state, action) => {
-        state.nearOffers = action.payload;
-      })
-      .addCase(clearNearOffer, (state, action) => {
-        state.nearOffers = action.payload;
-      })
       .addCase(loadFavoriteOffers, (state, action) => {
         state.favoriteOffers = action.payload;
       })
       .addCase(clearFavoriteOffers, (state, action) => {
         state.favoriteOffers = action.payload;
-      })
-      .addCase(loadComments, (state, action) => {
-        state.comments = action.payload;
-      })
-      .addCase(clearComments, (state, action) => {
-        state.comments = action.payload;
       })
       .addCase(setOffersDataLoadingStatus, (state, action) => {
         state.isOffersDataLoading = action.payload;

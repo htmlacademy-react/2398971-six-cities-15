@@ -1,6 +1,6 @@
 import { createAction } from '@reduxjs/toolkit';
 import { Cities, Sorting, OffersList, CurrentOffer, Comments, NewComment } from '../types/offer';
-import { AppRoute, AuthorizationStatus } from '../const';
+import { AppRoute } from '../const';
 
 export const cityChange = createAction<Cities>('city/cityChange');
 export const offersContent = createAction('offers/offersContent');
@@ -21,7 +21,6 @@ export const loadComments = createAction<Comments>('data/loadComments');
 export const clearComments = createAction<null>('data/clearComments');
 export const addComment = createAction<NewComment>('data/addComment');
 
-export const requireAuthorization = createAction<AuthorizationStatus>('user/requireAuthorization');
 export const getUserName = createAction<string | null>('data/userLogin');
 export const redirectToRoute = createAction<AppRoute>('route/redirectToRoute');
 export const setOffersDataLoadingStatus = createAction<boolean>('data/setOffersDataLoadingStatus');

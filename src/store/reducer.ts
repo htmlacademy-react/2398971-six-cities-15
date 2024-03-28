@@ -1,6 +1,6 @@
 import {createReducer} from '@reduxjs/toolkit';
-import { cityChange, loadOffers, offersContent, sortingChange, setOffersDataLoadingStatus, setCurrentOffers, requireAuthorization, getUserName, loadOffer, loadNearOffer, loadFavoriteOffers, loadComments, clearOffer, clearNearOffer, clearComments, setErrorStatus, clearFavoriteOffers } from './action';
-import { AuthorizationStatus, CITIES, SORTING } from '../const';
+import { cityChange, loadOffers, offersContent, sortingChange, setOffersDataLoadingStatus, setCurrentOffers, getUserName, loadOffer, loadNearOffer, loadFavoriteOffers, loadComments, clearOffer, clearNearOffer, clearComments, setErrorStatus, clearFavoriteOffers } from './action';
+import { CITIES, SORTING } from '../const';
 import { Cities, Comments, CurrentOffer, OffersList, Sorting } from '../types/offer';
 import { checkAuthAction, fetchAllOfferAction, fetchCurrentOfferAction, fetchFavoriteOffersAction, fetchNearOffersAction, fetchNewCommentAction, fetchOfferCommentAction, fetchSwitchFavoriteOffer, loginAction, logoutAction } from './api-actions';
 
@@ -10,7 +10,6 @@ type InitalState = {
   offers: OffersList;
   currentOffers: OffersList;
   isOffersDataLoading: boolean;
-  authorizationStatus: AuthorizationStatus;
   email: string | null;
   offer: CurrentOffer | null;
   nearOffers: OffersList | null;
@@ -25,7 +24,6 @@ const initialState: InitalState = {
   offers: [],
   currentOffers: [],
   isOffersDataLoading: false,
-  authorizationStatus: AuthorizationStatus.Unknown,
   email: null,
   offer: null,
   nearOffers: [],
@@ -78,9 +76,6 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(setOffersDataLoadingStatus, (state, action) => {
       state.isOffersDataLoading = action.payload;
-    })
-    .addCase(requireAuthorization, (state, action) => {
-      state.authorizationStatus = action.payload;
     })
     .addCase(getUserName, (state, action) => {
       state.email = action.payload;

@@ -3,6 +3,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks';
 import { fetchSetFavoriteOffer } from '../../store/api-actions';
 import { AppRoute, AuthorizationStatus } from '../../const';
 import { useNavigate } from 'react-router-dom';
+import { getAuthorizationStatus } from '../../store/user-process/selectors';
 
 type OfferBookmarkProps = {
   offerId:string;
@@ -18,7 +19,7 @@ function OfferBookmark(props: OfferBookmarkProps): JSX.Element {
   const {offerId, className, width, height} = props;
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
 
   const [isFavorite, setIsFavorite] = useState(props.isFavorite);
 

@@ -1,20 +1,15 @@
-import { setOffersDataLoadingStatus, getUserName, setErrorStatus } from '../action';
+import { getUserName, setErrorStatus } from '../action';
 import { NameSpace } from '../../const';
-import { OffersList } from '../../types/offer';
 import { fetchAllOfferAction, fetchCurrentOfferAction, fetchFavoriteOffersAction, fetchNearOffersAction, fetchNewCommentAction, fetchOfferCommentAction, fetchSetFavoriteOffer } from '../api-actions';
 import { createSlice } from '@reduxjs/toolkit';
 
 type InitalState = {
-  isOffersDataLoading: boolean;
   email: string | null;
-  favoriteOffers: OffersList | null;
   errorStatus: boolean;
 }
 
 const initialState: InitalState = {
-  isOffersDataLoading: false,
   email: null,
-  favoriteOffers: null,
   errorStatus: false
 };
 
@@ -24,9 +19,6 @@ export const TempProcess = createSlice({
   reducers: {},
   extraReducers(builder) {
     builder
-      .addCase(setOffersDataLoadingStatus, (state, action) => {
-        state.isOffersDataLoading = action.payload;
-      })
       .addCase(getUserName, (state, action) => {
         state.email = action.payload;
       })

@@ -4,7 +4,8 @@ import { useAppDispatch, useAppSelector } from '../../hooks';
 import { logoutAction } from '../../store/api-actions';
 
 function UserProfileAuth(): JSX.Element {
-  const userEmail = useAppSelector((state) => state.email);
+  //const userEmail = useAppSelector((state) => state.email);
+  const userEmail = 'useAppSelector((state) => state.email)';
   const dispatch = useAppDispatch();
 
   const handleLogoutClick = (evt: React.MouseEvent<HTMLAnchorElement>) => {

@@ -1,13 +1,12 @@
 import { NameSpace } from '../../const';
 import { createSlice } from '@reduxjs/toolkit';
 import { OfferProcess } from '../../types/state';
-import { fetchCurrentOfferAction, fetchNearOffersAction, fetchOfferCommentAction } from '../api-actions';
+import { fetchCurrentOfferAction, fetchNearOffersAction } from '../api-actions';
 
 const initialState: OfferProcess = {
   offer: null,
   nearOffers: [],
-  comments: [],
-  isOfferDataLoading: [true, true, true],
+  isOfferDataLoading: [true, true],
 };
 
 export const offerProcess = createSlice({
@@ -17,7 +16,6 @@ export const offerProcess = createSlice({
     clearOffer: (state) => {
       state.offer = null;
       state.nearOffers = [];
-      state.comments = [];
     },
   },
   extraReducers(builder) {
@@ -28,9 +26,6 @@ export const offerProcess = createSlice({
       .addCase(fetchNearOffersAction.pending, (state) => {
         state.isOfferDataLoading[1] = true;
       })
-      .addCase(fetchOfferCommentAction.pending, (state) => {
-        state.isOfferDataLoading[2] = true;
-      })
       .addCase(fetchCurrentOfferAction.fulfilled, (state, action) => {
         state.offer = action.payload;
         state.isOfferDataLoading[0] = false;
@@ -38,10 +33,6 @@ export const offerProcess = createSlice({
       .addCase(fetchNearOffersAction.fulfilled, (state, action) => {
         state.nearOffers = action.payload;
         state.isOfferDataLoading[1] = false;
-      })
-      .addCase(fetchOfferCommentAction.fulfilled, (state, action) => {
-        state.comments = action.payload;
-        state.isOfferDataLoading[2] = false;
       });
   }
 });

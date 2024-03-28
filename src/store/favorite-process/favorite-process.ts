@@ -27,10 +27,10 @@ export const favoriteProcess = createSlice({
         state.isFavoriteOffersDataLoading = false;
       })
       .addCase(fetchSetFavoriteOffer.pending, (state) => {
-        state.isFavoriteOffersDataLoading = true;
+        state.isSetFavoriteOffersDataSending = true;
       })
       .addCase(fetchSetFavoriteOffer.fulfilled, (state) => {
-        state.isFavoriteOffersDataLoading = false;
+        state.isSetFavoriteOffersDataSending = false;
       });
   }
 });

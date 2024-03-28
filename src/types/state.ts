@@ -17,7 +17,6 @@ export type OffersProcess = {
 export type OfferProcess = {
   offer: CurrentOffer | null;
   nearOffers: OffersList;
-  comments: Comments;
   isOfferDataLoading: boolean[];
 }
 
@@ -25,6 +24,12 @@ export type FavoriteProcess = {
   favoriteOffers: OffersList;
   isSetFavoriteOffersDataSending: boolean;
   isFavoriteOffersDataLoading: boolean;
+}
+
+export type CommentProcess = {
+  comments: Comments;
+  isSendNewCommentDataLoading: boolean;
+  isCommentsDataLoading: boolean;
 }
 
 

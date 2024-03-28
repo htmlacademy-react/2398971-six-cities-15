@@ -11,8 +11,10 @@ import { useParams } from 'react-router-dom';
 import { fetchCurrentOfferAction, fetchNearOffersAction, fetchOfferCommentAction } from '../../store/api-actions';
 import LoadingScreen from '../loading-screen/loading-screen';
 //import ErrorScreen from '../error-screen/error-screen';
-import { getComments, getCurrentOffer, getNearOffers, getOfferDataLoadingStatus } from '../../store/offer-process/selectors';
+import { getCurrentOffer, getNearOffers, getOfferDataLoadingStatus } from '../../store/offer-process/selectors';
 import { clearOffer } from '../../store/offer-process/offer-process';
+import { getComments, getCommentsDataLoadingStatus } from '../../store/сomments-process/selectors';
+import { clearComments } from '../../store/сomments-process/сomments-process';
 
 type OfferScreenProps = {
   authorizationStatus: string;
@@ -39,6 +41,7 @@ function OfferScreen (props: OfferScreenProps): JSX.Element {
 
     return () => {
       dispatch(clearOffer());
+      dispatch(clearComments());
     };
   }, [dispatch, offerId]);
 
@@ -46,6 +49,7 @@ function OfferScreen (props: OfferScreenProps): JSX.Element {
   const nearOffers = useAppSelector(getNearOffers);
   const comments = useAppSelector(getComments);
   const isOfferDataLoading = useAppSelector(getOfferDataLoadingStatus);
+  const isCommentsDataLoading = useAppSelector(getCommentsDataLoadingStatus);
 
   //const isError = useAppSelector((state) => state.errorStatus);
 
@@ -55,7 +59,7 @@ function OfferScreen (props: OfferScreenProps): JSX.Element {
   //   );
   // }
 
-  if (сurrentOffer === null || nearOffers === null || comments === null || isOfferDataLoading.includes(true)) {
+  if (сurrentOffer === null || nearOffers === null || comments === null || isOfferDataLoading.includes(true) || isCommentsDataLoading === true) {
     return (
       <LoadingScreen />
     );

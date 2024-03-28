@@ -1,5 +1,4 @@
 import { createAction } from '@reduxjs/toolkit';
-import { NewComment } from '../types/offer';
 import { AppRoute } from '../const';
 
 //export const cityChange = createAction<Cities>('city/cityChange');
@@ -19,7 +18,7 @@ import { AppRoute } from '../const';
 
 //export const loadComments = createAction<Comments>('data/loadComments');
 //export const clearComments = createAction<null>('data/clearComments');
-export const addComment = createAction<NewComment>('data/addComment');
+//export const addComment = createAction<NewComment>('data/addComment');
 
 export const getUserName = createAction<string | null>('data/userLogin');
 export const redirectToRoute = createAction<AppRoute>('route/redirectToRoute');

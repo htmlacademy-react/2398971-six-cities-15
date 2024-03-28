@@ -5,11 +5,13 @@ import { TempProcess } from './temp-process/temp-process';
 import { offersProcess } from './offers-process/offers-process';
 import { offerProcess } from './offer-process/offer-process';
 import { favoriteProcess } from './favorite-process/favorite-process';
+import { commentsProcess } from './сomments-process/сomments-process';
 
 export const rootReducer = combineReducers({
   [NameSpace.User]: userProcess.reducer,
   [NameSpace.Offers]: offersProcess.reducer,
   [NameSpace.Offer]: offerProcess.reducer,
   [NameSpace.Favorites]: favoriteProcess.reducer,
+  [NameSpace.Comments]: commentsProcess.reducer,
   [NameSpace.TEMP]: TempProcess.reducer,
 });

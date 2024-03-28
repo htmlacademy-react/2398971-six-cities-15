@@ -20,7 +20,7 @@ import { AppRoute } from '../const';
 //export const clearComments = createAction<null>('data/clearComments');
 //export const addComment = createAction<NewComment>('data/addComment');
 
-export const getUserName = createAction<string | null>('data/userLogin');
+//export const getUserName = createAction<string | null>('data/userLogin');
 export const redirectToRoute = createAction<AppRoute>('route/redirectToRoute');
 export const setOffersDataLoadingStatus = createAction<boolean>('data/setOffersDataLoadingStatus');
 export const setErrorStatus = createAction<boolean>('data/setErrorStatus');

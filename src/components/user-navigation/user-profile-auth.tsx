@@ -2,10 +2,10 @@ import { Link } from 'react-router-dom';
 import { AppRoute } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { logoutAction } from '../../store/api-actions';
+import { getUserEmail } from '../../store/user-process/selectors';
 
 function UserProfileAuth(): JSX.Element {
-  //const userEmail = useAppSelector((state) => state.email);
-  const userEmail = 'useAppSelector((state) => state.email)';
+  const userEmail = useAppSelector(getUserEmail);
   const dispatch = useAppDispatch();
 
   const handleLogoutClick = (evt: React.MouseEvent<HTMLAnchorElement>) => {

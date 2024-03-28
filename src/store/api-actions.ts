@@ -1,7 +1,7 @@
 import { AxiosInstance } from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AppDispatch, State } from '../types/state.js';
-import { getUserName, redirectToRoute} from './action.js';
+import { redirectToRoute} from './action.js';
 import { APIRoute, AppRoute} from '../const.js';
 import { Comments, CurrentOffer, OffersList } from '../types/offer.js';
 import { AuthData } from '../types/auth-data.js';
@@ -102,20 +102,20 @@ export const fetchNewCommentAction = createAsyncThunk<CommentData, NewCommentDat
   },
 );
 
-export const checkAuthAction = createAsyncThunk<void, undefined, {
+export const checkAuthAction = createAsyncThunk<UserData, undefined, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
 }
 >(
   'user/checkAuth',
-  async (_arg, {dispatch, extra: api}) => {
+  async (_arg, {extra: api}) => {
     const {data} = await api.get<UserData>(APIRoute.Login);
-    dispatch(getUserName(data.email));
+    return data;
   },
 );
 
-export const loginAction = createAsyncThunk<void, AuthData, {
+export const loginAction = createAsyncThunk<UserData, AuthData, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
@@ -125,8 +125,8 @@ export const loginAction = createAsyncThunk<void, AuthData, {
   async ({login: email, password}, {dispatch, extra: api}) => {
     const {data} = await api.post<UserData>(APIRoute.Login, {email, password});
     saveToken(data.token);
-    dispatch(getUserName(data.email));
     dispatch(redirectToRoute(AppRoute.Main));
+    return data;
   },
 );
 

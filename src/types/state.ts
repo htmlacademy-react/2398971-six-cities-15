@@ -4,6 +4,7 @@ import { Cities, Comments, CurrentOffer, OffersList, Sorting } from './offer.js'
 
 export type UserProcess = {
   authorizationStatus: AuthorizationStatus;
+  userEmail: string | null;
 };
 
 export type OffersProcess = {

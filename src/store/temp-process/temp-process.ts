@@ -1,15 +1,13 @@
-import { getUserName, setErrorStatus } from '../action';
+import { setErrorStatus } from '../action';
 import { NameSpace } from '../../const';
 import { fetchAllOfferAction, fetchCurrentOfferAction, fetchFavoriteOffersAction, fetchNearOffersAction, fetchNewCommentAction, fetchOfferCommentAction, fetchSetFavoriteOffer } from '../api-actions';
 import { createSlice } from '@reduxjs/toolkit';
 
 type InitalState = {
-  email: string | null;
   errorStatus: boolean;
 }
 
 const initialState: InitalState = {
-  email: null,
   errorStatus: false
 };
 
@@ -19,9 +17,6 @@ export const TempProcess = createSlice({
   reducers: {},
   extraReducers(builder) {
     builder
-      .addCase(getUserName, (state, action) => {
-        state.email = action.payload;
-      })
       .addCase(setErrorStatus, (state, action) => {
         state.errorStatus = action.payload;
       })

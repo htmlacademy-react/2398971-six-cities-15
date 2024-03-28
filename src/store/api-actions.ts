@@ -1,7 +1,7 @@
 import { AxiosInstance } from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AppDispatch, State } from '../types/state.js';
-import { addComment, getUserName, loadComments, loadFavoriteOffers, loadNearOffer, loadOffer, loadOffers, redirectToRoute, setCurrentOffers, setOffersDataLoadingStatus, switchFavoriteOffer} from './action.js';
+import { addComment, getUserName, loadComments, loadFavoriteOffers, loadNearOffer, loadOffer, redirectToRoute, switchFavoriteOffer} from './action.js';
 import { APIRoute, AppRoute} from '../const.js';
 import { Comments, CurrentOffer, OffersList } from '../types/offer.js';
 import { AuthData } from '../types/auth-data.js';
@@ -11,19 +11,16 @@ import { NewCommentData } from '../types/new-comment-data.js';
 import { CommentData } from '../types/comment-data.js';
 import { SetFavoritData } from '../types/set-favorite-data.js';
 
-export const fetchAllOfferAction = createAsyncThunk<void, undefined, {
+export const fetchAllOfferAction = createAsyncThunk<OffersList, undefined, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
 }
 >(
   'data/fetchOffers',
-  async (_arg, {dispatch, extra: api}) => {
-    dispatch(setOffersDataLoadingStatus(true));
+  async (_arg, {extra: api}) => {
     const {data} = await api.get<OffersList>(APIRoute.Offers);
-    dispatch(setOffersDataLoadingStatus(false));
-    dispatch(loadOffers(data));
-    dispatch(setCurrentOffers(data));
+    return data;
   },
 );
 

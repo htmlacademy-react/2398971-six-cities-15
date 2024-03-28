@@ -1,5 +1,5 @@
 import { useAppSelector } from '../hooks';
-import { getCurrentOffers } from '../store/temp-process/temp-selectors';
+import { getCurrentOffers } from '../store/offers-process/selectors';
 
 function SortingSelector (sortingType: string) {
   const currentOffers = useAppSelector(getCurrentOffers);

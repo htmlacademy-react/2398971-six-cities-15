@@ -10,7 +10,7 @@ import { useAppSelector } from '../../hooks';
 import PlacesSorting from '../../components/places-sorting/places-sorting';
 import SortingSelector from '../../utils/sorting';
 import HeaderNavList from '../../components/user-navigation/user-navigation-list';
-import { getCurrentCity, getCurrentOffers, getCurrentSorting } from '../../store/temp-process/temp-selectors';
+import { getCurrentCity, getCurrentOffers, getCurrentSorting } from '../../store/offers-process/selectors';
 
 function MainScreen (): JSX.Element {
   const currentCity = useAppSelector(getCurrentCity);

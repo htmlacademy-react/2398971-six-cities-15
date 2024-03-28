@@ -1,14 +1,10 @@
-import { cityChange, loadOffers, offersContent, sortingChange, setOffersDataLoadingStatus, setCurrentOffers, getUserName, loadOffer, loadNearOffer, loadFavoriteOffers, loadComments, clearOffer, clearNearOffer, clearComments, setErrorStatus, clearFavoriteOffers } from '../action';
-import { CITIES, NameSpace, SORTING } from '../../const';
-import { Cities, Comments, CurrentOffer, OffersList, Sorting } from '../../types/offer';
+import { setOffersDataLoadingStatus, getUserName, loadOffer, loadNearOffer, loadFavoriteOffers, loadComments, clearOffer, clearNearOffer, clearComments, setErrorStatus, clearFavoriteOffers } from '../action';
+import { NameSpace } from '../../const';
+import { Comments, CurrentOffer, OffersList } from '../../types/offer';
 import { fetchAllOfferAction, fetchCurrentOfferAction, fetchFavoriteOffersAction, fetchNearOffersAction, fetchNewCommentAction, fetchOfferCommentAction, fetchSwitchFavoriteOffer } from '../api-actions';
 import { createSlice } from '@reduxjs/toolkit';
 
 type InitalState = {
-  city: Cities;
-  sorting: Sorting;
-  offers: OffersList;
-  currentOffers: OffersList;
   isOffersDataLoading: boolean;
   email: string | null;
   offer: CurrentOffer | null;
@@ -19,10 +15,6 @@ type InitalState = {
 }
 
 const initialState: InitalState = {
-  city: CITIES[0],
-  sorting: SORTING[0],
-  offers: [],
-  currentOffers: [],
   isOffersDataLoading: false,
   email: null,
   offer: null,
@@ -38,19 +30,6 @@ export const TempProcess = createSlice({
   reducers: {},
   extraReducers(builder) {
     builder
-      .addCase(cityChange, (state, action) => {
-        state.city = action.payload;
-        state.currentOffers = state.offers.filter((offer) => offer.city.name === action.payload.name);
-      })
-      .addCase(offersContent, (state) => {
-        state.offers.push();
-      })
-      .addCase(sortingChange, (state, action) => {
-        state.sorting = action.payload;
-      })
-      .addCase(loadOffers, (state, action) => {
-        state.offers = action.payload;
-      })
       .addCase(loadOffer, (state, action) => {
         state.offer = action.payload;
       })
@@ -62,9 +41,6 @@ export const TempProcess = createSlice({
       })
       .addCase(clearNearOffer, (state, action) => {
         state.nearOffers = action.payload;
-      })
-      .addCase(setCurrentOffers, (state) => {
-        state.currentOffers = state.offers.filter((offer) => offer.city.name === state.city.name);
       })
       .addCase(loadFavoriteOffers, (state, action) => {
         state.favoriteOffers = action.payload;

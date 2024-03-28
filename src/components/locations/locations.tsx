@@ -1,11 +1,12 @@
 import { Link } from 'react-router-dom';
 import { AppRoute, CITIES } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { cityChange } from '../../store/action';
-import { getCurrentCity } from '../../store/temp-process/temp-selectors';
+import { getCurrentCity } from '../../store/offers-process/selectors';
+import { cityChange } from '../../store/offers-process/offer-process.ts';
 
 function Locations(): JSX.Element {
   const currentCity = useAppSelector(getCurrentCity);
+
   const dispatch = useAppDispatch();
 
   return (

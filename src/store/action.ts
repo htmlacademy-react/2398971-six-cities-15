@@ -22,5 +22,4 @@ import { AppRoute } from '../const';
 
 //export const getUserName = createAction<string | null>('data/userLogin');
 export const redirectToRoute = createAction<AppRoute>('route/redirectToRoute');
-export const setOffersDataLoadingStatus = createAction<boolean>('data/setOffersDataLoadingStatus');
 export const setErrorStatus = createAction<boolean>('data/setErrorStatus');

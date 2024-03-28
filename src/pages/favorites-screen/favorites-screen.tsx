@@ -7,12 +7,11 @@ import { useEffect } from 'react';
 import { fetchFavoriteOffersAction } from '../../store/api-actions';
 //import ErrorScreen from '../error-screen/error-screen';
 import LoadingScreen from '../loading-screen/loading-screen';
-import { getFavoriteOffers } from '../../store/favorite-process/selectors';
+import { getFavoriteOffers, getFavoriteOffersDataLoadingStatus } from '../../store/favorite-process/selectors';
 import { clearFavoriteOffers } from '../../store/favorite-process/favorite-process';
 
 function FavoritesScreen (): JSX.Element {
   const dispatch = useAppDispatch();
-
 
   useEffect (() => {
     dispatch(fetchFavoriteOffersAction());
@@ -23,6 +22,8 @@ function FavoritesScreen (): JSX.Element {
   }, [dispatch]);
 
   const favoriteOffers = useAppSelector(getFavoriteOffers);
+  const isFavoriteOffersDataLoading = useAppSelector(getFavoriteOffersDataLoadingStatus);
+
   //const isError = useAppSelector((state) => state.errorStatus);
 
   // if (isError) {
@@ -31,7 +32,7 @@ function FavoritesScreen (): JSX.Element {
   //   );
   // }
 
-  if (favoriteOffers === null) {
+  if (favoriteOffers === null || isFavoriteOffersDataLoading) {
     return (
       <LoadingScreen />
     );

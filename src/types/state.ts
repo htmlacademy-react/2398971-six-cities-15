@@ -21,6 +21,13 @@ export type OfferProcess = {
   isOfferDataLoading: boolean[];
 }
 
+export type FavoriteProcess = {
+  favoriteOffers: OffersList;
+  isSetFavoriteOffersDataSending: boolean;
+  isFavoriteOffersDataLoading: boolean;
+}
+
+
 export type State = ReturnType<typeof store.getState>;
 
 export type AppDispatch = typeof store.dispatch;

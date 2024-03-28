@@ -4,10 +4,12 @@ import { userProcess } from './user-process/user-process';
 import { TempProcess } from './temp-process/temp-process';
 import { offersProcess } from './offers-process/offers-process';
 import { offerProcess } from './offer-process/offer-process';
+import { favoriteProcess } from './favorite-process/favorite-process';
 
 export const rootReducer = combineReducers({
   [NameSpace.User]: userProcess.reducer,
   [NameSpace.Offers]: offersProcess.reducer,
   [NameSpace.Offer]: offerProcess.reducer,
+  [NameSpace.Favorites]: favoriteProcess.reducer,
   [NameSpace.TEMP]: TempProcess.reducer,
 });

@@ -1,6 +1,6 @@
 import { ReactEventHandler, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { fetchSwitchFavoriteOffer } from '../../store/api-actions';
+import { fetchSetFavoriteOffer } from '../../store/api-actions';
 import { AppRoute, AuthorizationStatus } from '../../const';
 import { useNavigate } from 'react-router-dom';
 
@@ -26,7 +26,7 @@ function OfferBookmark(props: OfferBookmarkProps): JSX.Element {
     evt.preventDefault();
     if (authorizationStatus === AuthorizationStatus.Auth) {
       setIsFavorite(!isFavorite);
-      dispatch(fetchSwitchFavoriteOffer({
+      dispatch(fetchSetFavoriteOffer({
         offerId: offerId,
         status: isFavorite ? 0 : 1,
       }));

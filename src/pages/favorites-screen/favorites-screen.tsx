@@ -5,9 +5,10 @@ import { useAppDispatch, useAppSelector } from '../../hooks';
 import HeaderNavList from '../../components/user-navigation/user-navigation-list';
 import { useEffect } from 'react';
 import { fetchFavoriteOffersAction } from '../../store/api-actions';
-import { clearFavoriteOffers } from '../../store/action';
-import ErrorScreen from '../error-screen/error-screen';
+//import ErrorScreen from '../error-screen/error-screen';
 import LoadingScreen from '../loading-screen/loading-screen';
+import { getFavoriteOffers } from '../../store/favorite-process/selectors';
+import { clearFavoriteOffers } from '../../store/favorite-process/favorite-process';
 
 function FavoritesScreen (): JSX.Element {
   const dispatch = useAppDispatch();
@@ -17,18 +18,18 @@ function FavoritesScreen (): JSX.Element {
     dispatch(fetchFavoriteOffersAction());
 
     return () => {
-      dispatch(clearFavoriteOffers(null));
+      dispatch(clearFavoriteOffers());
     };
   }, [dispatch]);
 
-  const favoriteOffers = useAppSelector((state) => state.favoriteOffers);
-  const isError = useAppSelector((state) => state.errorStatus);
+  const favoriteOffers = useAppSelector(getFavoriteOffers);
+  //const isError = useAppSelector((state) => state.errorStatus);
 
-  if (isError) {
-    return (
-      <ErrorScreen />
-    );
-  }
+  // if (isError) {
+  //   return (
+  //     <ErrorScreen />
+  //   );
+  // }
 
   if (favoriteOffers === null) {
     return (

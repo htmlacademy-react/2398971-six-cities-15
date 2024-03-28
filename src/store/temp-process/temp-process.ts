@@ -1,26 +1,20 @@
-import { setOffersDataLoadingStatus, getUserName, loadFavoriteOffers, setErrorStatus, clearFavoriteOffers } from '../action';
+import { setOffersDataLoadingStatus, getUserName, setErrorStatus } from '../action';
 import { NameSpace } from '../../const';
-import { Comments, CurrentOffer, OffersList } from '../../types/offer';
-import { fetchAllOfferAction, fetchCurrentOfferAction, fetchFavoriteOffersAction, fetchNearOffersAction, fetchNewCommentAction, fetchOfferCommentAction, fetchSwitchFavoriteOffer } from '../api-actions';
+import { OffersList } from '../../types/offer';
+import { fetchAllOfferAction, fetchCurrentOfferAction, fetchFavoriteOffersAction, fetchNearOffersAction, fetchNewCommentAction, fetchOfferCommentAction, fetchSetFavoriteOffer } from '../api-actions';
 import { createSlice } from '@reduxjs/toolkit';
 
 type InitalState = {
   isOffersDataLoading: boolean;
   email: string | null;
-  offer: CurrentOffer | null;
-  nearOffers: OffersList | null;
   favoriteOffers: OffersList | null;
-  comments: Comments | null;
   errorStatus: boolean;
 }
 
 const initialState: InitalState = {
   isOffersDataLoading: false,
   email: null,
-  offer: null,
-  nearOffers: [],
   favoriteOffers: null,
-  comments: [],
   errorStatus: false
 };
 
@@ -30,12 +24,6 @@ export const TempProcess = createSlice({
   reducers: {},
   extraReducers(builder) {
     builder
-      .addCase(loadFavoriteOffers, (state, action) => {
-        state.favoriteOffers = action.payload;
-      })
-      .addCase(clearFavoriteOffers, (state, action) => {
-        state.favoriteOffers = action.payload;
-      })
       .addCase(setOffersDataLoadingStatus, (state, action) => {
         state.isOffersDataLoading = action.payload;
       })
@@ -57,7 +45,7 @@ export const TempProcess = createSlice({
       .addCase(fetchFavoriteOffersAction.rejected, (state) => {
         state.errorStatus = true;
       })
-      .addCase(fetchSwitchFavoriteOffer.rejected, (state) => {
+      .addCase(fetchSetFavoriteOffer.rejected, (state) => {
         state.errorStatus = true;
       })
       .addCase(fetchOfferCommentAction.rejected, (state) => {
@@ -78,7 +66,7 @@ export const TempProcess = createSlice({
       .addCase(fetchFavoriteOffersAction.fulfilled, (state) => {
         state.errorStatus = false;
       })
-      .addCase(fetchSwitchFavoriteOffer.fulfilled, (state) => {
+      .addCase(fetchSetFavoriteOffer.fulfilled, (state) => {
         state.errorStatus = false;
       })
       .addCase(fetchOfferCommentAction.fulfilled, (state) => {

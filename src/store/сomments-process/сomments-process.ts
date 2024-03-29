@@ -29,7 +29,11 @@ export const commentsProcess = createSlice({
       .addCase(fetchNewCommentAction.pending, (state) => {
         state.isSendNewCommentDataLoading = true;
       })
-      .addCase(fetchNewCommentAction.fulfilled, (state) => {
+      .addCase(fetchNewCommentAction.rejected, (state) => {
+        state.isSendNewCommentDataLoading = false;
+      })
+      .addCase(fetchNewCommentAction.fulfilled, (state, action) => {
+        state.comments.push(action.payload);
         state.isSendNewCommentDataLoading = false;
       });
   }

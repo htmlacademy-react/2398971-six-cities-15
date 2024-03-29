@@ -1,7 +1,5 @@
-import { useEffect, useState } from 'react';
-import { Nullable } from 'vitest';
+import { useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
-import { OfferList } from '../../types/offer';
 import Logo from '../../components/logo/logo';
 import Offer from '../../components/offer/offer';
 import NearPlaces from '../../components/near-places/near-places';
@@ -15,6 +13,7 @@ import { getCurrentOffer, getNearOffers, getOfferDataLoadingStatus } from '../..
 import { clearOffer } from '../../store/offer-process/offer-process';
 import { getComments, getCommentsDataLoadingStatus } from '../../store/сomments-process/selectors';
 import { clearComments } from '../../store/сomments-process/сomments-process';
+import { getOffers } from '../../store/offers-process/selectors';
 
 type OfferScreenProps = {
   authorizationStatus: string;
@@ -24,13 +23,7 @@ function OfferScreen (props: OfferScreenProps): JSX.Element {
   const {authorizationStatus} = props;
   const dispatch = useAppDispatch();
   const {offerId} = useParams();
-
-  const [activeOffer, setActiveOffer] = useState<Nullable<OfferList>>(null);
-
-  const handleOfferChange = (offer?: OfferList) => {
-    setActiveOffer(offer || null);
-  };//const currentNearOffer = сurrentOffers.find(({ id }) => id === activeOffer?.id);
-
+  const handleOfferChange = () => {};
 
   useEffect (() => {
     if (offerId) {
@@ -46,10 +39,15 @@ function OfferScreen (props: OfferScreenProps): JSX.Element {
   }, [dispatch, offerId]);
 
   const сurrentOffer = useAppSelector(getCurrentOffer);
-  const nearOffers = useAppSelector(getNearOffers);
+  const activeOffer = useAppSelector(getOffers).find((offer) => offer.id === offerId);
+  const nearOffers = useAppSelector(getNearOffers).slice(0, 3);
   const comments = useAppSelector(getComments);
   const isOfferDataLoading = useAppSelector(getOfferDataLoadingStatus);
   const isCommentsDataLoading = useAppSelector(getCommentsDataLoadingStatus);
+
+  if (activeOffer) {
+    nearOffers.push(activeOffer);
+  }
 
   //const isError = useAppSelector((state) => state.errorStatus);
 
@@ -59,7 +57,7 @@ function OfferScreen (props: OfferScreenProps): JSX.Element {
   //   );
   // }
 
-  if (сurrentOffer === null || nearOffers === null || comments === null || isOfferDataLoading.includes(true) || isCommentsDataLoading === true) {
+  if (сurrentOffer === null || activeOffer === null || nearOffers === null || comments === null || isOfferDataLoading.includes(true) || isCommentsDataLoading === true) {
     return (
       <LoadingScreen />
     );

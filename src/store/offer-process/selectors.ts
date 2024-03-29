@@ -3,5 +3,5 @@ import { CurrentOffer, OffersList } from '../../types/offer';
 import { State } from '../../types/state';
 
 export const getCurrentOffer = (state: State): CurrentOffer | null => state[NameSpace.Offer].offer;
-export const getNearOffers = (state: State): OffersList | null => state[NameSpace.Offer].nearOffers;
+export const getNearOffers = (state: State): OffersList => state[NameSpace.Offer].nearOffers;
 export const getOfferDataLoadingStatus = (state: State): boolean[] => state[NameSpace.Offer].isOfferDataLoading;

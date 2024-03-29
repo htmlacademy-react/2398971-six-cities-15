@@ -1,13 +1,15 @@
 import { FormEvent, Fragment, ReactEventHandler, useState } from 'react';
-import { useAppDispatch } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { fetchNewCommentAction } from '../../store/api-actions';
 import { useParams } from 'react-router-dom';
+import { getSendNewCommentDataLoadingStatus } from '../../store/сomments-process/selectors';
 
 type TChangeHandleReview = ReactEventHandler<HTMLInputElement | HTMLTextAreaElement>
 
 function OfferReviewForm(): JSX.Element {
   const dispatch = useAppDispatch();
   const {offerId} = useParams();
+  const isSendNewCommentDataLoading = useAppSelector(getSendNewCommentDataLoadingStatus);
 
   const [review, setReview] = useState({rating: 0, review: ''});
 
@@ -19,7 +21,7 @@ function OfferReviewForm(): JSX.Element {
   const handleCommentSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
 
-    if (offerId || review.review.length < 50 || review.rating === 0) {
+    if (offerId || review.review.length < 50 || review.review.length > 300 || review.rating === 0) {
       dispatch(fetchNewCommentAction({
         offerId: offerId,
         comment: review.review,
@@ -56,6 +58,7 @@ function OfferReviewForm(): JSX.Element {
               id={`${value}-stars`}
               type="radio"
               onChange={handleReviewChange}
+              disabled={isSendNewCommentDataLoading}
             />
             <label
               htmlFor={`${value}-stars`}
@@ -77,6 +80,7 @@ function OfferReviewForm(): JSX.Element {
         name="review"
         placeholder="Tell how was your stay, what you like and what can be improved"
         defaultValue={review.review}
+        disabled={isSendNewCommentDataLoading}
       />
       <div className="reviews__button-wrapper">
         <p className="reviews__help">
@@ -88,9 +92,9 @@ function OfferReviewForm(): JSX.Element {
         <button
           className="reviews__submit form__submit button"
           type="submit"
-          disabled={review.review.length < 50 || review.rating === 0}
+          disabled={review.review.length < 50 || review.review.length > 300 || review.rating === 0 || isSendNewCommentDataLoading}
         >
-          Submit
+          {isSendNewCommentDataLoading ? 'Submiting' : 'Submit' }
         </button>
       </div>
     </form>

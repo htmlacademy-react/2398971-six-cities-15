@@ -55,6 +55,7 @@ function OfferReviewForm(): JSX.Element {
               className="form__rating-input visually-hidden"
               name="rating"
               defaultValue={value}
+              checked={review.rating === value}
               id={`${value}-stars`}
               type="radio"
               onChange={handleReviewChange}
@@ -80,6 +81,7 @@ function OfferReviewForm(): JSX.Element {
         name="review"
         placeholder="Tell how was your stay, what you like and what can be improved"
         defaultValue={review.review}
+        value={review.review}
         disabled={isSendNewCommentDataLoading}
       />
       <div className="reviews__button-wrapper">

@@ -80,7 +80,6 @@ function OfferReviewForm(): JSX.Element {
         id="review"
         name="review"
         placeholder="Tell how was your stay, what you like and what can be improved"
-        defaultValue={review.review}
         value={review.review}
         disabled={isSendNewCommentDataLoading}
       />

@@ -23,9 +23,6 @@ export const offersProcess = createSlice({
     sortingChange: (state, action: PayloadAction<Sorting>) => {
       state.sorting = action.payload;
     },
-    setCurrentOffers: (state) => {
-      state.currentOffers = state.offers.filter((offer) => offer.city.name === state.city.name);
-    },
   },
   extraReducers(builder) {
     builder
@@ -55,8 +52,9 @@ export const offersProcess = createSlice({
           }
           return offer;
         });
+        state.currentOffers = state.offers.filter((offer) => offer.city.name === state.city.name);
       });
   }
 });
 
-export const { cityChange, sortingChange, setCurrentOffers } = offersProcess.actions;
+export const { cityChange, sortingChange } = offersProcess.actions;

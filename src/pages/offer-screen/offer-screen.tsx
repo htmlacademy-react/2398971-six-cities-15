@@ -41,12 +41,13 @@ function OfferScreen (props: OfferScreenProps): JSX.Element {
   const сurrentOffer = useAppSelector(getCurrentOffer);
   const activeOffer = useAppSelector(getOffers).find((offer) => offer.id === offerId);
   const nearOffers = useAppSelector(getNearOffers).slice(0, 3);
+  const mapNearOffers = useAppSelector(getNearOffers).slice(0, 3);
   const comments = useAppSelector(getComments);
   const isOfferDataLoading = useAppSelector(getOfferDataLoadingStatus);
   const isCommentsDataLoading = useAppSelector(getCommentsDataLoadingStatus);
 
   if (activeOffer) {
-    nearOffers.push(activeOffer);
+    mapNearOffers.push(activeOffer);
   }
 
   //const isError = useAppSelector((state) => state.errorStatus);
@@ -85,7 +86,7 @@ function OfferScreen (props: OfferScreenProps): JSX.Element {
           authorizationStatus={authorizationStatus}
           activeOffer={activeOffer}
           сurrentOffer={сurrentOffer}
-          nearOffers={nearOffers}
+          nearOffers={mapNearOffers}
           comments={comments}
         />
         <NearPlaces

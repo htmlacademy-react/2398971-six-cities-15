@@ -1,19 +1,18 @@
 import { useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
-import Logo from '../../components/logo/logo';
-import Offer from '../../components/offer/offer';
-import NearPlaces from '../../components/near-places/near-places';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import HeaderNavList from '../../components/user-navigation/user-navigation-list';
 import { useParams } from 'react-router-dom';
 import { fetchCurrentOfferAction, fetchNearOffersAction, fetchOfferCommentAction } from '../../store/api-actions';
-import LoadingScreen from '../loading-screen/loading-screen';
-//import ErrorScreen from '../error-screen/error-screen';
 import { getCurrentOffer, getNearOffers, getOfferDataLoadingStatus } from '../../store/offer-process/selectors';
 import { clearOffer } from '../../store/offer-process/offer-process';
 import { getComments, getCommentsDataLoadingStatus } from '../../store/сomments-process/selectors';
 import { clearComments } from '../../store/сomments-process/сomments-process';
 import { getOffers } from '../../store/offers-process/selectors';
+import Header from '../../components/header/header';
+import Offer from '../../components/offer/offer';
+import NearPlaces from '../../components/near-places/near-places';
+import LoadingScreen from '../loading-screen/loading-screen';
+//import ErrorScreen from '../error-screen/error-screen';
 
 type OfferScreenProps = {
   authorizationStatus: string;
@@ -69,18 +68,7 @@ function OfferScreen (props: OfferScreenProps): JSX.Element {
       <Helmet>
         <title>Шесть городов. Предложения.</title>
       </Helmet>
-      <header className="header">
-        <div className="container">
-          <div className="header__wrapper">
-            <div className="header__left">
-              <Logo />
-            </div>
-            <nav className="header__nav">
-              <HeaderNavList/>
-            </nav>
-          </div>
-        </div>
-      </header>
+      <Header/>
       <main className="page__main page__main--offer">
         <Offer
           authorizationStatus={authorizationStatus}

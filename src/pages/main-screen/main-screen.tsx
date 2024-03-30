@@ -1,16 +1,15 @@
 import { useState } from 'react';
 import { Nullable } from 'vitest';
 import { Helmet } from 'react-helmet-async';
-import Logo from '../../components/logo/logo';
-import CardList from '../../components/card-list/card-list';
 import { OfferList } from '../../types/offer';
+import { useAppSelector } from '../../hooks';
+import { getCurrentCity, getCurrentOffers, getCurrentSorting } from '../../store/offers-process/selectors';
+import Header from '../../components/header/header';
+import CardList from '../../components/card-list/card-list';
 import Map from '../../components/map/map';
 import Locations from '../../components/locations/locations';
-import { useAppSelector } from '../../hooks';
 import PlacesSorting from '../../components/places-sorting/places-sorting';
 import SortingSelector from '../../utils/sorting';
-import HeaderNavList from '../../components/user-navigation/user-navigation-list';
-import { getCurrentCity, getCurrentOffers, getCurrentSorting } from '../../store/offers-process/selectors';
 
 function MainScreen (): JSX.Element {
   const currentCity = useAppSelector(getCurrentCity);
@@ -29,18 +28,7 @@ function MainScreen (): JSX.Element {
       <Helmet>
         <title>Шесть городов. Главная страница.</title>
       </Helmet>
-      <header className="header">
-        <div className="container">
-          <div className="header__wrapper">
-            <div className="header__left">
-              <Logo />
-            </div>
-            <nav className="header__nav">
-              <HeaderNavList/>
-            </nav>
-          </div>
-        </div>
-      </header>
+      <Header/>
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">

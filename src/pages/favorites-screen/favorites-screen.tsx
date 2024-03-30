@@ -1,14 +1,14 @@
 import { Helmet } from 'react-helmet-async';
-import Logo from '../../components/logo/logo';
-import FavoriteCardList from '../../components/favorites-list/favorites-list';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import HeaderNavList from '../../components/user-navigation/user-navigation-list';
 import { useEffect } from 'react';
 import { fetchFavoriteOffersAction } from '../../store/api-actions';
-//import ErrorScreen from '../error-screen/error-screen';
-import LoadingScreen from '../loading-screen/loading-screen';
 import { getFavoriteOffers, getFavoriteOffersDataLoadingStatus } from '../../store/favorite-process/selectors';
 import { clearFavoriteOffers } from '../../store/favorite-process/favorite-process';
+import FavoriteCardList from '../../components/favorites-list/favorites-list';
+//import ErrorScreen from '../error-screen/error-screen';
+import LoadingScreen from '../loading-screen/loading-screen';
+
+import Header from '../../components/header/header';
 
 function FavoritesScreen (): JSX.Element {
   const dispatch = useAppDispatch();
@@ -43,18 +43,7 @@ function FavoritesScreen (): JSX.Element {
       <Helmet>
         <title>Шесть городов. Избранное.</title>
       </Helmet>
-      <header className="header">
-        <div className="container">
-          <div className="header__wrapper">
-            <div className="header__left">
-              <Logo />
-            </div>
-            <nav className="header__nav">
-              <HeaderNavList/>
-            </nav>
-          </div>
-        </div>
-      </header>
+      <Header/>
       <main className="page__main page__main--favorites">
         <div className="page__favorites-container container">
           <FavoriteCardList

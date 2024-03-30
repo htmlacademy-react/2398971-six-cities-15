@@ -3,10 +3,12 @@ import { AppRoute } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { logoutAction } from '../../store/api-actions';
 import { getUserEmail } from '../../store/user-process/selectors';
+import { getOffers } from '../../store/offers-process/selectors';
 
 function UserProfileAuth(): JSX.Element {
   const userEmail = useAppSelector(getUserEmail);
   const dispatch = useAppDispatch();
+  const favoriteOffersCount = useAppSelector(getOffers).filter((offer) => offer.isFavorite === true).length;
 
   const handleLogoutClick = (evt: React.MouseEvent<HTMLAnchorElement>) => {
     evt.preventDefault();
@@ -25,7 +27,7 @@ function UserProfileAuth(): JSX.Element {
             {userEmail}
           </span>
           <span className="header__favorite-count">
-          3
+            {favoriteOffersCount}
           </span>
         </Link>
       </li>
@@ -35,7 +37,9 @@ function UserProfileAuth(): JSX.Element {
           to={AppRoute.Main}
           onClick={handleLogoutClick}
         >
-          <span className="header__signout">Sign out</span>
+          <span className="header__signout">
+            Sign out
+          </span>
         </Link>
       </li>
     </ul>

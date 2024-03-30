@@ -7,6 +7,8 @@ const initialState: FavoriteProcess = {
   favoriteOffers: [],
   isSetFavoriteOffersDataSending: false,
   isFavoriteOffersDataLoading: true,
+  hasErrorFavoriteOffersLoading: false,
+  hasErrorFavoriteOfferSending: false,
 };
 
 export const favoriteProcess = createSlice({
@@ -21,13 +23,19 @@ export const favoriteProcess = createSlice({
     builder
       .addCase(fetchFavoriteOffersAction.pending, (state) => {
         state.isFavoriteOffersDataLoading = true;
+        state.hasErrorFavoriteOffersLoading = false;
       })
       .addCase(fetchFavoriteOffersAction.fulfilled, (state, action) => {
         state.favoriteOffers = action.payload;
         state.isFavoriteOffersDataLoading = false;
       })
+      .addCase(fetchFavoriteOffersAction.rejected, (state) => {
+        state.isFavoriteOffersDataLoading = false;
+        state.hasErrorFavoriteOffersLoading = true;
+      })
       .addCase(fetchSetFavoriteOffer.pending, (state) => {
         state.isSetFavoriteOffersDataSending = true;
+        state.hasErrorFavoriteOfferSending = false;
       })
       .addCase(fetchSetFavoriteOffer.fulfilled, (state, action) => {
         state.favoriteOffers = state.favoriteOffers.map((offer) => {
@@ -48,6 +56,10 @@ export const favoriteProcess = createSlice({
           return offer;
         });
         state.isSetFavoriteOffersDataSending = false;
+      })
+      .addCase(fetchSetFavoriteOffer.rejected, (state) => {
+        state.isSetFavoriteOffersDataSending = false;
+        state.hasErrorFavoriteOfferSending = true;
       });
   }
 });

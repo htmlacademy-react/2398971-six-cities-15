@@ -3,16 +3,17 @@ import { Helmet } from 'react-helmet-async';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { useParams } from 'react-router-dom';
 import { fetchCurrentOfferAction, fetchNearOffersAction, fetchOfferCommentAction } from '../../store/api-actions';
-import { getCurrentOffer, getNearOffers, getOfferDataLoadingStatus } from '../../store/offer-process/selectors';
+import { getCurrentOffer, getErrorNearOffersLoadingStatus, getErrorOfferLoadingStatus, getNearOffers, getOfferDataLoadingStatus } from '../../store/offer-process/selectors';
 import { clearOffer } from '../../store/offer-process/offer-process';
-import { getComments, getCommentsDataLoadingStatus } from '../../store/сomments-process/selectors';
+import { getComments, getCommentsDataLoadingStatus, getErrorCommentLoadingStatus, getErrorCommentSendingStatus } from '../../store/сomments-process/selectors';
 import { clearComments } from '../../store/сomments-process/сomments-process';
 import { getOffers } from '../../store/offers-process/selectors';
 import Header from '../../components/header/header';
 import Offer from '../../components/offer/offer';
 import NearPlaces from '../../components/near-places/near-places';
 import LoadingScreen from '../loading-screen/loading-screen';
-//import ErrorScreen from '../error-screen/error-screen';
+import ErrorScreen from '../error-screen/error-screen';
+import { getErrorFavoriteOfferSendingStatus } from '../../store/favorite-process/selectors';
 
 type OfferScreenProps = {
   authorizationStatus: string;
@@ -49,13 +50,22 @@ function OfferScreen (props: OfferScreenProps): JSX.Element {
     mapNearOffers.push(activeOffer);
   }
 
-  //const isError = useAppSelector((state) => state.errorStatus);
+  const hasErrorOfferLoading = useAppSelector(getErrorOfferLoadingStatus);
+  const hasErrorNearOffersLoading = useAppSelector(getErrorNearOffersLoadingStatus);
+  const hasErrorCommentLoading = useAppSelector(getErrorCommentLoadingStatus);
+  const hasErrorCommentSending = useAppSelector(getErrorCommentSendingStatus);
+  const hasErrorFavoriteOfferSending = useAppSelector(getErrorFavoriteOfferSendingStatus);
 
-  // if (isError) {
-  //   return (
-  //     <ErrorScreen />
-  //   );
-  // }
+  if (
+    hasErrorOfferLoading ||
+    hasErrorNearOffersLoading ||
+    hasErrorCommentLoading ||
+    hasErrorCommentSending ||
+    hasErrorFavoriteOfferSending) {
+    return (
+      <ErrorScreen />
+    );
+  }
 
   if (сurrentOffer === null || activeOffer === null || nearOffers === null || comments === null || isOfferDataLoading.includes(true) || isCommentsDataLoading === true) {
     return (

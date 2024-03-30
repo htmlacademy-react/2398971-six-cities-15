@@ -12,14 +12,12 @@ import LoadingScreen from '../pages/loading-screen/loading-screen';
 import HistoryRouter from '../components/history-route/history-route';
 import browserHistory from '../browser-history';
 import { getAuthCheckedStatus, getAuthorizationStatus } from '../store/user-process/selectors';
-import { getOffersDataLoadingStatus } from '../store/offers-process/selectors';
 
 function App (): JSX.Element {
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const isAuthChecked = useAppSelector(getAuthCheckedStatus);
-  const isOffersDataLoading = useAppSelector(getOffersDataLoadingStatus);
 
-  if (!isAuthChecked || isOffersDataLoading) {
+  if (!isAuthChecked) {
     return (
       <LoadingScreen />
     );

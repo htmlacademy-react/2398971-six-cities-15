@@ -13,24 +13,31 @@ export type OffersProcess = {
   offers: OffersList;
   currentOffers: OffersList;
   isOffersDataLoading: boolean;
+  hasErrorOffersLoading: boolean;
 }
 
 export type OfferProcess = {
   offer: CurrentOffer | null;
   nearOffers: OffersList;
   isOfferDataLoading: boolean[];
+  hasErrorOfferLoading: boolean;
+  hasErrorNearOffersLoading: boolean;
 }
 
 export type FavoriteProcess = {
   favoriteOffers: OffersList;
   isSetFavoriteOffersDataSending: boolean;
   isFavoriteOffersDataLoading: boolean;
+  hasErrorFavoriteOffersLoading: boolean;
+  hasErrorFavoriteOfferSending: boolean;
 }
 
 export type CommentProcess = {
   comments: Comments;
   isSendNewCommentDataLoading: boolean;
   isCommentsDataLoading: boolean;
+  hasErrorCommentLoading: boolean;
+  hasErrorCommentSending: boolean;
 }
 
 

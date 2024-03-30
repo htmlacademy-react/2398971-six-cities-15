@@ -1,27 +1,54 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Nullable } from 'vitest';
 import { Helmet } from 'react-helmet-async';
 import { OfferList } from '../../types/offer';
-import { useAppSelector } from '../../hooks';
-import { getCurrentCity, getCurrentOffers, getCurrentSorting } from '../../store/offers-process/selectors';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { getCurrentCity, getCurrentOffers, getCurrentSorting, getOffersDataLoadingStatus } from '../../store/offers-process/selectors';
 import Header from '../../components/header/header';
 import CardList from '../../components/card-list/card-list';
 import Map from '../../components/map/map';
 import Locations from '../../components/locations/locations';
 import PlacesSorting from '../../components/places-sorting/places-sorting';
 import SortingSelector from '../../utils/sorting';
+import ErrorScreen from '../error-screen/error-screen';
+import { getErrorOfferLoadingStatus } from '../../store/offer-process/selectors';
+import { getErrorFavoriteOfferSendingStatus } from '../../store/favorite-process/selectors';
+import { fetchAllOfferAction } from '../../store/api-actions';
+import LoadingScreen from '../loading-screen/loading-screen';
 
 function MainScreen (): JSX.Element {
+  const dispatch = useAppDispatch();
+
+  useEffect (() => {
+    dispatch(fetchAllOfferAction());
+  }, [dispatch]);
+
   const currentCity = useAppSelector(getCurrentCity);
   const currentOffers = useAppSelector(getCurrentOffers);
   const currentSorting = useAppSelector(getCurrentSorting);
   const sorteredOffers = SortingSelector(currentSorting.name);
+  const isOffersDataLoading = useAppSelector(getOffersDataLoadingStatus);
 
   const [activeOffer, setActiveOffer] = useState<Nullable<OfferList>>(null);
 
   const handleOfferChange = (offer?: OfferList) => {
     setActiveOffer(offer || null);
   };
+
+  const hasErrorOffersLoading = useAppSelector(getErrorOfferLoadingStatus);
+  const hasErrorFavoriteOfferSending = useAppSelector(getErrorFavoriteOfferSendingStatus);
+
+  if (hasErrorOffersLoading || hasErrorFavoriteOfferSending) {
+    return (
+      <ErrorScreen />
+    );
+  }
+
+  if (isOffersDataLoading) {
+    return (
+      <LoadingScreen />
+    );
+  }
 
   return (
     <div className="page page--gray page--main">

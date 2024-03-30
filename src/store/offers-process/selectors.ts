@@ -7,3 +7,4 @@ export const getOffers = (state: State): OffersList => state[NameSpace.Offers].o
 export const getCurrentOffers = (state: State): OffersList => state[NameSpace.Offers].currentOffers;
 export const getCurrentSorting = (state: State): Sorting => state[NameSpace.Offers].sorting;
 export const getOffersDataLoadingStatus = (state: State): boolean => state[NameSpace.Offers].isOffersDataLoading;
+export const getErrorOffersLoadingStatus = (state: State): boolean => state[NameSpace.Offers].hasErrorOffersLoading;

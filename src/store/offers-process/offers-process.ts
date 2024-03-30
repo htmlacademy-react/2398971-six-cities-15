@@ -9,7 +9,8 @@ const initialState: OffersProcess = {
   sorting: SORTING[0],
   offers: [],
   currentOffers: [],
-  isOffersDataLoading: false,
+  isOffersDataLoading: true,
+  hasErrorOffersLoading: false,
 };
 
 export const offersProcess = createSlice({
@@ -28,11 +29,16 @@ export const offersProcess = createSlice({
     builder
       .addCase(fetchAllOfferAction.pending, (state) => {
         state.isOffersDataLoading = true;
+        state.hasErrorOffersLoading = false;
       })
       .addCase(fetchAllOfferAction.fulfilled, (state, action) => {
         state.offers = action.payload;
         state.isOffersDataLoading = false;
         state.currentOffers = state.offers.filter((offer) => offer.city.name === state.city.name);
+      })
+      .addCase(fetchAllOfferAction.rejected, (state) => {
+        state.isOffersDataLoading = false;
+        state.hasErrorOffersLoading = true;
       })
       .addCase(fetchSetFavoriteOffer.fulfilled, (state, action) => {
         state.offers = state.offers.map((offer) => {

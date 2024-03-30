@@ -7,6 +7,8 @@ const initialState: CommentProcess = {
   comments: [],
   isSendNewCommentDataLoading: false,
   isCommentsDataLoading: true,
+  hasErrorCommentLoading: false,
+  hasErrorCommentSending: false,
 };
 
 export const commentsProcess = createSlice({
@@ -21,20 +23,27 @@ export const commentsProcess = createSlice({
     builder
       .addCase(fetchOfferCommentAction.pending, (state) => {
         state.isCommentsDataLoading = true;
+        state.hasErrorCommentLoading = false;
       })
       .addCase(fetchOfferCommentAction.fulfilled, (state, action) => {
         state.comments = action.payload;
         state.isCommentsDataLoading = false;
       })
+      .addCase(fetchOfferCommentAction.rejected, (state) => {
+        state.isCommentsDataLoading = false;
+        state.hasErrorCommentLoading = true;
+      })
       .addCase(fetchNewCommentAction.pending, (state) => {
         state.isSendNewCommentDataLoading = true;
-      })
-      .addCase(fetchNewCommentAction.rejected, (state) => {
-        state.isSendNewCommentDataLoading = false;
+        state.hasErrorCommentSending = false;
       })
       .addCase(fetchNewCommentAction.fulfilled, (state, action) => {
         state.comments.push(action.payload);
         state.isSendNewCommentDataLoading = false;
+      })
+      .addCase(fetchNewCommentAction.rejected, (state) => {
+        state.isSendNewCommentDataLoading = false;
+        state.hasErrorCommentSending = true;
       });
   }
 });

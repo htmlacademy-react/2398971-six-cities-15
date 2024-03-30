@@ -2,10 +2,10 @@ import { Helmet } from 'react-helmet-async';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { useEffect } from 'react';
 import { fetchFavoriteOffersAction } from '../../store/api-actions';
-import { getFavoriteOffers, getFavoriteOffersDataLoadingStatus } from '../../store/favorite-process/selectors';
+import { getErrorFavoriteOfferSendingStatus, getErrorFavoriteOffersLoadingStatus, getFavoriteOffers, getFavoriteOffersDataLoadingStatus } from '../../store/favorite-process/selectors';
 import { clearFavoriteOffers } from '../../store/favorite-process/favorite-process';
 import FavoriteCardList from '../../components/favorites-list/favorites-list';
-//import ErrorScreen from '../error-screen/error-screen';
+import ErrorScreen from '../error-screen/error-screen';
 import LoadingScreen from '../loading-screen/loading-screen';
 
 import Header from '../../components/header/header';
@@ -24,13 +24,16 @@ function FavoritesScreen (): JSX.Element {
   const favoriteOffers = useAppSelector(getFavoriteOffers);
   const isFavoriteOffersDataLoading = useAppSelector(getFavoriteOffersDataLoadingStatus);
 
-  //const isError = useAppSelector((state) => state.errorStatus);
+  const hasErrorFavoriteOffersLoading = useAppSelector(getErrorFavoriteOffersLoadingStatus);
+  const hasErrorFavoriteOffersSending = useAppSelector(getErrorFavoriteOfferSendingStatus);
 
-  // if (isError) {
-  //   return (
-  //     <ErrorScreen />
-  //   );
-  // }
+  if (
+    hasErrorFavoriteOffersLoading ||
+    hasErrorFavoriteOffersSending) {
+    return (
+      <ErrorScreen />
+    );
+  }
 
   if (favoriteOffers === null || isFavoriteOffersDataLoading) {
     return (

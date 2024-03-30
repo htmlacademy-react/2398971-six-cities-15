@@ -24,7 +24,7 @@ function UserProfileAuth(): JSX.Element {
         >
           <div className="header__avatar-wrapper user__avatar-wrapper"></div>
           <span className="header__user-name user__name">
-            {userEmail}
+            {userEmail === null ? userEmail : userEmail.charAt(0).toUpperCase() + userEmail.slice(1)}
           </span>
           <span className="header__favorite-count">
             {favoriteOffersCount}

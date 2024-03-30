@@ -1,7 +1,7 @@
 import { NameSpace } from '../../const';
 import { createSlice } from '@reduxjs/toolkit';
 import { OfferProcess } from '../../types/state';
-import { fetchCurrentOfferAction, fetchNearOffersAction } from '../api-actions';
+import { fetchCurrentOfferAction, fetchNearOffersAction, fetchSetFavoriteOffer } from '../api-actions';
 
 const initialState: OfferProcess = {
   offer: null,
@@ -33,6 +33,27 @@ export const offerProcess = createSlice({
       .addCase(fetchNearOffersAction.fulfilled, (state, action) => {
         state.nearOffers = action.payload;
         state.isOfferDataLoading[1] = false;
+      })
+      .addCase(fetchSetFavoriteOffer.fulfilled, (state, action) => {
+        if(state.offer !== null) {
+          state.offer = {
+            id: state.offer.id,
+            title: state.offer.title,
+            type: state.offer.type,
+            price: state.offer.price,
+            city: state.offer.city,
+            location: state.offer.location,
+            isFavorite: action.payload.isFavorite,
+            isPremium: state.offer.isPremium,
+            rating: state.offer.rating,
+            description: state.offer.description,
+            images: state.offer.images,
+            goods: state.offer.goods,
+            host: state.offer.host,
+            bedrooms: state.offer.bedrooms,
+            maxAdults: state.offer.maxAdults,
+          };
+        }
       });
   }
 });

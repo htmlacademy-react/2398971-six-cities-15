@@ -1,6 +1,6 @@
 import { CITIES, NameSpace, SORTING } from '../../const';
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { fetchAllOfferAction } from '../api-actions';
+import { fetchAllOfferAction, fetchSetFavoriteOffer } from '../api-actions';
 import { OffersProcess } from '../../types/state';
 import { Cities, Sorting } from '../../types/offer';
 
@@ -36,6 +36,25 @@ export const offersProcess = createSlice({
         state.offers = action.payload;
         state.isOffersDataLoading = false;
         state.currentOffers = state.offers.filter((offer) => offer.city.name === state.city.name);
+      })
+      .addCase(fetchSetFavoriteOffer.fulfilled, (state, action) => {
+        state.offers = state.offers.map((offer) => {
+          if (offer.id === action.payload.id) {
+            return {
+              id: offer.id,
+              title: offer.title,
+              type: offer.type,
+              price: offer.price,
+              city: offer.city,
+              location: offer.location,
+              isFavorite: action.payload.isFavorite,
+              isPremium: offer.isPremium,
+              rating: offer.rating,
+              previewImage: offer.previewImage,
+            };
+          }
+          return offer;
+        });
       });
   }
 });

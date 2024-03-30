@@ -4,6 +4,7 @@ import { fetchSetFavoriteOffer } from '../../store/api-actions';
 import { AppRoute, AuthorizationStatus } from '../../const';
 import { useNavigate } from 'react-router-dom';
 import { getAuthorizationStatus } from '../../store/user-process/selectors';
+import { getSetFavoriteOffersDataSendingStatus } from '../../store/favorite-process/selectors';
 
 type OfferBookmarkProps = {
   offerId:string;
@@ -20,6 +21,7 @@ function OfferBookmark(props: OfferBookmarkProps): JSX.Element {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
+  const isSetFavoriteOffersDataSending = useAppSelector(getSetFavoriteOffersDataSendingStatus);
 
   const [isFavorite, setIsFavorite] = useState(props.isFavorite);
 
@@ -41,6 +43,7 @@ function OfferBookmark(props: OfferBookmarkProps): JSX.Element {
       className={isFavorite ? `${className}__bookmark-button ${className}__bookmark-button--active button` : `${className}__bookmark-button button`}
       type="button"
       onClick={handleFavoriteChange}
+      disabled={isSetFavoriteOffersDataSending}
     >
       <svg
         className={`${className}__bookmark-icon`}

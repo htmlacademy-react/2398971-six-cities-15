@@ -29,7 +29,24 @@ export const favoriteProcess = createSlice({
       .addCase(fetchSetFavoriteOffer.pending, (state) => {
         state.isSetFavoriteOffersDataSending = true;
       })
-      .addCase(fetchSetFavoriteOffer.fulfilled, (state) => {
+      .addCase(fetchSetFavoriteOffer.fulfilled, (state, action) => {
+        state.favoriteOffers = state.favoriteOffers.map((offer) => {
+          if (offer.id === action.payload.id) {
+            return {
+              id: offer.id,
+              title: offer.title,
+              type: offer.type,
+              price: offer.price,
+              city: offer.city,
+              location: offer.location,
+              isFavorite: action.payload.isFavorite,
+              isPremium: offer.isPremium,
+              rating: offer.rating,
+              previewImage: offer.previewImage,
+            };
+          }
+          return offer;
+        });
         state.isSetFavoriteOffersDataSending = false;
       });
   }

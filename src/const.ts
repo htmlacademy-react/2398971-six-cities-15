@@ -26,7 +26,6 @@ export enum NameSpace {
   Offer = 'OFFER',
   Favorites = 'FAVORITES',
   Comments = 'COMMENTS',
-  TEMP = 'TEMP',
 }
 
 export const URL_MARKER_DEFAULT = 'markup/img/pin.svg';

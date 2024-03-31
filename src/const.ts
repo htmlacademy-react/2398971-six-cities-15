@@ -60,7 +60,7 @@ export const CITIES = [
   },
   {
     'id': 'dusseldorf',
-    'name': 'London',
+    'name': 'Dusseldorf',
     'location': {'latitude': 51.225402, 'longitude': 6.776314, 'zoom': 13}
   },
 ];

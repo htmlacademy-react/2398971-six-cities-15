@@ -13,6 +13,7 @@ import OfferDescription from '../offer-elements/offer-description';
 import OfferReviewForm from '../offer-elements/offer-review-form';
 import OfferReviewsList from '../offer-elements/offer-reviews-list';
 import Map from '../map/map';
+import { memo } from 'react';
 
 type OfferReviewFormProps = {
   authorizationStatus: string;
@@ -90,4 +91,4 @@ function Offer(props: OfferReviewFormProps): JSX.Element {
   );
 }
 
-export default Offer;
+export default memo(Offer);

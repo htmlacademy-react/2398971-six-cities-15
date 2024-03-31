@@ -67,4 +67,3 @@ function CardPreview (props: CardPreviewProps): JSX.Element {
 }
 
 export default CardPreview;
-//isFavoriteCard ? 'favorites__card-info place-card__info' : 'place-card__info'

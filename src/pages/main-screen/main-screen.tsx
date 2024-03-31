@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { Nullable } from 'vitest';
 import { Helmet } from 'react-helmet-async';
 import { OfferList } from '../../types/offer';
@@ -30,9 +30,9 @@ function MainScreen (): JSX.Element {
 
   const [activeOffer, setActiveOffer] = useState<Nullable<OfferList>>(null);
 
-  const handleOfferChange = (offer?: OfferList) => {
+  const handleOfferChange = useCallback((offer?: OfferList) => {
     setActiveOffer(offer || null);
-  };
+  }, []);
 
   const hasErrorOffersLoading = useAppSelector(getErrorOfferLoadingStatus);
   const hasErrorFavoriteOfferSending = useAppSelector(getErrorFavoriteOfferSendingStatus);

@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { OfferList, OffersList } from '../../types/offer';
 import CardPreview from '../card/card-preview';
 
@@ -24,4 +25,4 @@ function CardList(props: CardListProps): JSX.Element {
   );
 }
 
-export default CardList;
+export default memo(CardList);

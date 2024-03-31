@@ -3,6 +3,7 @@ import { AppRoute, CITIES } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { getCurrentCity } from '../../store/offers-process/selectors';
 import { cityChange } from '../../store/offers-process/offers-process.ts';
+import { memo } from 'react';
 
 function Locations(): JSX.Element {
   const currentCity = useAppSelector(getCurrentCity);
@@ -31,4 +32,4 @@ function Locations(): JSX.Element {
   );
 }
 
-export default Locations;
+export default memo(Locations);

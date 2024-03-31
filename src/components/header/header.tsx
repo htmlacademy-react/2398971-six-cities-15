@@ -1,4 +1,3 @@
-import { memo } from 'react';
 import Logo from '../logo/logo';
 import HeaderNavList from '../user-navigation/user-navigation-list';
 
@@ -19,4 +18,4 @@ function Header(): JSX.Element {
   );
 }
 
-export default memo(Header);
+export default Header;

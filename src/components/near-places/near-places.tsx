@@ -1,6 +1,5 @@
-import { memo } from 'react';
 import { OfferList, OffersList } from '../../types/offer';
-import CardPreview from '../card/card-preview';
+import CardPreview from '../card-preview/card-preview';
 
 type NearPlacesProps = {
   nearOffers: OffersList;
@@ -32,4 +31,4 @@ function NearPlaces(props:NearPlacesProps): JSX.Element {
   );
 }
 
-export default memo(NearPlaces);
+export default NearPlaces;

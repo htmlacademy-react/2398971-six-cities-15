@@ -3,24 +3,17 @@ import { useAppDispatch, useAppSelector } from '../../hooks';
 import { useEffect } from 'react';
 import { fetchFavoriteOffersAction } from '../../store/api-actions';
 import { getErrorFavoriteOfferSendingStatus, getErrorFavoriteOffersLoadingStatus, getFavoriteOffers, getFavoriteOffersDataLoadingStatus } from '../../store/favorite-process/selectors';
-import { clearFavoriteOffers } from '../../store/favorite-process/favorite-process';
 import FavoriteCardList from '../../components/favorites-list/favorites-list';
 import ErrorScreen from '../error-screen/error-screen';
 import LoadingScreen from '../loading-screen/loading-screen';
-
 import Header from '../../components/header/header';
-import { Link } from 'react-router-dom';
-import { AppRoute } from '../../const';
+import Footer from '../../components/footer/footer';
 
 function FavoritesScreen (): JSX.Element {
   const dispatch = useAppDispatch();
 
   useEffect (() => {
     dispatch(fetchFavoriteOffersAction());
-
-    return () => {
-      dispatch(clearFavoriteOffers());
-    };
   }, [dispatch]);
 
   const favoriteOffers = useAppSelector(getFavoriteOffers);
@@ -56,17 +49,7 @@ function FavoritesScreen (): JSX.Element {
           />
         </div>
       </main>
-      <footer className="footer container">
-        <Link className="footer__logo-link" to={AppRoute.Main}>
-          <img
-            className="footer__logo"
-            src="img/logo.svg"
-            alt="6 cities logo"
-            width={64}
-            height={33}
-          />
-        </Link>
-      </footer>
+      <Footer/>
     </div>
   );
 }

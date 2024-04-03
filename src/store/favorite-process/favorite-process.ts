@@ -38,23 +38,25 @@ export const favoriteProcess = createSlice({
         state.hasErrorFavoriteOfferSending = false;
       })
       .addCase(fetchSetFavoriteOffer.fulfilled, (state, action) => {
-        state.favoriteOffers = state.favoriteOffers.map((offer) => {
-          if (offer.id === action.payload.id) {
-            return {
-              id: offer.id,
-              title: offer.title,
-              type: offer.type,
-              price: offer.price,
-              city: offer.city,
-              location: offer.location,
+        const offerIndex = state.favoriteOffers.findIndex((offer) => offer.id === action.payload.id);
+        if (offerIndex === -1) {
+          state.favoriteOffers.push(
+            {
+              id: action.payload.id,
+              title: action.payload.title,
+              type: action.payload.type,
+              price: action.payload.price,
+              city: action.payload.city,
+              location: action.payload.location,
               isFavorite: action.payload.isFavorite,
-              isPremium: offer.isPremium,
-              rating: offer.rating,
-              previewImage: offer.previewImage,
-            };
-          }
-          return offer;
-        });
+              isPremium: action.payload.isPremium,
+              rating: action.payload.rating,
+              previewImage: action.payload.images[0],
+            }
+          );
+        } else {
+          state.favoriteOffers.splice(offerIndex, 1);
+        }
         state.isSetFavoriteOffersDataSending = false;
       })
       .addCase(fetchSetFavoriteOffer.rejected, (state) => {

@@ -1,17 +1,17 @@
 import { AuthorizationStatus } from '../const.js';
 import { store } from '../store/index.js';
 import { Cities, Comments, CurrentOffer, OffersList, Sorting } from './offer.js';
+import { UserData } from './user-data.js';
 
 export type UserProcess = {
   authorizationStatus: AuthorizationStatus;
-  userEmail: string | null;
+  userData: UserData | null;
 };
 
 export type OffersProcess = {
   city: Cities;
   sorting: Sorting;
   offers: OffersList;
-  currentOffers: OffersList;
   isOffersDataLoading: boolean;
   hasErrorOffersLoading: boolean;
 }

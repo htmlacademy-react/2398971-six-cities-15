@@ -1,10 +1,18 @@
-import { FormEvent, Fragment, ReactEventHandler, useState } from 'react';
+import { FormEvent, Fragment, ReactEventHandler, memo, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { fetchNewCommentAction } from '../../store/api-actions';
 import { useParams } from 'react-router-dom';
 import { getSendNewCommentDataLoadingStatus } from '../../store/сomments-process/selectors';
 
 type TChangeHandleReview = ReactEventHandler<HTMLInputElement | HTMLTextAreaElement>
+
+const rating = [
+  {value: 5, label: 'perfect' },
+  {value: 4, label: 'good' },
+  {value: 3, label: 'not bad' },
+  {value: 2, label: 'badly' },
+  {value: 1, label: 'terribly' },
+];
 
 function OfferReviewForm(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -31,22 +39,13 @@ function OfferReviewForm(): JSX.Element {
     }
   };
 
-  const rating = [
-    {value: 5, label: 'perfect' },
-    {value: 4, label: 'good' },
-    {value: 3, label: 'not bad' },
-    {value: 2, label: 'badly' },
-    {value: 1, label: 'terribly' },
-  ];
-
   return (
     <form
       className="reviews__form form"
-      action=""
       onSubmit={handleCommentSubmit}
     >
       <label className="reviews__label form__label" htmlFor="review">
-            Your review
+        Your review
       </label>
       <div className="reviews__rating-form form__rating">
         {rating.map(({value, label}) => (
@@ -55,7 +54,7 @@ function OfferReviewForm(): JSX.Element {
               className="form__rating-input visually-hidden"
               name="rating"
               defaultValue={value}
-              checked={review.rating === value}
+              checked={Number(review.rating) === value}
               id={`${value}-stars`}
               type="radio"
               onChange={handleReviewChange}
@@ -95,11 +94,13 @@ function OfferReviewForm(): JSX.Element {
           type="submit"
           disabled={review.review.length < 50 || review.review.length > 300 || review.rating === 0 || isSendNewCommentDataLoading}
         >
-          {isSendNewCommentDataLoading ? 'Submiting' : 'Submit' }
+          {isSendNewCommentDataLoading ? 'Submitting' : 'Submit' }
         </button>
       </div>
     </form>
   );
 }
 
-export default OfferReviewForm;
+const MemoizeOfferReviewForm = memo(OfferReviewForm);
+
+export default MemoizeOfferReviewForm;

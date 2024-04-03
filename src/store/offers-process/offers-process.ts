@@ -8,7 +8,6 @@ const initialState: OffersProcess = {
   city: CITIES[0],
   sorting: SORTING[0],
   offers: [],
-  currentOffers: [],
   isOffersDataLoading: true,
   hasErrorOffersLoading: false,
 };
@@ -19,7 +18,6 @@ export const offersProcess = createSlice({
   reducers: {
     cityChange: (state, action: PayloadAction<Cities>) => {
       state.city = action.payload;
-      state.currentOffers = state.offers.filter((offer) => offer.city.name === state.city.name);
     },
     sortingChange: (state, action: PayloadAction<Sorting>) => {
       state.sorting = action.payload;
@@ -34,7 +32,6 @@ export const offersProcess = createSlice({
       .addCase(fetchAllOfferAction.fulfilled, (state, action) => {
         state.offers = action.payload;
         state.isOffersDataLoading = false;
-        state.currentOffers = state.offers.filter((offer) => offer.city.name === state.city.name);
       })
       .addCase(fetchAllOfferAction.rejected, (state) => {
         state.isOffersDataLoading = false;
@@ -58,7 +55,6 @@ export const offersProcess = createSlice({
           }
           return offer;
         });
-        state.currentOffers = state.offers.filter((offer) => offer.city.name === state.city.name);
       });
   }
 });

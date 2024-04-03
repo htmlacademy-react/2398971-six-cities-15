@@ -5,7 +5,7 @@ import { UserProcess } from '../../types/state';
 
 const initialState: UserProcess = {
   authorizationStatus: AuthorizationStatus.Unknown,
-  userEmail: null,
+  userData: null,
 };
 
 export const userProcess = createSlice({
@@ -15,14 +15,14 @@ export const userProcess = createSlice({
   extraReducers(builder) {
     builder
       .addCase(checkAuthAction.fulfilled, (state, action) => {
-        state.userEmail = action.payload.email;
+        state.userData = action.payload;
         state.authorizationStatus = AuthorizationStatus.Auth;
       })
       .addCase(checkAuthAction.rejected, (state) => {
         state.authorizationStatus = AuthorizationStatus.NoAuth;
       })
       .addCase(loginAction.fulfilled, (state, action) => {
-        state.userEmail = action.payload.email;
+        state.userData = action.payload;
         state.authorizationStatus = AuthorizationStatus.Auth;
       })
       .addCase(loginAction.rejected, (state) => {

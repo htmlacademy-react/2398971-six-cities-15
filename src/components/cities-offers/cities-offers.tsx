@@ -21,7 +21,7 @@ function CitiesOffers(props: CitiesOffersProps): JSX.Element {
         <section className="cities__places places">
           <h2 className="visually-hidden">Places</h2>
           <b className="places__found">
-            {`${currentOffers.length} places to stay in ${currentCity.name}`}
+            {`${currentOffers.length} ${currentOffers.length === 1 ? 'place' : 'places'} to stay in ${currentCity.name}`}
           </b>
           <PlacesSorting/>
           <div className="cities__places-list places__list tabs__content">

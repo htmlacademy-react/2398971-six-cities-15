@@ -4,7 +4,7 @@ import { userProcess } from './user-process/user-process';
 import { offersProcess } from './offers-process/offers-process';
 import { offerProcess } from './offer-process/offer-process';
 import { favoriteProcess } from './favorite-process/favorite-process';
-import { commentsProcess } from './сomments-process/сomments-process';
+import { commentsProcess } from './comments-process/comments-process';
 
 export const rootReducer = combineReducers({
   [NameSpace.User]: userProcess.reducer,

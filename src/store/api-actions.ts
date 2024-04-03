@@ -9,7 +9,7 @@ import { UserData } from '../types/user-data.js';
 import { dropToken, saveToken } from '../services/token.js';
 import { NewCommentData } from '../types/new-comment-data.js';
 import { CommentData } from '../types/comment-data.js';
-import { SetFavoritData } from '../types/set-favorite-data.js';
+import { SetFavoriteData } from '../types/set-favorite-data.js';
 
 export const fetchAllOfferAction = createAsyncThunk<OffersList, undefined, {
   dispatch: AppDispatch;
@@ -63,7 +63,7 @@ export const fetchFavoriteOffersAction = createAsyncThunk<OffersList, undefined,
   },
 );
 
-export const fetchSetFavoriteOffer = createAsyncThunk<CurrentOffer, SetFavoritData, {
+export const fetchSetFavoriteOffer = createAsyncThunk<CurrentOffer, SetFavoriteData, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;

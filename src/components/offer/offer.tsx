@@ -16,15 +16,15 @@ import MemoizeOfferReviewForm from '../offer-elements/offer-review-form';
 
 type OfferReviewFormProps = {
   authorizationStatus: string;
-  сurrentOffer: CurrentOffer;
+  currentOffer: CurrentOffer;
   nearOffers: OffersList;
   comments: Comments;
   activeOffer: Nullable<OfferList>;
 }
 
 function Offer(props: OfferReviewFormProps): JSX.Element {
-  const {authorizationStatus, сurrentOffer, nearOffers, comments, activeOffer} = props;
-  const {id, title, description, type, price, images, city, goods, host, isFavorite, isPremium, rating, bedrooms, maxAdults} = сurrentOffer;
+  const {authorizationStatus, currentOffer, nearOffers, comments, activeOffer} = props;
+  const {id, title, description, type, price, images, city, goods, host, isFavorite, isPremium, rating, bedrooms, maxAdults} = currentOffer;
 
   return (
     <section className="offer">

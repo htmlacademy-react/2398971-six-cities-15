@@ -18,7 +18,7 @@ function MainScreen (): JSX.Element {
   const currentCity = useAppSelector(getCurrentCity);
   const currentOffers = useAppSelector(getCurrentOffers);
   const currentSorting = useAppSelector(getCurrentSorting);
-  const sorteredOffers = SortingSelector(currentSorting.name);
+  const sortedOffers = SortingSelector(currentSorting.name);
   const isOffersDataLoading = useAppSelector(getOffersDataLoadingStatus);
 
   const [activeOffer, setActiveOffer] = useState<Nullable<OfferList>>(null);
@@ -62,7 +62,7 @@ function MainScreen (): JSX.Element {
           <CitiesOffers
             currentCity={currentCity}
             currentOffers={currentOffers}
-            sorteredOffers={sorteredOffers}
+            sortedOffers={sortedOffers}
             activeOffer={activeOffer}
             handleOfferChange={handleOfferChange}
           />}

@@ -7,13 +7,13 @@ import { Nullable } from 'vitest';
 type CitiesOffersProps = {
   currentCity: Cities;
   currentOffers: OffersList;
-  sorteredOffers: OffersList;
+  sortedOffers: OffersList;
   activeOffer: Nullable<OfferList>;
   handleOfferChange: (offer?: OfferList) => void;
 }
 
 function CitiesOffers(props: CitiesOffersProps): JSX.Element {
-  const {currentOffers, sorteredOffers, currentCity, activeOffer, handleOfferChange} = props;
+  const {currentOffers, sortedOffers, currentCity, activeOffer, handleOfferChange} = props;
 
   return (
     <div className="cities">
@@ -27,7 +27,7 @@ function CitiesOffers(props: CitiesOffersProps): JSX.Element {
           <div className="cities__places-list places__list tabs__content">
             <CardList
               handleOfferChange={handleOfferChange}
-              offers={sorteredOffers}
+              offers={sortedOffers}
               cardClassName = {'cities'}
             />
           </div>

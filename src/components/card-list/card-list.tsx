@@ -1,5 +1,5 @@
 import { OfferList, OffersList } from '../../types/offer';
-import CardPreview from '../card-preview/card-preview';
+import MemoizeCardPreview from '../card-preview/card-preview';
 
 type CardListProps = {
   offers: OffersList;
@@ -13,7 +13,7 @@ function CardList(props: CardListProps): JSX.Element {
   return (
     <div className="cities__places-list places__list tabs__content">
       {offers.map((offer) => (
-        <CardPreview
+        <MemoizeCardPreview
           handleMouseHover={handleOfferChange}
           key={offer.id}
           offer={offer}

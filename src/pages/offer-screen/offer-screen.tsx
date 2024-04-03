@@ -5,8 +5,8 @@ import { useParams } from 'react-router-dom';
 import { fetchCurrentOfferAction, fetchNearOffersAction, fetchOfferCommentAction } from '../../store/api-actions';
 import { getCurrentOffer, getErrorNearOffersLoadingStatus, getErrorOfferLoadingStatus, getNearOffers, getOfferDataLoadingStatus } from '../../store/offer-process/selectors';
 import { clearOffer } from '../../store/offer-process/offer-process';
-import { getComments, getCommentsDataLoadingStatus, getErrorCommentLoadingStatus, getErrorCommentSendingStatus } from '../../store/сomments-process/selectors';
-import { clearComments } from '../../store/сomments-process/сomments-process';
+import { getComments, getCommentsDataLoadingStatus, getErrorCommentLoadingStatus, getErrorCommentSendingStatus } from '../../store/comments-process/selectors';
+import { clearComments } from '../../store/comments-process/comments-process';
 import { getOffers } from '../../store/offers-process/selectors';
 import Header from '../../components/header/header';
 import Offer from '../../components/offer/offer';
@@ -38,7 +38,7 @@ function OfferScreen (props: OfferScreenProps): JSX.Element {
     };
   }, [dispatch, offerId]);
 
-  const сurrentOffer = useAppSelector(getCurrentOffer);
+  const currentOffer = useAppSelector(getCurrentOffer);
   const activeOffer = useAppSelector(getOffers).find((offer) => offer.id === offerId);
   const nearOffers = useAppSelector(getNearOffers).slice(0, 3);
   const mapNearOffers = useAppSelector(getNearOffers).slice(0, 3);
@@ -67,7 +67,7 @@ function OfferScreen (props: OfferScreenProps): JSX.Element {
     );
   }
 
-  if (сurrentOffer === null || activeOffer === null || nearOffers === null || comments === null || isOfferDataLoading.includes(true) || isCommentsDataLoading === true) {
+  if (currentOffer === null || activeOffer === null || nearOffers === null || comments === null || isOfferDataLoading.includes(true) || isCommentsDataLoading === true) {
     return (
       <LoadingScreen />
     );
@@ -83,7 +83,7 @@ function OfferScreen (props: OfferScreenProps): JSX.Element {
         <Offer
           authorizationStatus={authorizationStatus}
           activeOffer={activeOffer}
-          сurrentOffer={сurrentOffer}
+          currentOffer={currentOffer}
           nearOffers={mapNearOffers}
           comments={comments}
         />

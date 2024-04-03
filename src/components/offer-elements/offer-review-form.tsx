@@ -2,7 +2,7 @@ import { FormEvent, Fragment, ReactEventHandler, memo, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { fetchNewCommentAction } from '../../store/api-actions';
 import { useParams } from 'react-router-dom';
-import { getSendNewCommentDataLoadingStatus } from '../../store/сomments-process/selectors';
+import { getSendNewCommentDataLoadingStatus } from '../../store/comments-process/selectors';
 
 type TChangeHandleReview = ReactEventHandler<HTMLInputElement | HTMLTextAreaElement>
 

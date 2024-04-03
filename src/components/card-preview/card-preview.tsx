@@ -67,4 +67,6 @@ function CardPreview (props: CardPreviewProps): JSX.Element {
   );
 }
 
-export default memo(CardPreview);
+const MemoizeCardPreview = memo(CardPreview);
+
+export default MemoizeCardPreview;

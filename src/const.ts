@@ -20,6 +20,14 @@ export enum APIRoute {
   Logout = '/six-cities/logout',
 }
 
+export enum NameSpace {
+  User = 'USER',
+  Offers = 'OFFERS',
+  Offer = 'OFFER',
+  Favorites = 'FAVORITES',
+  Comments = 'COMMENTS',
+}
+
 export const URL_MARKER_DEFAULT = 'markup/img/pin.svg';
 
 export const URL_MARKER_CURRENT = 'markup/img/pin-active.svg';

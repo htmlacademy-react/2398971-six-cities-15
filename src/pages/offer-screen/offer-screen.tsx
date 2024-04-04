@@ -1,17 +1,19 @@
-import { useEffect, useState } from 'react';
-import { Nullable } from 'vitest';
+import { useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
-import { OfferList } from '../../types/offer';
-import Logo from '../../components/logo/logo';
-import Offer from '../../components/offer/offer';
-import NearPlaces from '../../components/near-places/near-places';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import HeaderNavList from '../../components/user-navigation/user-navigation-list';
 import { useParams } from 'react-router-dom';
 import { fetchCurrentOfferAction, fetchNearOffersAction, fetchOfferCommentAction } from '../../store/api-actions';
+import { getCurrentOffer, getErrorNearOffersLoadingStatus, getErrorOfferLoadingStatus, getNearOffers, getOfferDataLoadingStatus } from '../../store/offer-process/selectors';
+import { clearOffer } from '../../store/offer-process/offer-process';
+import { getComments, getCommentsDataLoadingStatus, getErrorCommentLoadingStatus, getErrorCommentSendingStatus } from '../../store/comments-process/selectors';
+import { clearComments } from '../../store/comments-process/comments-process';
+import { getOffers } from '../../store/offers-process/selectors';
+import Header from '../../components/header/header';
+import Offer from '../../components/offer/offer';
+import NearPlaces from '../../components/near-places/near-places';
 import LoadingScreen from '../loading-screen/loading-screen';
-import { clearComments, clearNearOffer, clearOffer } from '../../store/action';
 import ErrorScreen from '../error-screen/error-screen';
+import { getErrorFavoriteOfferSendingStatus } from '../../store/favorite-process/selectors';
 
 type OfferScreenProps = {
   authorizationStatus: string;
@@ -21,13 +23,7 @@ function OfferScreen (props: OfferScreenProps): JSX.Element {
   const {authorizationStatus} = props;
   const dispatch = useAppDispatch();
   const {offerId} = useParams();
-
-  const [activeOffer, setActiveOffer] = useState<Nullable<OfferList>>(null);
-
-  const handleOfferChange = (offer?: OfferList) => {
-    setActiveOffer(offer || null);
-  };//const currentNearOffer = сurrentOffers.find(({ id }) => id === activeOffer?.id);
-
+  const handleOfferChange = () => {};
 
   useEffect (() => {
     if (offerId) {
@@ -37,24 +33,41 @@ function OfferScreen (props: OfferScreenProps): JSX.Element {
     }
 
     return () => {
-      dispatch(clearOffer(null));
-      dispatch(clearNearOffer(null));
-      dispatch(clearComments(null));
+      dispatch(clearOffer());
+      dispatch(clearComments());
     };
   }, [dispatch, offerId]);
 
-  const сurrentOffer = useAppSelector((state) => state.offer);
-  const nearOffers = useAppSelector((state) => state.nearOffers);
-  const comments = useAppSelector((state) => state.comments);
-  const isError = useAppSelector((state) => state.errorStatus);
+  const currentOffer = useAppSelector(getCurrentOffer);
+  const activeOffer = useAppSelector(getOffers).find((offer) => offer.id === offerId);
+  const nearOffers = useAppSelector(getNearOffers).slice(0, 3);
+  const mapNearOffers = useAppSelector(getNearOffers).slice(0, 3);
+  const comments = useAppSelector(getComments);
+  const isOfferDataLoading = useAppSelector(getOfferDataLoadingStatus);
+  const isCommentsDataLoading = useAppSelector(getCommentsDataLoadingStatus);
 
-  if (isError) {
+  if (activeOffer) {
+    mapNearOffers.push(activeOffer);
+  }
+
+  const hasErrorOfferLoading = useAppSelector(getErrorOfferLoadingStatus);
+  const hasErrorNearOffersLoading = useAppSelector(getErrorNearOffersLoadingStatus);
+  const hasErrorCommentLoading = useAppSelector(getErrorCommentLoadingStatus);
+  const hasErrorCommentSending = useAppSelector(getErrorCommentSendingStatus);
+  const hasErrorFavoriteOfferSending = useAppSelector(getErrorFavoriteOfferSendingStatus);
+
+  if (
+    hasErrorOfferLoading ||
+    hasErrorNearOffersLoading ||
+    hasErrorCommentLoading ||
+    hasErrorCommentSending ||
+    hasErrorFavoriteOfferSending) {
     return (
       <ErrorScreen />
     );
   }
 
-  if (сurrentOffer === null || nearOffers === null || comments === null) {
+  if (currentOffer === null || activeOffer === null || nearOffers === null || comments === null || isOfferDataLoading.includes(true) || isCommentsDataLoading === true) {
     return (
       <LoadingScreen />
     );
@@ -65,24 +78,13 @@ function OfferScreen (props: OfferScreenProps): JSX.Element {
       <Helmet>
         <title>Шесть городов. Предложения.</title>
       </Helmet>
-      <header className="header">
-        <div className="container">
-          <div className="header__wrapper">
-            <div className="header__left">
-              <Logo />
-            </div>
-            <nav className="header__nav">
-              <HeaderNavList/>
-            </nav>
-          </div>
-        </div>
-      </header>
+      <Header/>
       <main className="page__main page__main--offer">
         <Offer
           authorizationStatus={authorizationStatus}
           activeOffer={activeOffer}
-          сurrentOffer={сurrentOffer}
-          nearOffers={nearOffers}
+          currentOffer={currentOffer}
+          nearOffers={mapNearOffers}
           comments={comments}
         />
         <NearPlaces

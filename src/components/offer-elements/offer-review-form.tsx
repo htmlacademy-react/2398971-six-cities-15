@@ -1,13 +1,23 @@
-import { FormEvent, Fragment, ReactEventHandler, useState } from 'react';
-import { useAppDispatch } from '../../hooks';
+import { FormEvent, Fragment, ReactEventHandler, memo, useState } from 'react';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { fetchNewCommentAction } from '../../store/api-actions';
 import { useParams } from 'react-router-dom';
+import { getSendNewCommentDataLoadingStatus } from '../../store/comments-process/selectors';
 
 type TChangeHandleReview = ReactEventHandler<HTMLInputElement | HTMLTextAreaElement>
+
+const rating = [
+  {value: 5, label: 'perfect' },
+  {value: 4, label: 'good' },
+  {value: 3, label: 'not bad' },
+  {value: 2, label: 'badly' },
+  {value: 1, label: 'terribly' },
+];
 
 function OfferReviewForm(): JSX.Element {
   const dispatch = useAppDispatch();
   const {offerId} = useParams();
+  const isSendNewCommentDataLoading = useAppSelector(getSendNewCommentDataLoadingStatus);
 
   const [review, setReview] = useState({rating: 0, review: ''});
 
@@ -19,7 +29,7 @@ function OfferReviewForm(): JSX.Element {
   const handleCommentSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
 
-    if (offerId || review.review.length < 50 || review.rating === 0) {
+    if (offerId || review.review.length < 50 || review.review.length > 300 || review.rating === 0) {
       dispatch(fetchNewCommentAction({
         offerId: offerId,
         comment: review.review,
@@ -29,22 +39,13 @@ function OfferReviewForm(): JSX.Element {
     }
   };
 
-  const rating = [
-    {value: 5, label: 'perfect' },
-    {value: 4, label: 'good' },
-    {value: 3, label: 'not bad' },
-    {value: 2, label: 'badly' },
-    {value: 1, label: 'terribly' },
-  ];
-
   return (
     <form
       className="reviews__form form"
-      action=""
       onSubmit={handleCommentSubmit}
     >
       <label className="reviews__label form__label" htmlFor="review">
-            Your review
+        Your review
       </label>
       <div className="reviews__rating-form form__rating">
         {rating.map(({value, label}) => (
@@ -53,9 +54,11 @@ function OfferReviewForm(): JSX.Element {
               className="form__rating-input visually-hidden"
               name="rating"
               defaultValue={value}
+              checked={Number(review.rating) === value}
               id={`${value}-stars`}
               type="radio"
               onChange={handleReviewChange}
+              disabled={isSendNewCommentDataLoading}
             />
             <label
               htmlFor={`${value}-stars`}
@@ -76,7 +79,8 @@ function OfferReviewForm(): JSX.Element {
         id="review"
         name="review"
         placeholder="Tell how was your stay, what you like and what can be improved"
-        defaultValue={review.review}
+        value={review.review}
+        disabled={isSendNewCommentDataLoading}
       />
       <div className="reviews__button-wrapper">
         <p className="reviews__help">
@@ -88,13 +92,15 @@ function OfferReviewForm(): JSX.Element {
         <button
           className="reviews__submit form__submit button"
           type="submit"
-          disabled={review.review.length < 50 || review.rating === 0}
+          disabled={review.review.length < 50 || review.review.length > 300 || review.rating === 0 || isSendNewCommentDataLoading}
         >
-          Submit
+          {isSendNewCommentDataLoading ? 'Submitting' : 'Submit' }
         </button>
       </div>
     </form>
   );
 }
 
-export default OfferReviewForm;
+const MemoizeOfferReviewForm = memo(OfferReviewForm);
+
+export default MemoizeOfferReviewForm;

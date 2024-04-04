@@ -1,77 +1,71 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import { Nullable } from 'vitest';
 import { Helmet } from 'react-helmet-async';
-import Logo from '../../components/logo/logo';
-import CardList from '../../components/card-list/card-list';
 import { OfferList } from '../../types/offer';
-import Map from '../../components/map/map';
-import Locations from '../../components/locations/locations';
 import { useAppSelector } from '../../hooks';
-import PlacesSorting from '../../components/places-sorting/places-sorting';
+import { getCurrentCity, getCurrentOffers, getCurrentSorting, getOffersDataLoadingStatus } from '../../store/offers-process/selectors';
+import { getErrorOfferLoadingStatus } from '../../store/offer-process/selectors';
+import { getErrorFavoriteOfferSendingStatus } from '../../store/favorite-process/selectors';
+import Header from '../../components/header/header';
+import Locations from '../../components/locations/locations';
 import SortingSelector from '../../utils/sorting';
-import HeaderNavList from '../../components/user-navigation/user-navigation-list';
+import ErrorScreen from '../error-screen/error-screen';
+import LoadingScreen from '../loading-screen/loading-screen';
+import CitiesOffers from '../../components/cities-offers/cities-offers';
+import CitiesOffersEmpty from '../../components/cities-offers-empty/cities-offers-empty';
 
 function MainScreen (): JSX.Element {
-  const currentCity = useAppSelector((state) => state.city);
-  const currentOffers = useAppSelector((state) => state.currentOffers);
-  const currentSorting = useAppSelector((state) => state.sorting);
-  const sorteredOffers = SortingSelector(currentSorting.name);
+  const currentCity = useAppSelector(getCurrentCity);
+  const currentOffers = useAppSelector(getCurrentOffers);
+  const currentSorting = useAppSelector(getCurrentSorting);
+  const sortedOffers = SortingSelector(currentSorting.name);
+  const isOffersDataLoading = useAppSelector(getOffersDataLoadingStatus);
 
   const [activeOffer, setActiveOffer] = useState<Nullable<OfferList>>(null);
 
-  const handleOfferChange = (offer?: OfferList) => {
+  const handleOfferChange = useCallback((offer?: OfferList) => {
     setActiveOffer(offer || null);
-  };
+  }, []);
+
+  const hasErrorOffersLoading = useAppSelector(getErrorOfferLoadingStatus);
+  const hasErrorFavoriteOfferSending = useAppSelector(getErrorFavoriteOfferSendingStatus);
+  const hasOffers = currentOffers.length !== 0;
+
+  if (hasErrorOffersLoading || hasErrorFavoriteOfferSending) {
+    return (
+      <ErrorScreen />
+    );
+  }
+
+  if (isOffersDataLoading) {
+    return (
+      <LoadingScreen />
+    );
+  }
 
   return (
     <div className="page page--gray page--main">
       <Helmet>
         <title>Шесть городов. Главная страница.</title>
       </Helmet>
-      <header className="header">
-        <div className="container">
-          <div className="header__wrapper">
-            <div className="header__left">
-              <Logo />
-            </div>
-            <nav className="header__nav">
-              <HeaderNavList/>
-            </nav>
-          </div>
-        </div>
-      </header>
-      <main className="page__main page__main--index">
+      <Header/>
+      <main className={`page__main page__main--index ${!hasOffers ? 'page__main--index-empty' : ''}`}>
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
           <Locations/>
         </div>
-        <div className="cities">
-          <div className="cities__places-container container">
-            <section className="cities__places places">
-              <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">
-                {`${currentOffers.length} places to stay in ${currentCity.name}`}
-              </b>
-              <PlacesSorting/>
-              <div className="cities__places-list places__list tabs__content">
-                <CardList
-                  handleOfferChange={handleOfferChange}
-                  offers={sorteredOffers}
-                  cardClassName = {'cities'}
-                />
-              </div>
-            </section>
-            <div className="cities__right-section">
-              <section className="cities__map map">
-                <Map
-                  city={currentCity}
-                  offers={currentOffers}
-                  activeOffer={activeOffer}
-                />
-              </section>
-            </div>
-          </div>
-        </div>
+        {!hasOffers &&
+          <CitiesOffersEmpty
+            currentCity={currentCity}
+          />}
+        {hasOffers &&
+          <CitiesOffers
+            currentCity={currentCity}
+            currentOffers={currentOffers}
+            sortedOffers={sortedOffers}
+            activeOffer={activeOffer}
+            handleOfferChange={handleOfferChange}
+          />}
       </main>
     </div>
   );

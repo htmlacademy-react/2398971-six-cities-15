@@ -10,21 +10,21 @@ import OfferPrice from '../offer-elements/offer-price';
 import OfferInside from '../offer-elements/offer-inside';
 import OfferUser from '../offer-elements/offer-user';
 import OfferDescription from '../offer-elements/offer-description';
-import OfferReviewForm from '../offer-elements/offer-review-form';
 import OfferReviewsList from '../offer-elements/offer-reviews-list';
 import Map from '../map/map';
+import MemoizeOfferReviewForm from '../offer-elements/offer-review-form';
 
 type OfferReviewFormProps = {
   authorizationStatus: string;
-  сurrentOffer: CurrentOffer;
+  currentOffer: CurrentOffer;
   nearOffers: OffersList;
   comments: Comments;
   activeOffer: Nullable<OfferList>;
 }
 
 function Offer(props: OfferReviewFormProps): JSX.Element {
-  const {authorizationStatus, сurrentOffer, nearOffers, comments, activeOffer} = props;
-  const {id, title, description, type, price, images, city, goods, host, isFavorite, isPremium, rating, bedrooms, maxAdults} = сurrentOffer;
+  const {authorizationStatus, currentOffer, nearOffers, comments, activeOffer} = props;
+  const {id, title, description, type, price, images, city, goods, host, isFavorite, isPremium, rating, bedrooms, maxAdults} = currentOffer;
 
   return (
     <section className="offer">
@@ -75,7 +75,7 @@ function Offer(props: OfferReviewFormProps): JSX.Element {
             <OfferReviewsList
               comments={comments}
             />
-            { authorizationStatus === 'AUTH' ? <OfferReviewForm/> : ''}
+            { authorizationStatus === 'AUTH' ? <MemoizeOfferReviewForm/> : ''}
           </section>
         </div>
       </div>

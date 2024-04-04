@@ -4,12 +4,12 @@ type OfferDescriptionProps = {
 
 function OfferDescription(props: OfferDescriptionProps): JSX.Element {
   const {description} = props;
-  const splitedDescription = description.split('.');
+  const splitDescription = description.split('.');
 
   return (
     <div className="offer__description">
-      { Array.from({ length:splitedDescription.length }, (_,index) => (
-        <p key={index} className="offer__text"> {`${splitedDescription[index]}.`}</p>
+      { Array.from({ length:splitDescription.length }, (_,index) => (
+        <p key={index} className="offer__text"> {`${splitDescription[index]}.`}</p>
       ))}
     </div>
   );

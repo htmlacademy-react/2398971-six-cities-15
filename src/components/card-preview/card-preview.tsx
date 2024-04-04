@@ -6,6 +6,7 @@ import OfferPreviewImage from '../offer-elements/offer-preview-image';
 import OfferBookmark from '../offer-elements/offer-bookmark';
 import OfferRating from '../offer-elements/offer-rating';
 import OfferPrice from '../offer-elements/offer-price';
+import { memo } from 'react';
 
 type CardPreviewProps = {
   offer: OfferList;
@@ -66,5 +67,6 @@ function CardPreview (props: CardPreviewProps): JSX.Element {
   );
 }
 
-export default CardPreview;
-//isFavoriteCard ? 'favorites__card-info place-card__info' : 'place-card__info'
+const MemoizeCardPreview = memo(CardPreview);
+
+export default MemoizeCardPreview;

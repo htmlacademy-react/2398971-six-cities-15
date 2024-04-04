@@ -1,5 +1,5 @@
 import { OfferList, OffersList } from '../../types/offer';
-import CardPreview from '../card/card-preview';
+import MemoizeCardPreview from '../card-preview/card-preview';
 
 type NearPlacesProps = {
   nearOffers: OffersList;
@@ -18,7 +18,7 @@ function NearPlaces(props:NearPlacesProps): JSX.Element {
         </h2>
         <div className="near-places__list places__list">
           {nearOffers.map((offer) => (
-            <CardPreview
+            <MemoizeCardPreview
               handleMouseHover={handleOfferChange}
               key={offer.id}
               offer={offer}

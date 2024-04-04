@@ -1,5 +1,5 @@
 import { OffersList } from '../../types/offer';
-import CardPreview from '../card/card-preview';
+import MemoizeCardPreview from '../card-preview/card-preview';
 
 type FavoritePlaceProps = {
   favoriteOffers: OffersList;
@@ -14,14 +14,14 @@ function FavoritePlaceList(props: FavoritePlaceProps): JSX.Element {
     <li className="favorites__locations-items">
       <div className="favorites__locations locations locations--current">
         <div className="locations__item">
-          <a className="locations__item-link" href="#">
+          <a className="locations__item-link">
             <span>{city}</span>
           </a>
         </div>
       </div>
       <div className="favorites__places">
         {favoriteOffers.map((offer) => (
-          <CardPreview
+          <MemoizeCardPreview
             handleMouseHover={handleMouseHover}
             key={offer.id}
             offer={offer}

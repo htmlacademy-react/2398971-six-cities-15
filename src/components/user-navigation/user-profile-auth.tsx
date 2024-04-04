@@ -2,10 +2,13 @@ import { Link } from 'react-router-dom';
 import { AppRoute } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { logoutAction } from '../../store/api-actions';
+import { getUserData } from '../../store/user-process/selectors';
+import { getFavoriteOffers } from '../../store/favorite-process/selectors';
 
 function UserProfileAuth(): JSX.Element {
-  const userEmail = useAppSelector((state) => state.email);
+  const userData = useAppSelector(getUserData);
   const dispatch = useAppDispatch();
+  const favoriteOffersCount = useAppSelector(getFavoriteOffers).length;
 
   const handleLogoutClick = (evt: React.MouseEvent<HTMLAnchorElement>) => {
     evt.preventDefault();
@@ -19,12 +22,18 @@ function UserProfileAuth(): JSX.Element {
           className="header__nav-link header__nav-link--profile"
           to={AppRoute.Favorites}
         >
-          <div className="header__avatar-wrapper user__avatar-wrapper"></div>
+          <div className="header__avatar-wrapper user__avatar-wrapper">
+            <img
+              className='user__avatar'
+              src={userData?.avatarUrl}
+              alt='User Avatar'
+            />
+          </div>
           <span className="header__user-name user__name">
-            {userEmail}
+            {userData && userData.email.charAt(0).toUpperCase() + userData.email.slice(1)}
           </span>
           <span className="header__favorite-count">
-          3
+            {favoriteOffersCount}
           </span>
         </Link>
       </li>
@@ -34,7 +43,9 @@ function UserProfileAuth(): JSX.Element {
           to={AppRoute.Main}
           onClick={handleLogoutClick}
         >
-          <span className="header__signout">Sign out</span>
+          <span className="header__signout">
+            Sign out
+          </span>
         </Link>
       </li>
     </ul>

@@ -1,11 +1,12 @@
 import { useState } from 'react';
 import { SORTING } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { sortingChange } from '../../store/action';
+import { getCurrentSorting } from '../../store/offers-process/selectors';
+import { sortingChange } from '../../store/offers-process/offers-process';
 
 function PlacesSorting(): JSX.Element {
   const [isOptionsOpened, setIsOptionsOpened] = useState(false);
-  const currentSorting = useAppSelector((state) => state.sorting);
+  const currentSorting = useAppSelector(getCurrentSorting);
   const dispatch = useAppDispatch();
 
   return (

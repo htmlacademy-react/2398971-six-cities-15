@@ -1,4 +1,4 @@
-export type SetFavoritData = {
+export type SetFavoriteData = {
   offerId: string;
   status: number;
 };

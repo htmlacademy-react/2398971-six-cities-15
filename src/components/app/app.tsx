@@ -1,17 +1,18 @@
 import { Route, Routes } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import { AppRoute } from '../../const';
+import { useAppSelector } from '../../hooks';
+import { getAuthCheckedStatus, getAuthorizationStatus } from '../../store/user-process/selectors';
 import ErrorScreen from '../../pages/error-screen/error-screen';
 import FavoritesScreen from '../../pages/favorites-screen/favorites-screen';
 import LoginScreen from '../../pages/login-screen/login-screen';
 import MainScreen from '../../pages/main-screen/main-screen';
 import OfferScreen from '../../pages/offer-screen/offer-screen';
 import PrivateRoute from '../private-route/private-route';
-import { useAppSelector } from '../../hooks';
 import LoadingScreen from '../../pages/loading-screen/loading-screen';
 import HistoryRouter from '../history-route/history-route';
 import browserHistory from '../../browser-history';
-import { getAuthCheckedStatus, getAuthorizationStatus } from '../../store/user-process/selectors';
+
 
 function App (): JSX.Element {
   const authorizationStatus = useAppSelector(getAuthorizationStatus);

@@ -52,17 +52,7 @@ export type Offer = {
   rating: number;
 };
 
-export type OfferList = PreviewImage & Offer & {
-  id: string;
-  title: string;
-  type: string;
-  price: number;
-  city: OfferCity;
-  location: OfferLocation;
-  isFavorite: boolean;
-  isPremium: boolean;
-  rating: number;
-};
+export type OfferList = PreviewImage & Offer;
 
 export type OffersList = OfferList[];
 

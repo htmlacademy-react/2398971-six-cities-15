@@ -5,7 +5,7 @@ import Footer from '../../components/footer/footer';
 
 function ErrorScreen (): JSX.Element {
   return (
-    <div className="page page--error-empty">
+    <div className="page page--error-empty" data-testid="page-error">
       <Helmet>
         <title>Шесть городов. Страница не найдена.</title>
       </Helmet>

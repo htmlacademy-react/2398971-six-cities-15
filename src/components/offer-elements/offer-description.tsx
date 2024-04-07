@@ -7,9 +7,11 @@ function OfferDescription(props: OfferDescriptionProps): JSX.Element {
   const splitDescription = description.split('.');
 
   return (
-    <div className="offer__description">
+    <div className="offer__description" data-testid="offer-description">
       { Array.from({ length:splitDescription.length }, (_,index) => (
-        <p key={index} className="offer__text"> {`${splitDescription[index]}.`}</p>
+        <p key={index} className="offer__text" data-testid="offer-text">
+          {`${splitDescription[index]}.`}
+        </p>
       ))}
     </div>
   );

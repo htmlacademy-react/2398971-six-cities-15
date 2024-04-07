@@ -7,7 +7,7 @@ function OfferPrice(props: OfferPriceProps): JSX.Element {
   const {className, price} = props;
 
   return (
-    <div className={`${className}__price`}>
+    <div className={`${className}__price`} data-testid="offer-price">
       <b className={`${className}__price-value`}>&euro;{`${price} `}</b>
 
       {className === 'offer' ?

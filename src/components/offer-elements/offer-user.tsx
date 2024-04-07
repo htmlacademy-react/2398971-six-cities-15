@@ -12,7 +12,7 @@ function OfferUser(props: OfferUserProps): JSX.Element {
   const {isPro, name, avatarUrl} = user;
 
   return (
-    <div className={`${className === 'offer' ? 'offer__host-user user' : `${className}__user user`}`}>
+    <div className={`${className === 'offer' ? 'offer__host-user user' : `${className}__user user`}`} data-testid="offer-user">
       <div className={`${className}__avatar-wrapper ${isPro ? `${className}__avatar-wrapper--pro` : ''} user__avatar-wrapper`}>
         <img
           className={`${className}__avatar user__avatar`}

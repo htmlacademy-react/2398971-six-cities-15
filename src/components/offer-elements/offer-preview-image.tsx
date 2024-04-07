@@ -9,6 +9,7 @@ function OfferPreviewImage({previewImage, width, height}: OfferPreviewImageProps
   return (
     <img
       className="place-card__image"
+      data-testid="place-card-image"
       src={previewImage}
       width={width}
       height={height}

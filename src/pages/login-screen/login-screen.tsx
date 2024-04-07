@@ -57,6 +57,7 @@ function LoginScreen (): JSX.Element {
                   id="email"
                   placeholder="Email"
                   required
+                  data-testid="loginElement"
                 />
               </div>
               <div className="login__input-wrapper form__input-wrapper">
@@ -69,6 +70,7 @@ function LoginScreen (): JSX.Element {
                   id="password"
                   placeholder="Password"
                   required
+                  data-testid="passwordElement"
                 />
               </div>
               <button
@@ -81,7 +83,11 @@ function LoginScreen (): JSX.Element {
           </section>
           <section className="locations locations--login locations--current">
             <div className="locations__item">
-              <Link className="locations__item-link" to={AppRoute.Main}>
+              <Link
+                className="locations__item-link"
+                data-testId="locations-item-test"
+                to={AppRoute.Main}
+              >
                 <span>Amsterdam</span>
               </Link>
             </div>

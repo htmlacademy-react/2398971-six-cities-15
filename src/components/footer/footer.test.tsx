@@ -2,7 +2,7 @@ import { withHistory } from '../../utils/mock-component';
 import { render, screen } from '@testing-library/react';
 import Footer from './footer';
 
-describe('Component: Logo', () => {
+describe('Component: Footer', () => {
   it('should render correctly', () => {
     const footerLogoTestId = 'footer-logo-test';
 

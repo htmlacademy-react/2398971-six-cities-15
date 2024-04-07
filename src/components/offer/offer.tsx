@@ -27,7 +27,7 @@ function Offer(props: OfferReviewFormProps): JSX.Element {
   const {id, title, description, type, price, images, city, goods, host, isFavorite, isPremium, rating, bedrooms, maxAdults} = currentOffer;
 
   return (
-    <section className="offer">
+    <section className="offer" data-testid="offer">
       <OfferGallery images={images}/>
       <div className="offer__container container">
         <div className="offer__wrapper">

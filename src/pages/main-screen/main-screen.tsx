@@ -44,7 +44,7 @@ function MainScreen (): JSX.Element {
   }
 
   return (
-    <div className="page page--gray page--main">
+    <div className="page page--gray page--main" data-testid="page-main">
       <Helmet>
         <title>Шесть городов. Главная страница.</title>
       </Helmet>

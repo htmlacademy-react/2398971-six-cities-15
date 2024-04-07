@@ -42,6 +42,7 @@ function OfferBookmark(props: OfferBookmarkProps): JSX.Element {
     <button
       className={isFavorite ? `${className}__bookmark-button ${className}__bookmark-button--active button` : `${className}__bookmark-button button`}
       type="button"
+      data-testid="bookmark-button"
       onClick={handleFavoriteChange}
       disabled={isSetFavoriteOffersDataSending}
     >

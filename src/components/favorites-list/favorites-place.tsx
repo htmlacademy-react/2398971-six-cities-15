@@ -11,7 +11,7 @@ function FavoritePlaceList(props: FavoritePlaceProps): JSX.Element {
   const handleMouseHover = () => {};
 
   return (
-    <li className="favorites__locations-items">
+    <li className="favorites__locations-items" data-testid="favorites-location">
       <div className="favorites__locations locations locations--current">
         <div className="locations__item">
           <a className="locations__item-link">

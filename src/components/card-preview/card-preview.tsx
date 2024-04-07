@@ -31,6 +31,7 @@ function CardPreview (props: CardPreviewProps): JSX.Element {
       onMouseEnter={handleMouseOn}
       onMouseLeave={handleMouseOff}
       className={`${cardClassName}__card place-card`}
+      data-testid='place-card'
     >
       {isPremium ? <OfferPremiumLogo className="place-card__mark"/> : ''}
       <div className={`${cardClassName}__image-wrapper place-card__image-wrapper`}>

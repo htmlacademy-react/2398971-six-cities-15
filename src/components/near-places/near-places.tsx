@@ -11,7 +11,7 @@ function NearPlaces(props:NearPlacesProps): JSX.Element {
   const {nearOffers, handleOfferChange, cardClassName} = props;
 
   return (
-    <div className="container">
+    <div className="container" data-testid="near-places-container">
       <section className="near-places places">
         <h2 className="near-places__title">
           Other places in the neighbourhood

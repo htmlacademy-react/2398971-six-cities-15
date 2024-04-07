@@ -11,7 +11,7 @@ function CardList(props: CardListProps): JSX.Element {
   const { offers, handleOfferChange, cardClassName } = props;
 
   return (
-    <div className="cities__places-list places__list tabs__content">
+    <div className="cities__places-list places__list tabs__content" data-testid="cities-places-list">
       {offers.map((offer) => (
         <MemoizeCardPreview
           handleMouseHover={handleOfferChange}

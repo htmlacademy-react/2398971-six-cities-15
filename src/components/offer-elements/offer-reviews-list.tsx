@@ -12,7 +12,7 @@ function OfferReviewsList(props: OfferReviewsListProps): JSX.Element {
   const sortedComments = comments.toSorted((commentA, commentB) => Date.parse(commentB.date) - Date.parse(commentA.date)).slice(0, 10);
 
   return (
-    <ul className="reviews__list">
+    <ul className="reviews__list" data-testid='reviews-list'>
       {sortedComments.map((comment) => (
         <li key={comment.id} className="reviews__item">
           <OfferUser

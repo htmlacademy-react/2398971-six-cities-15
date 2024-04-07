@@ -43,6 +43,7 @@ function OfferReviewForm(): JSX.Element {
     <form
       className="reviews__form form"
       onSubmit={handleCommentSubmit}
+      data-testid="reviews-form"
     >
       <label className="reviews__label form__label" htmlFor="review">
         Your review

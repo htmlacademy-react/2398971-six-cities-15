@@ -4,6 +4,7 @@ import { MockStore, configureMockStore } from '@jedmao/redux-mock-store';
 import { redirect } from './redirect';
 import { redirectToRoute } from '../action';
 import { AppRoute } from '../../const';
+import { State } from '../../types/state';
 
 vi.mock('../../browser-history', () => ({
   default: {

@@ -26,7 +26,7 @@ function ErrorScreen (): JSX.Element {
           <section className="error error--empty">
             <h1 className="visually-hidden">Error (empty)</h1>
             <div className="error__status-wrapper">
-              <b className="error__status">Sorry, something went wrong.</b>
+              <b className="error__status">Sorry, something went wrong. 404. Page not found</b>
               <p className="error__status-description">
                 A team of highly trained monkeys has been dispatched to deal with this situation.
               </p>

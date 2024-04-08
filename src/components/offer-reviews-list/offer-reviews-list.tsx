@@ -9,7 +9,7 @@ type OfferReviewsListProps = {
 
 function OfferReviewsList(props: OfferReviewsListProps): JSX.Element {
   const {comments} = props;
-  const sortedComments = comments.toSorted((commentA, commentB) => Date.parse(commentB.date) - Date.parse(commentA.date)).slice(0, 10);
+  const sortedComments = comments.slice().sort((commentA, commentB) => Date.parse(commentB.date) - Date.parse(commentA.date)).slice(0, 10);
 
   return (
     <ul className="reviews__list" data-testid='reviews-list'>

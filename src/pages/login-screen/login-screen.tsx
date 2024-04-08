@@ -4,7 +4,8 @@ import { FormEvent, useRef } from 'react';
 import { useAppDispatch } from '../../hooks';
 import { Link } from 'react-router-dom';
 import { loginAction } from '../../store/api-actions';
-import { AppRoute } from '../../const';
+import { AppRoute, CITIES } from '../../const';
+import { cityChange } from '../../store/offers-process/offers-process';
 
 function LoginScreen (): JSX.Element {
   const loginRef = useRef<HTMLInputElement | null>(null);
@@ -23,6 +24,8 @@ function LoginScreen (): JSX.Element {
       }));
     }
   };
+
+  const randomCity = CITIES[Math.floor((Math.random() * CITIES.length))];
 
   return (
     <div className="page page--gray page--login">
@@ -86,9 +89,14 @@ function LoginScreen (): JSX.Element {
               <Link
                 className="locations__item-link"
                 data-testId="locations-item-test"
+                onClick={() => {
+                  dispatch((cityChange(randomCity)));
+                }}
                 to={AppRoute.Main}
               >
-                <span>Amsterdam</span>
+                <span>
+                  {randomCity.name}
+                </span>
               </Link>
             </div>
           </section>

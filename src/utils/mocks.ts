@@ -111,7 +111,7 @@ export const makeFakeComment = (): Comment => ({
     name: name.firstName(),
     avatarUrl: image.imageUrl(),
   },
-  comment: lorem.word(200),
+  comment: lorem.word(5),
   rating: datatype.number({ min: 0, max: 5 }),
 } as Comment);
 

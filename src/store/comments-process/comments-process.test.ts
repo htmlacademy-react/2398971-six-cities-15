@@ -120,7 +120,7 @@ describe('CommentProcess Slice', () => {
     expect(result).toEqual(expectedState);
   });
 
-  it('should set "comments" to array with Offer, "isCommentsDataLoading" to "false", "hasErrorCommentLoading" to "false" with "fetchOfferCommentAction.fulfilled"', () => {
+  it('should set "comments" to array with Offer, "isCommentsDataLoading" to "false", "hasErrorCommentLoading" to "false" with "fetchNewCommentAction.fulfilled"', () => {
 
     const initialState = {
       comments: [],
@@ -140,14 +140,13 @@ describe('CommentProcess Slice', () => {
 
     const result = commentsProcess.reducer(
       initialState,
-      fetchNewCommentAction.fulfilled(
-        mockNewComment, '', {offerId: mockOffer.id, comment: mockNewComment.comment, rating: mockNewComment.rating})
+      fetchNewCommentAction.fulfilled(mockNewComment, '', {offerId: mockOffer.id, comment: mockNewComment.comment, rating: mockNewComment.rating})
     );
 
     expect(result).toEqual(expectedState);
   });
 
-  it('should set "isSendNewCommentDataLoading" to "false", "hasErrorCommentSending" to "true" with "fetchOfferCommentAction.rejected"', () => {
+  it('should set "isSendNewCommentDataLoading" to "false", "hasErrorCommentSending" to "true" with "fetchNewCommentAction.rejected"', () => {
     const expectedState = {
       comments: [],
       isSendNewCommentDataLoading: false,

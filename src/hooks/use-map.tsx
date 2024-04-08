@@ -6,6 +6,15 @@ type UseMapProps = {
   mapRef: MutableRefObject<HTMLElement | null>;
   location: OfferLocation;
 };
+
+const layer = new TileLayer(
+  'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',
+  {
+    attribution:
+      '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
+  }
+);
+
 function useMap(props: UseMapProps): Map | null {
   const {location, mapRef} = props;
   const [map, setMap] = useState<Map | null>(null);
@@ -20,14 +29,6 @@ function useMap(props: UseMapProps): Map | null {
         },
         zoom: 10
       });
-
-      const layer = new TileLayer(
-        'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',
-        {
-          attribution:
-            '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
-        }
-      );
 
       instance.addLayer(layer);
 

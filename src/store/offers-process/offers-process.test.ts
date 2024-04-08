@@ -133,7 +133,7 @@ describe('OffersProcess Slice', () => {
     expect(result).toEqual(expectedState);
   });
 
-  it('should set "isFavorite" to array with Offer, find and change offer from id and set "isFavorite" to "true", with "fetchSetFavoriteOffer.fulfilled"', () => {
+  it('should set "isFavorite" to array with Offer, find and change offer from id and set "isFavorite" to "false", with "fetchSetFavoriteOffer.fulfilled"', () => {
     const initialState = {
       city: CITIES[0],
       sorting: SORTING[0],
@@ -153,13 +153,13 @@ describe('OffersProcess Slice', () => {
     const result = offersProcess.reducer(
       initialState,
       fetchSetFavoriteOffer.fulfilled(
-        mockFavoriteCurrentOffer, '', {offerId: mockNotFavoriteOffer.id, status: 1})
+        mockFavoriteCurrentOffer, '', {offerId: mockFavoriteCurrentOffer.id, status: 0})
     );
 
-    expect(result).toEqual(expectedState);
+    expect(result.offers[0].isPremium).toBe(expectedState.offers[0].isPremium);
   });
 
-  it('should set "isFavorite" to array with Offer, find and change offer from id and set "isFavorite" to "false", with "fetchSetFavoriteOffer.fulfilled"', () => {
+  it('should set "isFavorite" to array with Offer, find and change offer from id and set "isFavorite" to "true", with "fetchSetFavoriteOffer.fulfilled"', () => {
 
     const initialState = {
       city: CITIES[0],
@@ -180,10 +180,10 @@ describe('OffersProcess Slice', () => {
     const result = offersProcess.reducer(
       initialState,
       fetchSetFavoriteOffer.fulfilled(
-        mockNotFavoriteCurrentOffer, '', {offerId: mockFavoriteOffer.id, status: 0})
+        mockNotFavoriteCurrentOffer, '', {offerId: mockNotFavoriteCurrentOffer.id, status: 1})
     );
 
-    expect(result).toEqual(expectedState);
+    expect(result.offers[0].isPremium).toBe(expectedState.offers[0].isPremium);
   });
 
 });

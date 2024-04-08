@@ -74,7 +74,7 @@ function OfferScreen (props: OfferScreenProps): JSX.Element {
   }
 
   return (
-    <div className="page">
+    <div className="page" data-testid="page-offer">
       <Helmet>
         <title>Шесть городов. Предложения.</title>
       </Helmet>

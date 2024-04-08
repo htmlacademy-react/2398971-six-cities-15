@@ -10,7 +10,7 @@ function PlacesSorting(): JSX.Element {
   const dispatch = useAppDispatch();
 
   return (
-    <form className="places__sorting" action="#" method="get">
+    <form className="places__sorting" action="#" method="get" data-testid="places-sorting">
       <span className="places__sorting-caption">
         {'Sort by '}
       </span>

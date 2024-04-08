@@ -3,7 +3,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks';
 import { useEffect } from 'react';
 import { fetchFavoriteOffersAction } from '../../store/api-actions';
 import { getErrorFavoriteOfferSendingStatus, getErrorFavoriteOffersLoadingStatus, getFavoriteOffers, getFavoriteOffersDataLoadingStatus } from '../../store/favorite-process/selectors';
-import FavoriteCardList from '../../components/favorites-list/favorites-list';
+import FavoritesCardList from '../../components/favorites-card-list/favorites-card-list';
 import ErrorScreen from '../error-screen/error-screen';
 import LoadingScreen from '../loading-screen/loading-screen';
 import Header from '../../components/header/header';
@@ -37,14 +37,14 @@ function FavoritesScreen (): JSX.Element {
   }
 
   return (
-    <div className="page">
+    <div className={`${favoriteOffers.length === 0 ? 'page page--favorites-empty' : 'page'}`} data-testid="page-favorites">
       <Helmet>
         <title>Шесть городов. Избранное.</title>
       </Helmet>
       <Header/>
-      <main className="page__main page__main--favorites">
+      <main className={`${favoriteOffers.length === 0 ? 'page__main page__main--favorites page__main--favorites-empty' : 'page__main page__main--favorites'}`}>
         <div className="page__favorites-container container">
-          <FavoriteCardList
+          <FavoritesCardList
             offers={favoriteOffers}
           />
         </div>

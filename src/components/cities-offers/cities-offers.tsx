@@ -16,7 +16,7 @@ function CitiesOffers(props: CitiesOffersProps): JSX.Element {
   const {currentOffers, sortedOffers, currentCity, activeOffer, handleOfferChange} = props;
 
   return (
-    <div className="cities">
+    <div className="cities" data-testid='cities'>
       <div className="cities__places-container container">
         <section className="cities__places places">
           <h2 className="visually-hidden">Places</h2>

@@ -4,7 +4,7 @@ import './loading-screen.css';
 function LoadingScreen(): JSX.Element {
 
   return (
-    <div className='load-spinner'>
+    <div className='load-spinner' data-testid="load-spinner">
       <ThreeDots
         height="80"
         width="80"

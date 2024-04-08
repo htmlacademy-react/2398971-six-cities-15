@@ -1,11 +1,11 @@
 import { Helmet } from 'react-helmet-async';
 import Logo from '../../components/logo/logo';
-import HeaderNavList from '../../components/user-navigation/user-navigation-list';
+import HeaderNavList from '../../components/header-nav-list/header-nav-list';
 import Footer from '../../components/footer/footer';
 
 function ErrorScreen (): JSX.Element {
   return (
-    <div className="page page--error-empty">
+    <div className="page page--error-empty" data-testid="page-error">
       <Helmet>
         <title>Шесть городов. Страница не найдена.</title>
       </Helmet>
@@ -26,7 +26,7 @@ function ErrorScreen (): JSX.Element {
           <section className="error error--empty">
             <h1 className="visually-hidden">Error (empty)</h1>
             <div className="error__status-wrapper">
-              <b className="error__status">Sorry, something went wrong.</b>
+              <b className="error__status">Sorry, something went wrong. 404. Page not found</b>
               <p className="error__status-description">
                 A team of highly trained monkeys has been dispatched to deal with this situation.
               </p>

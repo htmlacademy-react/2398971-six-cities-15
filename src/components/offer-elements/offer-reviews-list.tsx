@@ -30,7 +30,7 @@ function OfferReviewsList(props: OfferReviewsListProps): JSX.Element {
               {comment.comment}
             </p>
             <time className="reviews__time" dateTime="2019-04-24">
-              {dayjs(comment.date).format('MMMM DD')}
+              {dayjs(comment.date).format('MMMM YYYY')}
             </time>
           </div>
         </li>

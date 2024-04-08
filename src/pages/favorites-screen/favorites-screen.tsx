@@ -37,12 +37,12 @@ function FavoritesScreen (): JSX.Element {
   }
 
   return (
-    <div className="page" data-testid="page-favorites">
+    <div className={`${favoriteOffers.length === 0 ? 'page page--favorites-empty' : 'page'}`} data-testid="page-favorites">
       <Helmet>
         <title>Шесть городов. Избранное.</title>
       </Helmet>
       <Header/>
-      <main className="page__main page__main--favorites">
+      <main className={`${favoriteOffers.length === 0 ? 'page__main page__main--favorites page__main--favorites-empty' : 'page__main page__main--favorites'}`}>
         <div className="page__favorites-container container">
           <FavoriteCardList
             offers={favoriteOffers}

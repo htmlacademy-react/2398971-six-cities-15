@@ -5,7 +5,7 @@ import LoginScreen from './login-screen';
 
 describe('Component: Login Screen', () => {
   it('should render correctly', () => {
-    const locationsItemLink = 'Amsterdam';
+    const locationsItemTestId = 'locations-item-test';
     const loginText = 'E-mail';
     const passwordText = 'Password';
     const { withStoreComponent } = withStore(<LoginScreen />, {});
@@ -13,7 +13,7 @@ describe('Component: Login Screen', () => {
 
     render(preparedComponent);
 
-    expect(screen.getByText(locationsItemLink)).toBeInTheDocument();
+    expect(screen.getByTestId(locationsItemTestId)).toBeInTheDocument();
     expect(screen.getByText(loginText)).toBeInTheDocument();
     expect(screen.getByText(passwordText)).toBeInTheDocument();
   });

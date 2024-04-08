@@ -1,18 +1,18 @@
 import { Nullable } from 'vitest';
 import { CurrentOffer, OfferList, OffersList } from '../../types/offer';
 import { Comments } from '../../types/offer';
-import OfferGallery from '../offer-elements/offer-gallery';
-import OfferPremiumLogo from '../offer-elements/offer-premium-logo';
-import OfferBookmark from '../offer-elements/offer-bookmark';
-import OfferRating from '../offer-elements/offer-rating';
-import OfferFeatures from '../offer-elements/offer-features';
-import OfferPrice from '../offer-elements/offer-price';
-import OfferInside from '../offer-elements/offer-inside';
-import OfferUser from '../offer-elements/offer-user';
-import OfferDescription from '../offer-elements/offer-description';
-import OfferReviewsList from '../offer-elements/offer-reviews-list';
+import OfferGallery from '../offer-gallery/offer-gallery';
+import OfferPremiumLogo from '../offer-premium-logo/offer-premium-logo';
+import OfferBookmark from '../offer-bookmark/offer-bookmark';
+import OfferRating from '../offer-rating/offer-rating';
+import OfferFeatures from '../offer-features/offer-features';
+import OfferPrice from '../offer-price/offer-price';
+import OfferInside from '../offer-inside/offer-inside';
+import OfferUser from '../offer-user/offer-user';
+import OfferDescription from '../offer-description/offer-description';
+import OfferReviewsList from '../offer-reviews-list/offer-reviews-list';
 import Map from '../map/map';
-import MemoizeOfferReviewForm from '../offer-elements/offer-review-form';
+import MemoizeOfferReviewForm from '../offer-review-form/offer-review-form';
 
 type OfferReviewFormProps = {
   authorizationStatus: string;

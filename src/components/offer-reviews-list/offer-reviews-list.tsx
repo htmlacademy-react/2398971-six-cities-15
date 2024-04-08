@@ -1,7 +1,7 @@
 import dayjs from 'dayjs';
 import { Comments } from '../../types/offer';
-import OfferRating from './offer-rating';
-import OfferUser from './offer-user';
+import OfferRating from '../offer-rating/offer-rating';
+import OfferUser from '../offer-user/offer-user';
 
 type OfferReviewsListProps = {
   comments: Comments;

@@ -1,11 +1,11 @@
 import {Link} from 'react-router-dom';
 import { AppRoute } from '../../const';
 import { OfferList } from '../../types/offer';
-import OfferPremiumLogo from '../offer-elements/offer-premium-logo';
-import OfferPreviewImage from '../offer-elements/offer-preview-image';
-import OfferBookmark from '../offer-elements/offer-bookmark';
-import OfferRating from '../offer-elements/offer-rating';
-import OfferPrice from '../offer-elements/offer-price';
+import OfferPremiumLogo from '../offer-premium-logo/offer-premium-logo';
+import OfferPreviewImage from '../offer-preview-image/offer-preview-image';
+import OfferBookmark from '../offer-bookmark/offer-bookmark';
+import OfferRating from '../offer-rating/offer-rating';
+import OfferPrice from '../offer-price/offer-price';
 import { memo } from 'react';
 
 type CardPreviewProps = {

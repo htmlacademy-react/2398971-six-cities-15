@@ -1,12 +1,12 @@
 import { OffersList } from '../../types/offer';
 import MemoizeCardPreview from '../card-preview/card-preview';
 
-type FavoritePlaceProps = {
+type FavoritesPlaceListProps = {
   favoriteOffers: OffersList;
   city: string;
 }
 
-function FavoritePlaceList(props: FavoritePlaceProps): JSX.Element {
+function FavoritesPlaceList(props: FavoritesPlaceListProps): JSX.Element {
   const { city, favoriteOffers } = props;
   const handleMouseHover = () => {};
 
@@ -32,4 +32,4 @@ function FavoritePlaceList(props: FavoritePlaceProps): JSX.Element {
     </li>);
 }
 
-export default FavoritePlaceList;
+export default FavoritesPlaceList;

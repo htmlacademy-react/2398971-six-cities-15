@@ -1,4 +1,4 @@
-function FavoriteEmpty(): JSX.Element {
+function FavoritesEmpty(): JSX.Element {
 
   return (
     <section className="favorites favorites--empty" data-testid="favorites-empty">
@@ -11,5 +11,5 @@ function FavoriteEmpty(): JSX.Element {
   );
 }
 
-export default FavoriteEmpty;
+export default FavoritesEmpty;
 

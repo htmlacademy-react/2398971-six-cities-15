@@ -1,6 +1,6 @@
 import { Helmet } from 'react-helmet-async';
 import Logo from '../../components/logo/logo';
-import HeaderNavList from '../../components/user-navigation/user-navigation-list';
+import HeaderNavList from '../../components/header-nav-list/header-nav-list';
 import Footer from '../../components/footer/footer';
 
 function ErrorScreen (): JSX.Element {

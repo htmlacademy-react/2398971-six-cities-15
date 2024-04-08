@@ -1,12 +1,12 @@
 import { OffersList } from '../../types/offer';
-import FavoritePlaceList from './favorites-place';
-import FavoriteEmpty from './favorites-empty';
+import FavoritesPlaceList from '../favorites-list/favorites-place-list';
+import FavoritesEmpty from '../favorites-empty/favorites-empty';
 
-type FavoriteCardListProps = {
+type FavoritesCardListProps = {
   offers: OffersList;
 }
 
-function FavoriteCardList(props: FavoriteCardListProps): JSX.Element {
+function FavoritesCardList(props: FavoritesCardListProps): JSX.Element {
   const { offers } = props;
   const favoriteOffers = offers.filter((place)=> place.isFavorite);
   const favoriteCities = Array.from(new Set(favoriteOffers.map((place) => place.city.name)));
@@ -14,7 +14,7 @@ function FavoriteCardList(props: FavoriteCardListProps): JSX.Element {
   if (favoriteCities.length === 0) {
 
     return (
-      <FavoriteEmpty />
+      <FavoritesEmpty />
     );
   } else {
 
@@ -23,7 +23,7 @@ function FavoriteCardList(props: FavoriteCardListProps): JSX.Element {
         <h1 className="favorites__title">Saved listing</h1>
         <ul className="favorites__list">
           {favoriteCities.map((city)=>(
-            <FavoritePlaceList
+            <FavoritesPlaceList
               key={city}
               city={city}
               favoriteOffers={favoriteOffers.filter((place)=> place.city.name === city)}
@@ -34,5 +34,5 @@ function FavoriteCardList(props: FavoriteCardListProps): JSX.Element {
   }
 }
 
-export default FavoriteCardList;
+export default FavoritesCardList;
 

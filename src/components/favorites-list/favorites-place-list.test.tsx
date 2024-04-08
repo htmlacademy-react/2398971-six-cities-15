@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import { withHistory, withStore } from '../../utils/mock-component';
 import { makeFakeFavoriteOffers, makeFakeStore } from '../../utils/mocks';
-import FavoritePlaceList from './favorites-place';
+import FavoritesPlaceList from './favorites-place-list';
 import { CITIES } from '../../const';
 
 
@@ -10,7 +10,7 @@ describe('Component: Favorite PlaceList', () => {
     const favoritesLocationTestId = 'favorites-location';
 
     const withHistoryComponent = withHistory(
-      <FavoritePlaceList
+      <FavoritesPlaceList
         city={CITIES[0].name}
         favoriteOffers={makeFakeFavoriteOffers}
       />);
